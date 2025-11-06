@@ -1,10 +1,20 @@
 # PvdAI
 
+![Next.js](https://img.shields.io/badge/Next.js-16.0.1-black?logo=nextdotjs) ![React](https://img.shields.io/badge/React-19.2.0-61dafb?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white) ![OpenAI SDK](https://img.shields.io/badge/OpenAI%20SDK-6.x-412991?logo=openai&logoColor=white) ![App Router](https://img.shields.io/badge/Next.js-App%20Router-black)
+
 Minimal Next.js playground using Next.js 16, React 19, and the OpenAI JavaScript SDK (Responses API).
 
 ## Overview
 
 Use this repo to prototype small AI features (chat, summarization, Q&A, transformations) and iterate quickly. A starter API route is included at `/api/chat` that calls `gpt-4o` via `openai.responses.create`.
+
+## Stack
+
+- **Next.js**: 16.0.1 (App Router)
+- **React**: 19.2.0
+- **TypeScript**: ^5
+- **OpenAI JS SDK**: ^6 (Responses API)
+- **ESLint**: ^9 with `eslint-config-next`
 
 ## Setup
 
