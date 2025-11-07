@@ -1,7 +1,11 @@
 import OpenAI from "openai";
-const client = new OpenAI();
+import 'dotenv/config';
 
-const response = await client.responses.create({
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const response = await openai.responses.create({
     model: "gpt-5-nano",
     input: "hallo alles goed?"
 });
