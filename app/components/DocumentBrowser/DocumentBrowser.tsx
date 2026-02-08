@@ -36,7 +36,7 @@ const TOCItem = memo(function TOCItem({
   const hasChildren = item.children.length > 0;
 
   return (
-    <li className={styles.tocItem} role="treeitem" aria-expanded={hasChildren ? expanded : undefined}>
+    <li className={styles.tocItem} role="treeitem" aria-selected={highlightId === item.id} aria-expanded={hasChildren ? expanded : undefined}>
       <div
         className={`${styles.tocLabel} ${highlightId === item.id ? styles.tocActive : ""}`}
         style={{ paddingLeft: `${item.level * 16 + 8}px` }}
@@ -145,18 +145,16 @@ export default function DocumentBrowser({
 
   // Find the top-level section ID for a given item
   const findTopLevelId = useCallback((id: string): string => {
+    function findInChildren(item: TocItem, targetId: string): boolean {
+      if (item.id === targetId) return true;
+      return item.children.some((c) => findInChildren(c, targetId));
+    }
     for (const section of toc) {
       if (section.id === id) return id;
-      const found = findInChildren(section, id);
-      if (found) return section.id;
+      if (findInChildren(section, id)) return section.id;
     }
     return id;
   }, [toc]);
-
-  function findInChildren(item: TocItem, id: string): boolean {
-    if (item.id === id) return true;
-    return item.children.some((c) => findInChildren(c, id));
-  }
 
   const handleSelect = useCallback((id: string) => {
     const topId = findTopLevelId(id);
