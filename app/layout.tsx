@@ -4,7 +4,7 @@ import "./globals.scss";
 const title = "PvdAI — Statuten & Reglementen van de PvdA";
 const description =
   "Doorzoek en stel vragen over de statuten en reglementen van de Partij van de Arbeid. AI-gestuurde antwoorden in begrijpelijke taal. Onafhankelijk project, geen initiatief van de PvdA.";
-const url = "https://pvdai.vercel.app";
+const url = "https://pvdai.tech";
 
 export const metadata: Metadata = {
   title: {
@@ -63,6 +63,12 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4VK7HXVHV" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-H4VK7HXVHV');`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light")})()`,
