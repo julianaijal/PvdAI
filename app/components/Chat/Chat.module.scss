@@ -114,6 +114,7 @@
     background: var(--pvda-red);
     color: var(--pvda-surface);
     border-radius: var(--radius) var(--radius) 4px var(--radius);
+    white-space: pre-wrap;
   }
 }
 
@@ -133,7 +134,44 @@
   padding: 12px 16px;
   font-size: 14px;
   line-height: 1.65;
-  white-space: pre-wrap;
+
+  p {
+    margin: 0 0 0.5em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.markdownLink {
+  color: var(--pvda-red);
+  text-decoration: underline;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.markdownList {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+
+  li {
+    margin: 0.25em 0;
+  }
+}
+
+.markdownCode {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+
+  [data-theme="dark"] & {
+    background: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .articleRef {

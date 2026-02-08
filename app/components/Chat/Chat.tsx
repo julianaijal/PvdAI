@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback, Children } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import type { Components } from "react-markdown";
 import styles from "./Chat.module.scss";
 
 interface Message {
@@ -143,6 +146,47 @@ function parseArticleRefs(
   });
 }
 
+function processChildren(
+  children: React.ReactNode,
+  onClick?: (id: string) => void,
+  articleLookup?: Map<string, string>
+): React.ReactNode {
+  return Children.map(children, (child) => {
+    if (typeof child === "string") {
+      return parseArticleRefs(child, onClick, articleLookup);
+    }
+    return child;
+  });
+}
+
+function useMarkdownComponents(
+  onClick?: (id: string) => void,
+  articleLookup?: Map<string, string>
+): Components {
+  return useMemo(() => ({
+    p: ({ children }) => (
+      <p>{processChildren(children, onClick, articleLookup)}</p>
+    ),
+    li: ({ children }) => (
+      <li>{processChildren(children, onClick, articleLookup)}</li>
+    ),
+    strong: ({ children }) => (
+      <strong>{processChildren(children, onClick, articleLookup)}</strong>
+    ),
+    em: ({ children }) => (
+      <em>{processChildren(children, onClick, articleLookup)}</em>
+    ),
+    a: ({ href, children }) => (
+      <a href={href} className={styles.markdownLink} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    ),
+    ul: ({ children }) => <ul className={styles.markdownList}>{children}</ul>,
+    ol: ({ children }) => <ol className={styles.markdownList}>{children}</ol>,
+    code: ({ children }) => <code className={styles.markdownCode}>{children}</code>,
+  }), [onClick, articleLookup]);
+}
+
 export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -153,6 +197,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const isNearBottomRef = useRef(true);
   const articleLookup = useMemo<Map<string, string>>(() => buildArticleLookup(toc || []), [toc]);
+  const markdownComponents = useMarkdownComponents(onArticleClick, articleLookup);
 
   useEffect(() => {
     setStarterQuestions(pickRandomQuestions(4));
@@ -262,9 +307,13 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
           >
             <div className={styles.messageContent}>
-              {msg.role === "assistant"
-                ? parseArticleRefs(msg.content, onArticleClick, articleLookup)
-                : msg.content}
+              {msg.role === "assistant" ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                  {msg.content}
+                </ReactMarkdown>
+              ) : (
+                msg.content
+              )}
             </div>
           </div>
         ))}
