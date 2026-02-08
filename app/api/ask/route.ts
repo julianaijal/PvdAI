@@ -89,8 +89,8 @@ export async function POST(req: Request) {
       .map((c) => `[${c.sectionTitle}]\n${c.text}`)
       .join("\n\n---\n\n");
 
-    // Ask GPT
-    const response = await openai.responses.create({
+    // Stream the response
+    const stream = openai.responses.stream({
       model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
       input: `Context uit de statuten en reglementen:\n\n${context}\n\n---\n\nVraag: ${question}`,
@@ -98,10 +98,43 @@ export async function POST(req: Request) {
       store: false,
     });
 
-    return Response.json(
-      { answer: response.output_text },
-      { headers: { "X-RateLimit-Remaining": String(remaining) } }
-    );
+    const encoder = new TextEncoder();
+
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const event of stream) {
+            if (
+              event.type === "response.output_text.delta" &&
+              "delta" in event
+            ) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ delta: event.delta })}\n\n`)
+              );
+            }
+          }
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        } catch (error) {
+          console.error("Stream error:", error);
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({ error: "Er is een fout opgetreden." })}\n\n`
+            )
+          );
+          controller.close();
+        }
+      },
+    });
+
+    return new Response(readable, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+        "X-RateLimit-Remaining": String(remaining),
+      },
+    });
   } catch (error) {
     console.error("Error in /api/ask:", error);
     return Response.json(
