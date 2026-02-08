@@ -92,7 +92,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           <a href="https://github.com/julianaijal/PvdAI" target="_blank" rel="noopener noreferrer">
             PvdAI
           </a>{" "}
-          is een onafhankelijk project van{" "}
+          is een onafhankelijk open-source project van{" "}
           <a href="https://github.com/julianaijal" target="_blank" rel="noopener noreferrer">
             Julian Aijal
           </a>{" "}
