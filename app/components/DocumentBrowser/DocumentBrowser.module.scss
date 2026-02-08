@@ -114,6 +114,7 @@
 
 .tocActive {
   background: var(--pvda-red-light);
+  animation: highlightPulse 600ms ease;
 
   .tocLink {
     color: var(--pvda-red);
@@ -136,6 +137,7 @@
 .section {
   margin-bottom: 32px;
   scroll-margin-top: 20px;
+  animation: contentFade 300ms ease;
 }
 
 .sectionTitle {
@@ -223,4 +225,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes highlightPulse {
+  0% { opacity: 0.5; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.01); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes contentFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
