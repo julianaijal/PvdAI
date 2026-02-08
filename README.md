@@ -12,7 +12,7 @@ Browse and ask questions about the articles of association (statuten en reglemen
 
 PvdAI makes the 188-page PvdA articles of association accessible through a split-screen interface:
 
-- **Left panel**: a searchable document browser with table of contents
+- **Left panel**: a document browser with collapsible table of contents and on-demand content loading
 - **Right panel**: an AI chat where you can ask questions in plain language
 
 The AI answers at B1 reading level and references specific articles, so you can verify the source yourself.
@@ -25,6 +25,14 @@ The AI answers at B1 reading level and references specific articles, so you can 
 - **OpenAI** SDK ^6 (Embeddings + Responses API)
 - **SCSS** Modules
 - **No database** — embeddings and document structure stored as JSON
+
+## Performance
+
+- Lightweight TOC (84KB) served on initial load instead of full document structure (599KB)
+- Section content loaded on demand via `/api/section` with 24h cache headers
+- Chat component dynamically imported (code-split)
+- Memoized TOC tree to minimize re-renders
+- Dark mode toggle with localStorage persistence
 
 ## Setup
 
@@ -46,7 +54,7 @@ npm install
 npx tsx scripts/parse.ts
 ```
 
-This reads the PDF, splits it into structured chapters and chunks. Output: `data/structure.json` and `data/chunks.json`.
+This reads the PDF and generates structured data. Output: `data/structure.json`, `data/toc.json`, and `data/chunks.json`.
 
 4. Generate embeddings (one-time):
 
@@ -66,19 +74,21 @@ npm run dev
 
 ```
 app/
-  page.tsx                  # main page (server component)
-  globals.scss              # PvdA branding
+  page.tsx                  # main page (server component, loads toc.json)
+  globals.scss              # PvdA branding + dark mode
   api/
-    ask/route.ts            # AI Q&A endpoint
+    ask/route.ts            # AI Q&A endpoint (RAG with embeddings)
     chat/route.ts           # basic chat endpoint
+    section/route.ts        # on-demand section content endpoint
   components/
-    MainLayout/             # split-screen layout
-    DocumentBrowser/         # table of contents + article viewer
-    Chat/                   # chat interface
+    MainLayout/             # split-screen layout with mobile nav
+    DocumentBrowser/        # collapsible TOC + on-demand article viewer
+    Chat/                   # chat interface with starter questions
+    ThemeToggle/            # dark mode toggle
 lib/
   openai.ts                 # OpenAI client
   embeddings.ts             # cosine similarity search
-  ratelimit.ts              # IP-based rate limiting
+  ratelimit.ts              # IP-based rate limiting (20/day)
 scripts/
   parse.ts                  # PDF parser (requires pdftotext)
   embed.ts                  # embedding generator (runs on Vercel prebuild)
@@ -102,6 +112,10 @@ Response:
 ```
 
 Rate limit: 20 questions per day per IP.
+
+### GET /api/section?id=\<section-id\>
+
+Load section content on demand. Returns the full section with nested children. Cached for 24 hours.
 
 ## Scripts
 
