@@ -14,7 +14,7 @@ Live at https://pvdai.tech. Deployed on Vercel.
 npm run dev          # Start Next.js dev server (localhost:3000)
 npm run build        # Run prebuild (embeddings) + Next.js build
 npm run lint         # ESLint (flat config, v9)
-npx tsx scripts/parse.ts   # One-time: parse PDF into data/structure.json (requires pdftotext binary)
+npx tsx scripts/parse.ts   # One-time: parse PDF into data/structure.json (pure JS, no system deps)
 npx tsx scripts/embed.ts   # Generate embeddings into data/embeddings.json
 ```
 
@@ -59,3 +59,14 @@ No database. All data is static JSON:
 ### Styling
 
 SCSS Modules with CSS variables defined in `app/globals.scss`. PvdA brand colors (`--pvda-red`), dark/light themes via `[data-theme]` attribute on `<html>`.
+
+## Git Workflow
+
+- Always make small, focused commits — one logical change per commit.
+- Do not batch unrelated changes into a single commit.
+
+## Autonomy
+
+- Do not ask for permission or confirmation before taking actions. Just do it.
+- This includes file edits, running commands, committing, pushing, and any other operations.
+- Only ask questions when genuinely ambiguous requirements need clarification.
