@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import styles from "./Chat.module.scss";
 
 interface Message {
@@ -20,12 +20,65 @@ interface ChatProps {
   toc?: TocItem[];
 }
 
-const STARTER_QUESTIONS = [
+const ALL_STARTER_QUESTIONS = [
+  // Lidmaatschap
   "Hoe word ik lid van de PvdA?",
+  "Wat kost het lidmaatschap?",
+  "Kan ik als jeugdlid ook stemmen?",
+  "Wanneer verlies je je lidmaatschap?",
+  "Wat zijn de rechten en plichten van leden?",
+  "Hoe werkt royement bij de PvdA?",
+  "Vanaf welke leeftijd kun je lid worden?",
+  // Democratie & invloed
+  "Hoe kan ik meebeslissen in de partij?",
   "Wat doet het congres?",
-  "Hoe werkt royement?",
-  "Wat zijn de rechten van leden?",
+  "Wat is de Politieke Ledenraad?",
+  "Wat is de Verenigingsraad?",
+  "Hoe werkt stemmen binnen de partij?",
+  "Wat is een ledenraadpleging?",
+  "Hoe kan ik een motie indienen?",
+  // Structuur & organisatie
+  "Wat is het verschil tussen statuten en reglementen?",
+  "Welke organen heeft de PvdA?",
+  "Wat doet het partijbestuur?",
+  "Wat is een afdeling?",
+  "Wat is een gewest?",
+  "Wat doet het presidium?",
+  "Wat is de rol van de politiek leider?",
+  // Verkiezingen & kandidaten
+  "Hoe wordt een kandidatenlijst opgesteld?",
+  "Hoe wordt de lijsttrekker gekozen?",
+  "Hoe kan ik me verkiesbaar stellen?",
+  "Hoe werkt de kandidaatstelling voor de Tweede Kamer?",
+  "Hoe worden wethouders gekozen?",
+  "Wat is een lijstverbinding?",
+  // Geld & integriteit
+  "Hoe wordt de PvdA gefinancierd?",
+  "Wat is de erecode van de PvdA?",
+  "Wat doet de Commissie Integriteit?",
+  "Hoe gaat de PvdA om met belangenverstrengeling?",
+  "Wat zijn de regels rond giften?",
+  // Beroep & toezicht
+  "Wat doet de beroepscommissie?",
+  "Hoe kan ik in beroep gaan binnen de partij?",
+  "Hoe werkt bemiddeling en toezicht?",
+  // Samenwerking
+  "Hoe werkt de PvdA samen in de EU?",
+  "Wat zijn geestverwante organisaties?",
+  // Praktisch
+  "Wat is het doel van de PvdA?",
+  "Waar is de PvdA gevestigd?",
+  "Hoe worden de statuten gewijzigd?",
 ];
+
+function pickRandomQuestions(count: number): string[] {
+  const shuffled = [...ALL_STARTER_QUESTIONS];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, count);
+}
 
 function buildArticleLookup(items: TocItem[]): Map<string, string> {
   const map = new Map<string, string>();
@@ -93,8 +146,13 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [starterQuestions, setStarterQuestions] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const articleLookup = useMemo<Map<string, string>>(() => buildArticleLookup(toc || []), [toc]);
+
+  useEffect(() => {
+    setStarterQuestions(pickRandomQuestions(4));
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -165,7 +223,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
               </a>
             </p>
             <div className={styles.starters} role="group" aria-label="Voorbeeldvragen">
-              {STARTER_QUESTIONS.map((q) => (
+              {starterQuestions.map((q) => (
                 <button
                   key={q}
                   className={styles.starterButton}
