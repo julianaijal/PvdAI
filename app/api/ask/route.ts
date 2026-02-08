@@ -46,7 +46,23 @@ Antwoord: "Je kunt lid worden als je 16 jaar of ouder bent en in Nederland woont
 - Als je het antwoord niet weet, zeg dat eerlijk. Verzin niets.
 - Als iemand in het Engels vraagt, antwoord dan in het Engels op dezelfde manier.`;
 
+const MAX_QUESTION_LENGTH = 500;
+
 export async function POST(req: Request) {
+  const body = await req.json().catch(() => ({}));
+  const question = body.question?.trim();
+
+  if (!question) {
+    return Response.json({ error: "Geen vraag opgegeven." }, { status: 400 });
+  }
+
+  if (question.length > MAX_QUESTION_LENGTH) {
+    return Response.json(
+      { error: `Vraag mag maximaal ${MAX_QUESTION_LENGTH} tekens zijn.` },
+      { status: 400 }
+    );
+  }
+
   const headersList = await headers();
   const ip =
     headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -62,13 +78,6 @@ export async function POST(req: Request) {
       },
       { status: 429, headers: { "X-RateLimit-Remaining": "0" } }
     );
-  }
-
-  const body = await req.json().catch(() => ({}));
-  const question = body.question?.trim();
-
-  if (!question) {
-    return Response.json({ error: "Geen vraag opgegeven." }, { status: 400 });
   }
 
   try {
@@ -90,6 +99,8 @@ export async function POST(req: Request) {
       model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
       input: `Context uit de statuten en reglementen:\n\n${context}\n\n---\n\nVraag: ${question}`,
+      max_output_tokens: 1024,
+      store: false,
     });
 
     return Response.json(

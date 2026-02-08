@@ -78,7 +78,6 @@ app/
   globals.scss              # PvdA branding + dark mode
   api/
     ask/route.ts            # AI Q&A endpoint (RAG with embeddings)
-    chat/route.ts           # basic chat endpoint
     section/route.ts        # on-demand section content endpoint
   components/
     MainLayout/             # split-screen layout with mobile nav
@@ -94,6 +93,10 @@ scripts/
   embed.ts                  # embedding generator (runs on Vercel prebuild)
 data/                       # generated JSON (embeddings.json not in git)
 ```
+
+## Privacy
+
+Your questions are **not stored or used for AI training**. The OpenAI API is called with `store: false`, meaning your data is not retained by OpenAI beyond the immediate request.
 
 ## API
 

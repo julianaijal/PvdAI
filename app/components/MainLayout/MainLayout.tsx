@@ -107,6 +107,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
             officiële document
           </a>{" "}
           voor bindende informatie.
+          Je vragen worden niet opgeslagen of gebruikt voor AI-training.
           De broncode is openbaar beschikbaar op{" "}
           <a href="https://github.com/julianaijal/PvdAI" target="_blank" rel="noopener noreferrer">
             GitHub
