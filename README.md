@@ -1,6 +1,10 @@
 # PvdAI
 
-![Next.js](https://img.shields.io/badge/Next.js-16.0.1-black?logo=nextdotjs) ![React](https://img.shields.io/badge/React-19.2.0-61dafb?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white) ![OpenAI SDK](https://img.shields.io/badge/OpenAI%20SDK-6.x-412991?logo=openai&logoColor=white)
+AI-powered document browser for the articles of association of the Dutch Labour Party (PvdA).
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs) ![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white) ![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=white) ![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)
+
+![Vercel Status](https://img.shields.io/github/deployments/julianaijal/PvdAI/production?label=Vercel&logo=vercel) ![Last Commit](https://img.shields.io/github/last-commit/julianaijal/PvdAI)
 
 Browse and ask questions about the articles of association (statuten en reglementen) of the Dutch Labour Party (PvdA).
 
