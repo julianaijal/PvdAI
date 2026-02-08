@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import { join } from "path";
+import { SectionRequestSchema } from "@/lib/schemas";
 
 interface Section {
   id: string;
@@ -33,11 +34,13 @@ function findSection(sections: Section[], id: string): Section | null {
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
+  const parsed = SectionRequestSchema.safeParse({ id: searchParams.get("id") ?? undefined });
 
-  if (!id) {
+  if (!parsed.success) {
     return Response.json({ error: "Missing id parameter" }, { status: 400 });
   }
+
+  const id = parsed.data.id;
 
   const structure = getStructure();
   const section = findSection(structure, id);

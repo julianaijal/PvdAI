@@ -1,6 +1,7 @@
 import { openai } from "@/lib/openai";
 import { findRelevantChunks } from "@/lib/embeddings";
 import { checkRateLimit } from "@/lib/ratelimit";
+import { AskRequestSchema } from "@/lib/schemas";
 import { headers } from "next/headers";
 
 const SYSTEM_PROMPT = `Je bent een vriendelijke assistent die de statuten en reglementen van de PvdA uitlegt. Iedereen in Nederland moet je antwoord kunnen begrijpen — ook mensen die Nederlands als tweede taal spreken.
@@ -46,22 +47,16 @@ Antwoord: "Je kunt lid worden als je 16 jaar of ouder bent en in Nederland woont
 - Als je het antwoord niet weet, zeg dat eerlijk. Verzin niets.
 - Als iemand in het Engels vraagt, antwoord dan in het Engels op dezelfde manier.`;
 
-const MAX_QUESTION_LENGTH = 500;
-
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
-  const question = body.question?.trim();
+  const parsed = AskRequestSchema.safeParse(body);
 
-  if (!question) {
-    return Response.json({ error: "Geen vraag opgegeven." }, { status: 400 });
+  if (!parsed.success) {
+    const message = parsed.error.issues[0]?.message || "Ongeldige vraag.";
+    return Response.json({ error: message }, { status: 400 });
   }
 
-  if (question.length > MAX_QUESTION_LENGTH) {
-    return Response.json(
-      { error: `Vraag mag maximaal ${MAX_QUESTION_LENGTH} tekens zijn.` },
-      { status: 400 }
-    );
-  }
+  const question = parsed.data.question;
 
   const headersList = await headers();
   const ip =
