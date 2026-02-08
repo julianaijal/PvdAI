@@ -95,9 +95,10 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           is een onafhankelijk open-source project van{" "}
           <a href="https://github.com/julianaijal" target="_blank" rel="noopener noreferrer">
             Julian Aijal
-          </a>{" "}
-          en heeft geen band met de Partij van de Arbeid (PvdA).
-          Antwoorden worden gegenereerd door AI en kunnen onnauwkeurigheden bevatten.
+          </a>.
+          Dit is geen officieel product van en niet goedgekeurd door de Partij van de Arbeid (PvdA).
+          Antwoorden worden gegenereerd door AI en kunnen onjuistheden bevatten.
+          Aan de inhoud kunnen geen rechten worden ontleend.
           Raadpleeg altijd het{" "}
           <a
             href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
@@ -108,6 +109,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           </a>{" "}
           voor bindende informatie.
           Je vragen worden niet opgeslagen of gebruikt voor AI-training.
+          Er worden geen persoonsgegevens bewaard.
           De broncode is openbaar beschikbaar op{" "}
           <a href="https://github.com/julianaijal/PvdAI" target="_blank" rel="noopener noreferrer">
             GitHub
