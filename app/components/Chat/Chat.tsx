@@ -236,9 +236,8 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         setRemainingQuestions(parseInt(remaining, 10));
       }
 
-      const data = await res.json();
-
       if (!res.ok) {
+        const data = await res.json();
         setMessages((prev) => [
           ...prev,
           {
@@ -247,11 +246,60 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             isError: true,
           },
         ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.answer },
-        ]);
+        return;
+      }
+
+      // Add empty assistant message to stream into
+      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error("No reader");
+
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const payload = line.slice(6);
+          if (payload === "[DONE]") break;
+
+          try {
+            const parsed = JSON.parse(payload);
+            if (parsed.error) {
+              setMessages((prev) => {
+                const updated = [...prev];
+                updated[updated.length - 1] = {
+                  role: "assistant",
+                  content: parsed.error,
+                  isError: true,
+                };
+                return updated;
+              });
+              break;
+            }
+            if (parsed.delta) {
+              setMessages((prev) => {
+                const updated = [...prev];
+                const last = updated[updated.length - 1];
+                updated[updated.length - 1] = {
+                  ...last,
+                  content: last.content + parsed.delta,
+                };
+                return updated;
+              });
+            }
+          } catch {
+            // skip malformed JSON
+          }
+        }
       }
     } catch {
       setMessages((prev) => [
@@ -317,7 +365,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             </div>
           </div>
         ))}
-        {loading && (
+        {loading && !(messages.length > 0 && messages[messages.length - 1].role === "assistant" && messages[messages.length - 1].content.length > 0) && (
           <div
             className={`${styles.message} ${styles.assistantMessage}`}
             role="status"
