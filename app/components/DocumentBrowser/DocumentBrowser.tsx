@@ -1,7 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import styles from "./DocumentBrowser.module.scss";
+
+interface TocItem {
+  id: string;
+  title: string;
+  level: number;
+  children: TocItem[];
+}
 
 interface Section {
   id: string;
@@ -12,27 +19,27 @@ interface Section {
 }
 
 interface DocumentBrowserProps {
-  structure: Section[];
+  toc: TocItem[];
   highlightId?: string | null;
 }
 
-function TOCItem({
-  section,
+const TOCItem = memo(function TOCItem({
+  item,
   onSelect,
   highlightId,
 }: {
-  section: Section;
+  item: TocItem;
   onSelect: (id: string) => void;
   highlightId?: string | null;
 }) {
-  const [expanded, setExpanded] = useState(section.level === 0);
-  const hasChildren = section.children.length > 0;
+  const [expanded, setExpanded] = useState(item.level === 0);
+  const hasChildren = item.children.length > 0;
 
   return (
     <li className={styles.tocItem}>
       <div
-        className={`${styles.tocLabel} ${highlightId === section.id ? styles.tocActive : ""}`}
-        style={{ paddingLeft: `${section.level * 16 + 8}px` }}
+        className={`${styles.tocLabel} ${highlightId === item.id ? styles.tocActive : ""}`}
+        style={{ paddingLeft: `${item.level * 16 + 8}px` }}
       >
         {hasChildren && (
           <button
@@ -40,22 +47,22 @@ function TOCItem({
             onClick={() => setExpanded(!expanded)}
             aria-label={expanded ? "Inklappen" : "Uitklappen"}
           >
-            {expanded ? "▾" : "▸"}
+            {expanded ? "\u25BE" : "\u25B8"}
           </button>
         )}
         <button
           className={styles.tocLink}
-          onClick={() => onSelect(section.id)}
+          onClick={() => onSelect(item.id)}
         >
-          {section.title}
+          {item.title}
         </button>
       </div>
       {hasChildren && expanded && (
         <ul className={styles.tocChildren}>
-          {section.children.map((child) => (
+          {item.children.map((child) => (
             <TOCItem
               key={child.id}
-              section={child}
+              item={child}
               onSelect={onSelect}
               highlightId={highlightId}
             />
@@ -64,24 +71,20 @@ function TOCItem({
       )}
     </li>
   );
-}
+});
 
-function SectionContent({
-  section,
-}: {
-  section: Section;
-}) {
+function SectionContent({ section }: { section: Section }) {
+  const Tag = section.level === 0 ? "h2" : section.level === 1 ? "h3" : "h4";
+  const titleClass =
+    section.level === 0
+      ? styles.sectionTitle
+      : section.level === 1
+        ? styles.chapterTitle
+        : styles.articleTitle;
+
   return (
     <div id={section.id} className={styles.section}>
-      {section.level === 0 && (
-        <h2 className={styles.sectionTitle}>{section.title}</h2>
-      )}
-      {section.level === 1 && (
-        <h3 className={styles.chapterTitle}>{section.title}</h3>
-      )}
-      {section.level === 2 && (
-        <h4 className={styles.articleTitle}>{section.title}</h4>
-      )}
+      <Tag className={titleClass}>{section.title}</Tag>
       {section.content && (
         <div className={styles.sectionContent}>
           {section.content.split("\n").map((line, i) => (
@@ -99,17 +102,62 @@ function SectionContent({
 }
 
 export default function DocumentBrowser({
-  structure,
+  toc,
   highlightId,
 }: DocumentBrowserProps) {
   const [tocOpen, setTocOpen] = useState(true);
+  const [loadedSections, setLoadedSections] = useState<Record<string, Section>>({});
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
 
-  function scrollToSection(id: string) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const loadSection = useCallback(async (id: string) => {
+    if (loadedSections[id]) {
+      setActiveSectionId(id);
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+      return;
     }
+
+    setLoadingId(id);
+    try {
+      const res = await fetch(`/api/section?id=${encodeURIComponent(id)}`);
+      if (res.ok) {
+        const section: Section = await res.json();
+        setLoadedSections((prev) => ({ ...prev, [id]: section }));
+        setActiveSectionId(id);
+        setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 50);
+      }
+    } finally {
+      setLoadingId(null);
+    }
+  }, [loadedSections]);
+
+  // Find the top-level section ID for a given item
+  const findTopLevelId = useCallback((id: string): string => {
+    for (const section of toc) {
+      if (section.id === id) return id;
+      const found = findInChildren(section, id);
+      if (found) return section.id;
+    }
+    return id;
+  }, [toc]);
+
+  function findInChildren(item: TocItem, id: string): boolean {
+    if (item.id === id) return true;
+    return item.children.some((c) => findInChildren(c, id));
   }
+
+  const handleSelect = useCallback((id: string) => {
+    const topId = findTopLevelId(id);
+    loadSection(topId).then(() => {
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    });
+  }, [findTopLevelId, loadSection]);
 
   return (
     <div className={styles.browser}>
@@ -118,17 +166,17 @@ export default function DocumentBrowser({
           className={styles.tocHeaderToggle}
           onClick={() => setTocOpen(!tocOpen)}
         >
-          {tocOpen ? "▾" : "▸"} Inhoudsopgave
+          {tocOpen ? "\u25BE" : "\u25B8"} Inhoudsopgave
         </button>
       </div>
       {tocOpen && (
         <nav className={styles.toc}>
           <ul className={styles.tocList}>
-            {structure.map((section) => (
+            {toc.map((item) => (
               <TOCItem
-                key={section.id}
-                section={section}
-                onSelect={scrollToSection}
+                key={item.id}
+                item={item}
+                onSelect={handleSelect}
                 highlightId={highlightId}
               />
             ))}
@@ -136,9 +184,19 @@ export default function DocumentBrowser({
         </nav>
       )}
       <div className={styles.content}>
-        {structure.map((section) => (
-          <SectionContent key={section.id} section={section} />
-        ))}
+        {!activeSectionId && !loadingId && (
+          <div className={styles.placeholder}>
+            Klik op een item in de inhoudsopgave om het te bekijken.
+          </div>
+        )}
+        {loadingId && (
+          <div className={styles.placeholder}>
+            Laden...
+          </div>
+        )}
+        {activeSectionId && loadedSections[activeSectionId] && (
+          <SectionContent section={loadedSections[activeSectionId]} />
+        )}
       </div>
     </div>
   );
