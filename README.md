@@ -8,6 +8,8 @@ AI-powered document browser for the articles of association of the Dutch Labour 
 
 Browse and ask questions about the articles of association (statuten en reglementen) of the Dutch Labour Party (PvdA).
 
+**Live demo:** [pvdai.tech](https://pvdai.tech)
+
 Based on the [Statuten en reglementen PvdA 2023](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) (version 2023).
 
 ## What is this?
@@ -21,7 +23,7 @@ The AI answers at B1 reading level and references specific articles, so you can 
 
 ## Stack
 
-- **Next.js** 16.0.1 (App Router)
+- **Next.js** 16.0.10 (App Router)
 - **React** 19.2.0
 - **TypeScript** ^5
 - **OpenAI** SDK ^6 (Embeddings + Responses API)
@@ -50,7 +52,7 @@ echo "OPENAI_API_KEY=YOUR_KEY_HERE" > .env.local
 npm install
 ```
 
-3. Parse the PDF (one-time, requires `pdftotext`):
+3. Parse the PDF (one-time, requires `pdftotext` from [Poppler](https://poppler.freedesktop.org/) — install with `brew install poppler` on macOS):
 
 ```
 npx tsx scripts/parse.ts
