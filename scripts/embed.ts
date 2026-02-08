@@ -19,7 +19,7 @@ interface ChunkWithEmbedding extends Chunk {
 }
 
 async function generateEmbeddings(texts: string[]): Promise<number[][]> {
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY_PVDAI || process.env.OPENAI_API_KEY });
   const batchSize = 100;
   const embeddings: number[][] = [];
 
