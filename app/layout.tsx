@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.scss";
 
 const title = "PvdAI — Statuten & Reglementen van de PvdA";
@@ -64,6 +66,8 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <Analytics />
+        <SpeedInsights />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-H4VK7HXVHV"
           strategy="afterInteractive"
