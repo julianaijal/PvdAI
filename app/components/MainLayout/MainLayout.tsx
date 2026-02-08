@@ -1,24 +1,27 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import DocumentBrowser from "../DocumentBrowser/DocumentBrowser";
-import Chat from "../Chat/Chat";
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import styles from "./MainLayout.module.scss";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
-interface Section {
+const Chat = dynamic(() => import("../Chat/Chat"), {
+  loading: () => <div className={styles.chatLoading}>Laden...</div>,
+});
+
+interface TocItem {
   id: string;
   title: string;
   level: number;
-  content: string;
-  children: Section[];
+  children: TocItem[];
 }
 
 interface MainLayoutProps {
-  structure: Section[];
+  toc: TocItem[];
 }
 
-export default function MainLayout({ structure }: MainLayoutProps) {
+export default function MainLayout({ toc }: MainLayoutProps) {
   const [activePanel, setActivePanel] = useState<"browser" | "chat">("chat");
   const [highlightId, setHighlightId] = useState<string | null>(null);
 
@@ -65,7 +68,7 @@ export default function MainLayout({ structure }: MainLayoutProps) {
           className={`${styles.browserPanel} ${activePanel === "browser" ? styles.panelActive : ""}`}
         >
           <DocumentBrowser
-            structure={structure}
+            toc={toc}
             highlightId={highlightId}
           />
         </div>

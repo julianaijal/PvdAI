@@ -132,3 +132,12 @@
     display: block;
   }
 }
+
+.chatLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--pvda-text-secondary);
+  font-size: 14px;
+}
