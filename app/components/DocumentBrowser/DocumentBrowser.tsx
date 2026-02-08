@@ -36,7 +36,7 @@ const TOCItem = memo(function TOCItem({
   const hasChildren = item.children.length > 0;
 
   return (
-    <li className={styles.tocItem}>
+    <li className={styles.tocItem} role="treeitem" aria-expanded={hasChildren ? expanded : undefined}>
       <div
         className={`${styles.tocLabel} ${highlightId === item.id ? styles.tocActive : ""}`}
         style={{ paddingLeft: `${item.level * 16 + 8}px` }}
@@ -45,20 +45,22 @@ const TOCItem = memo(function TOCItem({
           <button
             className={styles.tocToggle}
             onClick={() => setExpanded(!expanded)}
-            aria-label={expanded ? "Inklappen" : "Uitklappen"}
+            aria-expanded={expanded}
+            aria-label={`${item.title} ${expanded ? "inklappen" : "uitklappen"}`}
           >
-            {expanded ? "\u25BE" : "\u25B8"}
+            <span aria-hidden="true">{expanded ? "\u25BE" : "\u25B8"}</span>
           </button>
         )}
         <button
           className={styles.tocLink}
           onClick={() => onSelect(item.id)}
+          aria-current={highlightId === item.id ? "location" : undefined}
         >
           {item.title}
         </button>
       </div>
       {hasChildren && expanded && (
-        <ul className={styles.tocChildren}>
+        <ul className={styles.tocChildren} role="group">
           {item.children.map((child) => (
             <TOCItem
               key={child.id}
@@ -160,27 +162,29 @@ export default function DocumentBrowser({
   }, [findTopLevelId, loadSection]);
 
   return (
-    <div className={styles.browser}>
+    <div className={styles.browser} role="region" aria-label="Documentbrowser">
       <div className={styles.tocHeader}>
         <button
           className={styles.tocHeaderToggle}
           onClick={() => setTocOpen(!tocOpen)}
+          aria-expanded={tocOpen}
+          aria-controls="toc-nav"
         >
-          {tocOpen ? "\u25BE" : "\u25B8"} Inhoudsopgave
+          <span aria-hidden="true">{tocOpen ? "\u25BE" : "\u25B8"}</span> Inhoudsopgave
         </button>
         <a
           href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.pdfLink}
-          title="Origineel document openen"
+          aria-label="Origineel document openen als PDF"
         >
           PDF
         </a>
       </div>
       {tocOpen && (
-        <nav className={styles.toc}>
-          <ul className={styles.tocList}>
+        <nav id="toc-nav" className={styles.toc} aria-label="Inhoudsopgave">
+          <ul className={styles.tocList} role="tree">
             {toc.map((item) => (
               <TOCItem
                 key={item.id}
@@ -195,15 +199,16 @@ export default function DocumentBrowser({
       <div className={styles.content}>
         {!activeSectionId && !loadingId && (
           <div className={styles.placeholder}>
-            <span className={styles.placeholderIcon}>{"\u{1F4D6}"}</span>
+            <span className={styles.placeholderIcon} aria-hidden="true">{"\u{1F4D6}"}</span>
             <span className={styles.placeholderText}>
               Klik op een onderdeel in de inhoudsopgave om de tekst te lezen.
             </span>
           </div>
         )}
         {loadingId && (
-          <div className={styles.placeholder}>
-            <div className={styles.spinner} />
+          <div className={styles.placeholder} role="status" aria-label="Sectie wordt geladen">
+            <div className={styles.spinner} aria-hidden="true" />
+            <span className="sr-only">Laden...</span>
           </div>
         )}
         {activeSectionId && loadedSections[activeSectionId] && (

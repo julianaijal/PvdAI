@@ -185,7 +185,6 @@
   border-radius: var(--radius-sm);
   font-size: 14px;
   font-family: inherit;
-  outline: none;
   color: var(--pvda-text);
   background: var(--pvda-grey);
   transition: all var(--transition);
@@ -193,7 +192,8 @@
   &:focus {
     border-color: var(--pvda-red);
     background: var(--pvda-surface);
-    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1);
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 1px;
   }
 
   &::placeholder {
@@ -223,7 +223,8 @@
   }
 
   &:disabled {
-    opacity: 0.4;
+    opacity: 0.5;
     cursor: not-allowed;
+    background: var(--pvda-grey-mid);
   }
 }

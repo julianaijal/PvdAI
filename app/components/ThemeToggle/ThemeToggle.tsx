@@ -31,7 +31,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={dark ? "Schakel naar licht thema" : "Schakel naar donker thema"}
     >
-      <span className={styles.icon}>{dark ? "\u2600" : "\u263E"}</span>
+      <span className={styles.icon} aria-hidden="true">{dark ? "\u2600" : "\u263E"}</span>
     </button>
   );
 }

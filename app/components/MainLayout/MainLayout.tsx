@@ -38,6 +38,9 @@ export default function MainLayout({ toc }: MainLayoutProps) {
 
   return (
     <div className={styles.layout}>
+      <a href="#main-content" className="skip-link">
+        Ga naar inhoud
+      </a>
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <h1 className={styles.logo}>Pvd<span>AI</span></h1>
@@ -46,16 +49,18 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           </span>
         </div>
         <div className={styles.headerRight}>
-          <nav className={styles.mobileNav}>
+          <nav className={styles.mobileNav} aria-label="Paneelnavigatie">
             <button
               className={`${styles.navButton} ${activePanel === "browser" ? styles.navActive : ""}`}
               onClick={() => setActivePanel("browser")}
+              aria-pressed={activePanel === "browser"}
             >
               Document
             </button>
             <button
               className={`${styles.navButton} ${activePanel === "chat" ? styles.navActive : ""}`}
               onClick={() => setActivePanel("chat")}
+              aria-pressed={activePanel === "chat"}
             >
               Chat
             </button>
@@ -63,20 +68,24 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           <ThemeToggle />
         </div>
       </header>
-      <main className={styles.main}>
-        <div
+      <main id="main-content" className={styles.main}>
+        <section
           className={`${styles.browserPanel} ${activePanel === "browser" ? styles.panelActive : ""}`}
+          aria-label="Documentbrowser"
+          aria-hidden={activePanel !== "browser" ? true : undefined}
         >
           <DocumentBrowser
             toc={toc}
             highlightId={highlightId}
           />
-        </div>
-        <div
+        </section>
+        <section
           className={`${styles.chatPanel} ${activePanel === "chat" ? styles.panelActive : ""}`}
+          aria-label="Chat"
+          aria-hidden={activePanel !== "chat" ? true : undefined}
         >
           <Chat onArticleClick={handleArticleClick} />
-        </div>
+        </section>
       </main>
     </div>
   );

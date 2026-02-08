@@ -84,14 +84,14 @@
   border: none;
   cursor: pointer;
   font-size: 10px;
-  color: var(--pvda-grey-mid);
+  color: var(--pvda-text-secondary);
   padding: 4px;
   line-height: 1;
   flex-shrink: 0;
   transition: color var(--transition);
 
   &:hover {
-    color: var(--pvda-text-secondary);
+    color: var(--pvda-text);
   }
 }
 

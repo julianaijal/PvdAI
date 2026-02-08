@@ -33,6 +33,7 @@ function parseArticleRefs(text: string, onClick?: (id: string) => void) {
           key={i}
           className={styles.articleRef}
           onClick={() => onClick?.(id)}
+          aria-label={`Ga naar ${part} in documentbrowser`}
         >
           {part}
         </button>
@@ -98,12 +99,12 @@ export default function Chat({ onArticleClick }: ChatProps) {
   }
 
   return (
-    <div className={styles.chat}>
-      <div className={styles.messages}>
+    <div className={styles.chat} role="region" aria-label="Chat met AI-assistent">
+      <div className={styles.messages} aria-live="polite" aria-relevant="additions">
         {messages.length === 0 && (
           <div className={styles.welcome}>
-            <div className={styles.welcomeIcon}>?</div>
-            <h3 className={styles.welcomeTitle}>Stel een vraag</h3>
+            <div className={styles.welcomeIcon} aria-hidden="true">?</div>
+            <h2 className={styles.welcomeTitle}>Stel een vraag</h2>
             <p className={styles.welcomeText}>
               Vraag iets over de statuten en reglementen van de PvdA.
               {" "}
@@ -116,7 +117,7 @@ export default function Chat({ onArticleClick }: ChatProps) {
                 Bekijk het originele document (PDF)
               </a>
             </p>
-            <div className={styles.starters}>
+            <div className={styles.starters} role="group" aria-label="Voorbeeldvragen">
               {STARTER_QUESTIONS.map((q) => (
                 <button
                   key={q}
@@ -133,6 +134,8 @@ export default function Chat({ onArticleClick }: ChatProps) {
           <div
             key={i}
             className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage}`}
+            role={msg.role === "user" ? "log" : "status"}
+            aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
           >
             <div className={styles.messageContent}>
               {msg.role === "assistant"
@@ -142,7 +145,11 @@ export default function Chat({ onArticleClick }: ChatProps) {
           </div>
         ))}
         {loading && (
-          <div className={`${styles.message} ${styles.assistantMessage}`}>
+          <div
+            className={`${styles.message} ${styles.assistantMessage}`}
+            role="status"
+            aria-label="Antwoord wordt geladen"
+          >
             <div className={styles.messageContent}>
               <span className={styles.loading}>Aan het nadenken...</span>
             </div>
@@ -157,15 +164,25 @@ export default function Chat({ onArticleClick }: ChatProps) {
           handleSubmit();
         }}
       >
+        <label htmlFor="chat-input" className="sr-only">
+          Stel een vraag over de statuten
+        </label>
         <input
+          id="chat-input"
           className={styles.input}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Stel een vraag over de statuten..."
           disabled={loading}
+          autoComplete="off"
         />
-        <button className={styles.sendButton} type="submit" disabled={loading || !input.trim()}>
+        <button
+          className={styles.sendButton}
+          type="submit"
+          disabled={loading || !input.trim()}
+          aria-label="Verstuur vraag"
+        >
           Vraag
         </button>
       </form>
