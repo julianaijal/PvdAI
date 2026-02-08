@@ -84,7 +84,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           aria-label="Chat"
           aria-hidden={activePanel !== "chat" ? true : undefined}
         >
-          <Chat onArticleClick={handleArticleClick} />
+          <Chat onArticleClick={handleArticleClick} toc={toc} />
         </section>
       </main>
       <footer className={styles.footer}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, useEffect, memo } from "react";
 import styles from "./DocumentBrowser.module.scss";
 
 interface TocItem {
@@ -160,6 +160,13 @@ export default function DocumentBrowser({
       }, 100);
     });
   }, [findTopLevelId, loadSection]);
+
+  // Auto-load section when highlightId changes (e.g. from chat article links)
+  useEffect(() => {
+    if (highlightId) {
+      handleSelect(highlightId);
+    }
+  }, [highlightId, handleSelect]);
 
   return (
     <div className={styles.browser} role="region" aria-label="Documentbrowser">

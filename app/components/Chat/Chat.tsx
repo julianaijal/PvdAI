@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import styles from "./Chat.module.scss";
 
 interface Message {
@@ -8,8 +8,16 @@ interface Message {
   content: string;
 }
 
+interface TocItem {
+  id: string;
+  title: string;
+  level: number;
+  children: TocItem[];
+}
+
 interface ChatProps {
   onArticleClick?: (articleId: string) => void;
+  toc?: TocItem[];
 }
 
 const STARTER_QUESTIONS = [
@@ -19,35 +27,55 @@ const STARTER_QUESTIONS = [
   "Wat zijn de rechten van leden?",
 ];
 
-function parseArticleRefs(text: string, onClick?: (id: string) => void) {
+function buildArticleLookup(items: TocItem[]): Map<number, string> {
+  const map = new Map<number, string>();
+  function walk(list: TocItem[]) {
+    for (const item of list) {
+      const match = item.id.match(/artikel-(\d+)/);
+      if (match && !map.has(Number(match[1]))) {
+        map.set(Number(match[1]), item.id);
+      }
+      walk(item.children);
+    }
+  }
+  walk(items);
+  return map;
+}
+
+function parseArticleRefs(
+  text: string,
+  onClick?: (id: string) => void,
+  articleLookup?: Map<number, string>
+) {
   const parts = text.split(/(Artikel\s+\d+[\w.]*(?:,?\s*lid\s+\d+)?)/gi);
   return parts.map((part, i) => {
-    if (/^Artikel\s+\d+/i.test(part)) {
-      const id = part
-        .toLowerCase()
-        .replace(/[.,]/g, "")
-        .replace(/\s+/g, "-")
-        .substring(0, 60);
-      return (
-        <button
-          key={i}
-          className={styles.articleRef}
-          onClick={() => onClick?.(id)}
-          aria-label={`Ga naar ${part} in documentbrowser`}
-        >
-          {part}
-        </button>
-      );
+    const numMatch = part.match(/^Artikel\s+(\d+)/i);
+    if (numMatch) {
+      const articleNum = Number(numMatch[1]);
+      const tocId = articleLookup?.get(articleNum);
+      if (tocId && onClick) {
+        return (
+          <button
+            key={i}
+            className={styles.articleRef}
+            onClick={() => onClick(tocId)}
+            aria-label={`Ga naar ${part} in documentbrowser`}
+          >
+            {part}
+          </button>
+        );
+      }
     }
     return <span key={i}>{part}</span>;
   });
 }
 
-export default function Chat({ onArticleClick }: ChatProps) {
+export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const articleLookup = useMemo(() => buildArticleLookup(toc || []), [toc]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -139,7 +167,7 @@ export default function Chat({ onArticleClick }: ChatProps) {
           >
             <div className={styles.messageContent}>
               {msg.role === "assistant"
-                ? parseArticleRefs(msg.content, onArticleClick)
+                ? parseArticleRefs(msg.content, onArticleClick, articleLookup)
                 : msg.content}
             </div>
           </div>
