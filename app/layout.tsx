@@ -32,20 +32,11 @@ export const metadata: Metadata = {
     siteName: "PvdAI",
     locale: "nl_NL",
     type: "website",
-    images: [
-      {
-        url: "/og.svg",
-        width: 1200,
-        height: 630,
-        alt: "PvdAI — Stel vragen over de statuten van de PvdA",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og.svg"],
   },
   robots: {
     index: true,
@@ -53,6 +44,7 @@ export const metadata: Metadata = {
   },
   other: {
     "theme-color": "#E30613",
+    "apple-mobile-web-app-title": "PvdAI",
   },
 };
 
