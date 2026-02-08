@@ -173,7 +173,7 @@ Contributions are welcome. Please open an issue first to discuss what you'd like
 
 ## License
 
-This project is open source. See the repository for license details.
+This project is licensed under the [MIT License](LICENSE).
 
 ## Disclaimer
 
