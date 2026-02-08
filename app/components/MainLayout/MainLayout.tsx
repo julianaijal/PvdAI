@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import DocumentBrowser from "../DocumentBrowser/DocumentBrowser";
 import styles from "./MainLayout.module.scss";
@@ -24,6 +24,20 @@ interface MainLayoutProps {
 export default function MainLayout({ toc }: MainLayoutProps) {
   const [activePanel, setActivePanel] = useState<"browser" | "chat">("chat");
   const [highlightId, setHighlightId] = useState<string | null>(null);
+  const browserPanelRef = useRef<HTMLElement>(null);
+  const chatPanelRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    // Only manage focus on mobile
+    if (window.innerWidth > 768) return;
+    const panelRef = activePanel === "browser" ? browserPanelRef : chatPanelRef;
+    const el = panelRef.current;
+    if (!el) return;
+    const focusable = el.querySelector<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    focusable?.focus({ preventScroll: true });
+  }, [activePanel]);
 
   const handleArticleClick = useCallback((articleId: string) => {
     setHighlightId(articleId);
@@ -70,6 +84,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
       </header>
       <main id="main-content" className={styles.main}>
         <section
+          ref={browserPanelRef}
           className={`${styles.browserPanel} ${activePanel === "browser" ? styles.panelActive : ""}`}
           aria-label="Documentbrowser"
           aria-hidden={activePanel !== "browser" ? true : undefined}
@@ -80,6 +95,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           />
         </section>
         <section
+          ref={chatPanelRef}
           className={`${styles.chatPanel} ${activePanel === "chat" ? styles.panelActive : ""}`}
           aria-label="Chat"
           aria-hidden={activePanel !== "chat" ? true : undefined}

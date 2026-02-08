@@ -6,6 +6,7 @@ import styles from "./Chat.module.scss";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  isError?: boolean;
 }
 
 interface TocItem {
@@ -147,7 +148,10 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [starterQuestions, setStarterQuestions] = useState<string[]>([]);
+  const [remainingQuestions, setRemainingQuestions] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const isNearBottomRef = useRef(true);
   const articleLookup = useMemo<Map<string, string>>(() => buildArticleLookup(toc || []), [toc]);
 
   useEffect(() => {
@@ -155,8 +159,16 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (isNearBottomRef.current) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
+
+  const handleScroll = useCallback(() => {
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    isNearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 150;
+  }, []);
 
   async function handleSubmit(question?: string) {
     const text = question || input.trim();
@@ -174,6 +186,11 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         body: JSON.stringify({ question: text }),
       });
 
+      const remaining = res.headers.get("X-RateLimit-Remaining");
+      if (remaining !== null) {
+        setRemainingQuestions(parseInt(remaining, 10));
+      }
+
       const data = await res.json();
 
       if (!res.ok) {
@@ -182,6 +199,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           {
             role: "assistant",
             content: data.error || "Er is iets misgegaan. Probeer het opnieuw.",
+            isError: true,
           },
         ]);
       } else {
@@ -195,7 +213,8 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         ...prev,
         {
           role: "assistant",
-          content: "Er is een fout opgetreden. Probeer het later opnieuw.",
+          content: "Kan geen verbinding maken. Controleer je internet en probeer het opnieuw.",
+          isError: true,
         },
       ]);
     } finally {
@@ -205,7 +224,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
 
   return (
     <div className={styles.chat} role="region" aria-label="Chat met AI-assistent">
-      <div className={styles.messages} aria-live="polite" aria-relevant="additions">
+      <div className={styles.messages} aria-live="polite" aria-relevant="additions" ref={messagesContainerRef} onScroll={handleScroll}>
         {messages.length === 0 && (
           <div className={styles.welcome}>
             <div className={styles.welcomeIcon} aria-hidden="true">?</div>
@@ -238,7 +257,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage}`}
+            className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage} ${msg.isError ? styles.errorMessage : ""}`}
             role={msg.role === "user" ? "log" : "status"}
             aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
           >
@@ -262,35 +281,42 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         )}
         <div ref={messagesEndRef} />
       </div>
-      <form
-        className={styles.inputArea}
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <label htmlFor="chat-input" className="sr-only">
-          Stel een vraag over de statuten
-        </label>
-        <input
-          id="chat-input"
-          className={styles.input}
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Stel een vraag over de statuten..."
-          disabled={loading}
-          autoComplete="off"
-        />
-        <button
-          className={styles.sendButton}
-          type="submit"
-          disabled={loading || !input.trim()}
-          aria-label="Verstuur vraag"
+      <div className={styles.inputWrapper}>
+        <form
+          className={styles.inputArea}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
         >
-          Vraag
-        </button>
-      </form>
+          <label htmlFor="chat-input" className="sr-only">
+            Stel een vraag over de statuten
+          </label>
+          <input
+            id="chat-input"
+            className={`${styles.input} ${loading ? styles.inputLoading : ""}`}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Stel een vraag over de statuten..."
+            disabled={loading}
+            autoComplete="off"
+          />
+          <button
+            className={styles.sendButton}
+            type="submit"
+            disabled={loading || !input.trim()}
+            aria-label="Verstuur vraag"
+          >
+            Vraag
+          </button>
+        </form>
+        {remainingQuestions !== null && remainingQuestions <= 5 && (
+          <div className={styles.rateLimit} aria-live="polite">
+            Nog {remainingQuestions} {remainingQuestions === 1 ? "vraag" : "vragen"} vandaag
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -110,6 +110,7 @@ export default function DocumentBrowser({
   const [tocOpen, setTocOpen] = useState(true);
   const [loadedSections, setLoadedSections] = useState<Record<string, Section>>({});
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [errorId, setErrorId] = useState<string | null>(null);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
 
   const loadSection = useCallback(async (id: string) => {
@@ -122,6 +123,7 @@ export default function DocumentBrowser({
     }
 
     setLoadingId(id);
+    setErrorId(null);
     try {
       const res = await fetch(`/api/section?id=${encodeURIComponent(id)}`);
       if (res.ok) {
@@ -131,7 +133,11 @@ export default function DocumentBrowser({
         setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 50);
+      } else {
+        setErrorId(id);
       }
+    } catch {
+      setErrorId(id);
     } finally {
       setLoadingId(null);
     }
@@ -216,6 +222,19 @@ export default function DocumentBrowser({
           <div className={styles.placeholder} role="status" aria-label="Sectie wordt geladen">
             <div className={styles.spinner} aria-hidden="true" />
             <span className="sr-only">Laden...</span>
+          </div>
+        )}
+        {errorId && !loadingId && (
+          <div className={styles.placeholder} role="alert">
+            <span className={styles.placeholderText}>
+              Kan deze sectie niet laden.
+            </span>
+            <button
+              className={styles.retryButton}
+              onClick={() => loadSection(errorId)}
+            >
+              Opnieuw proberen
+            </button>
           </div>
         )}
         {activeSectionId && loadedSections[activeSectionId] && (

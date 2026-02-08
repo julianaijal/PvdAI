@@ -210,6 +210,25 @@
   line-height: 1.6;
 }
 
+.retryButton {
+  margin-top: 8px;
+  background: none;
+  border: 1px solid var(--pvda-red);
+  color: var(--pvda-red);
+  border-radius: var(--radius-sm);
+  padding: 8px 20px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+
+  &:hover {
+    background: var(--pvda-red);
+    color: var(--pvda-surface);
+  }
+}
+
 /* ── Loading spinner ── */
 
 .spinner {

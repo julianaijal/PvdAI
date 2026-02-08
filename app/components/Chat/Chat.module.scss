@@ -154,6 +154,13 @@
   }
 }
 
+.errorMessage {
+  .messageContent {
+    background: color-mix(in srgb, var(--pvda-red) 10%, var(--pvda-grey)) !important;
+    border-left: 3px solid var(--pvda-red);
+  }
+}
+
 .loading {
   color: var(--pvda-text-secondary);
   font-size: 13px;
@@ -196,11 +203,14 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
+.inputWrapper {
+  border-top: 1px solid var(--pvda-border-light);
+}
+
 .inputArea {
   display: flex;
   gap: 8px;
   padding: 16px 20px;
-  border-top: 1px solid var(--pvda-border-light);
 }
 
 .input {
@@ -224,6 +234,24 @@
   &::placeholder {
     color: var(--pvda-text-secondary);
   }
+}
+
+.inputLoading {
+  opacity: 0.6;
+  border-color: var(--pvda-border);
+  animation: inputPulse 2s ease-in-out infinite;
+}
+
+@keyframes inputPulse {
+  0%, 100% { border-color: var(--pvda-border); }
+  50% { border-color: var(--pvda-red); }
+}
+
+.rateLimit {
+  padding: 0 20px 8px;
+  font-size: 11px;
+  color: var(--pvda-red);
+  text-align: right;
 }
 
 .sendButton {
