@@ -102,6 +102,7 @@ export default function Chat({ onArticleClick }: ChatProps) {
       <div className={styles.messages}>
         {messages.length === 0 && (
           <div className={styles.welcome}>
+            <div className={styles.welcomeIcon}>?</div>
             <h3 className={styles.welcomeTitle}>Stel een vraag</h3>
             <p className={styles.welcomeText}>
               Vraag iets over de statuten en reglementen van de PvdA.

@@ -37,7 +37,7 @@ export default function MainLayout({ structure }: MainLayoutProps) {
     <div className={styles.layout}>
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          <h1 className={styles.logo}>PvdAI</h1>
+          <h1 className={styles.logo}>Pvd<span>AI</span></h1>
           <span className={styles.tagline}>
             Stel vragen over de statuten en reglementen van de PvdA
           </span>

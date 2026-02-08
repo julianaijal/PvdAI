@@ -3,33 +3,43 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  background: var(--pvda-grey);
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
-  background: var(--pvda-red);
-  color: var(--pvda-white);
+  padding: 0 24px;
+  height: 56px;
+  background: var(--pvda-white);
+  border-bottom: 1px solid var(--pvda-border);
   flex-shrink: 0;
+  z-index: 10;
 }
 
 .headerLeft {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.5px;
+  color: var(--pvda-black);
+  letter-spacing: -0.3px;
+
+  span {
+    color: var(--pvda-red);
+  }
 }
 
 .tagline {
   font-size: 13px;
-  opacity: 0.85;
+  color: var(--pvda-text-secondary);
+  padding-left: 12px;
+  border-left: 1px solid var(--pvda-border);
 
   @media (max-width: 768px) {
     display: none;
@@ -38,7 +48,10 @@
 
 .mobileNav {
   display: none;
-  gap: 4px;
+  gap: 2px;
+  background: var(--pvda-grey);
+  padding: 3px;
+  border-radius: var(--radius-sm);
 
   @media (max-width: 768px) {
     display: flex;
@@ -46,27 +59,29 @@
 }
 
 .navButton {
-  background: rgba(255, 255, 255, 0.15);
+  background: transparent;
   border: none;
-  color: var(--pvda-white);
+  color: var(--pvda-text-secondary);
   padding: 6px 14px;
   border-radius: 6px;
   font-size: 13px;
-  font-weight: 700;
-  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
+  transition: all var(--transition);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
+    color: var(--pvda-text);
   }
 }
 
 .navActive {
   background: var(--pvda-white);
-  color: var(--pvda-red);
+  color: var(--pvda-black);
+  box-shadow: var(--shadow-sm);
 
   &:hover {
-    background: var(--pvda-white);
+    color: var(--pvda-black);
   }
 }
 
@@ -74,23 +89,31 @@
   display: flex;
   flex: 1;
   overflow: hidden;
+  padding: 12px;
+  gap: 12px;
 }
 
 .browserPanel {
   flex: 6;
-  border-right: 1px solid var(--pvda-grey-mid);
   overflow: hidden;
+  background: var(--pvda-white);
+  border-radius: var(--radius);
+  border: 1px solid var(--pvda-border);
+  box-shadow: var(--shadow-sm);
 
   @media (max-width: 768px) {
     display: none;
     flex: 1;
-    border-right: none;
   }
 }
 
 .chatPanel {
   flex: 4;
   overflow: hidden;
+  background: var(--pvda-white);
+  border-radius: var(--radius);
+  border: 1px solid var(--pvda-border);
+  box-shadow: var(--shadow-sm);
 
   @media (max-width: 768px) {
     display: none;
