@@ -1,19 +1,20 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --pvda-red: #E30613;
+  --pvda-red-dark: #B8050F;
+  --pvda-red-light: #FDE8E9;
+  --pvda-white: #FFFFFF;
+  --pvda-black: #1D1D1B;
+  --pvda-grey: #F2F2F2;
+  --pvda-grey-mid: #CCCCCC;
+  --background: var(--pvda-white);
+  --foreground: var(--pvda-black);
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  height: 100%;
 }
 
 body {
@@ -31,12 +32,10 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--pvda-red);
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  text-decoration: underline;
 }
