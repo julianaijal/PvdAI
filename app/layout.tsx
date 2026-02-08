@@ -63,6 +63,36 @@ export default function RootLayout({
             __html: `(function(){var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light")})()`,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://pvdai.tech/#website",
+                  name: "PvdAI",
+                  url: "https://pvdai.tech",
+                  description,
+                  inLanguage: "nl",
+                  isAccessibleForFree: true,
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": "https://pvdai.tech/#webpage",
+                  name: title,
+                  url: "https://pvdai.tech",
+                  isPartOf: { "@id": "https://pvdai.tech/#website" },
+                  description,
+                  inLanguage: "nl",
+                  isAccessibleForFree: true,
+                  author: { "@type": "Person", name: "Julian Aijal" },
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body>
         {children}
