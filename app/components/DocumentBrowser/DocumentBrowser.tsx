@@ -186,12 +186,15 @@ export default function DocumentBrowser({
       <div className={styles.content}>
         {!activeSectionId && !loadingId && (
           <div className={styles.placeholder}>
-            Klik op een item in de inhoudsopgave om het te bekijken.
+            <span className={styles.placeholderIcon}>{"\u{1F4D6}"}</span>
+            <span className={styles.placeholderText}>
+              Klik op een onderdeel in de inhoudsopgave om de tekst te lezen.
+            </span>
           </div>
         )}
         {loadingId && (
           <div className={styles.placeholder}>
-            Laden...
+            <div className={styles.spinner} />
           </div>
         )}
         {activeSectionId && loadedSections[activeSectionId] && (
