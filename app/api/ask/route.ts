@@ -87,7 +87,7 @@ export async function POST(req: Request) {
 
     // Ask GPT
     const response = await openai.responses.create({
-      model: "gpt-5-nano",
+      model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
       input: `Context uit de statuten en reglementen:\n\n${context}\n\n---\n\nVraag: ${question}`,
     });

@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 try {
   const response = await openai.responses.create({
-    model: "gpt-5-nano",
+    model: "gpt-4.1-mini",
     input: "hallo alles goed?",
   });
 
