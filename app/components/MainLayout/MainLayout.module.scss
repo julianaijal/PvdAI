@@ -1,0 +1,105 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--pvda-red);
+  color: var(--pvda-white);
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  font-size: 13px;
+  opacity: 0.85;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.mobileNav {
+  display: none;
+  gap: 4px;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}
+
+.navButton {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: var(--pvda-white);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.navActive {
+  background: var(--pvda-white);
+  color: var(--pvda-red);
+
+  &:hover {
+    background: var(--pvda-white);
+  }
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.browserPanel {
+  flex: 6;
+  border-right: 1px solid var(--pvda-grey-mid);
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: none;
+    flex: 1;
+    border-right: none;
+  }
+}
+
+.chatPanel {
+  flex: 4;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    display: none;
+    flex: 1;
+  }
+}
+
+.panelActive {
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
