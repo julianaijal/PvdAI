@@ -87,6 +87,25 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           <Chat onArticleClick={handleArticleClick} />
         </section>
       </main>
+      <footer className={styles.footer}>
+        <p>
+          PvdAI is een onafhankelijk project van{" "}
+          <a href="https://github.com/julianaijal" target="_blank" rel="noopener noreferrer">
+            Julian Aijal
+          </a>{" "}
+          en heeft geen band met de Partij van de Arbeid (PvdA).
+          Antwoorden worden gegenereerd door AI en kunnen onnauwkeurigheden bevatten.
+          Raadpleeg altijd het{" "}
+          <a
+            href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            officiële document
+          </a>{" "}
+          voor bindende informatie.
+        </p>
+      </footer>
     </div>
   );
 }

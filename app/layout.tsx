@@ -3,7 +3,7 @@ import "./globals.scss";
 
 const title = "PvdAI — Statuten & Reglementen van de PvdA";
 const description =
-  "Doorzoek en stel vragen over de statuten en reglementen van de Partij van de Arbeid. AI-gestuurde antwoorden in begrijpelijke taal.";
+  "Doorzoek en stel vragen over de statuten en reglementen van de Partij van de Arbeid. AI-gestuurde antwoorden in begrijpelijke taal. Onafhankelijk project, geen initiatief van de PvdA.";
 const url = "https://pvdai.vercel.app";
 
 export const metadata: Metadata = {
