@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import DocumentBrowser from "../DocumentBrowser/DocumentBrowser";
 import Chat from "../Chat/Chat";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import styles from "./MainLayout.module.scss";
 
 interface Section {
@@ -24,7 +25,6 @@ export default function MainLayout({ structure }: MainLayoutProps) {
   const handleArticleClick = useCallback((articleId: string) => {
     setHighlightId(articleId);
     setActivePanel("browser");
-    // Wait for panel to render, then scroll
     setTimeout(() => {
       const el = document.getElementById(articleId);
       if (el) {
@@ -42,20 +42,23 @@ export default function MainLayout({ structure }: MainLayoutProps) {
             Stel vragen over de statuten en reglementen van de PvdA
           </span>
         </div>
-        <nav className={styles.mobileNav}>
-          <button
-            className={`${styles.navButton} ${activePanel === "browser" ? styles.navActive : ""}`}
-            onClick={() => setActivePanel("browser")}
-          >
-            Document
-          </button>
-          <button
-            className={`${styles.navButton} ${activePanel === "chat" ? styles.navActive : ""}`}
-            onClick={() => setActivePanel("chat")}
-          >
-            Chat
-          </button>
-        </nav>
+        <div className={styles.headerRight}>
+          <nav className={styles.mobileNav}>
+            <button
+              className={`${styles.navButton} ${activePanel === "browser" ? styles.navActive : ""}`}
+              onClick={() => setActivePanel("browser")}
+            >
+              Document
+            </button>
+            <button
+              className={`${styles.navButton} ${activePanel === "chat" ? styles.navActive : ""}`}
+              onClick={() => setActivePanel("chat")}
+            >
+              Chat
+            </button>
+          </nav>
+          <ThemeToggle />
+        </div>
       </header>
       <main className={styles.main}>
         <div

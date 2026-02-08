@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background: var(--pvda-grey);
+  background: var(--pvda-canvas);
 }
 
 .header {
@@ -12,13 +12,19 @@
   justify-content: space-between;
   padding: 0 24px;
   height: 56px;
-  background: var(--pvda-white);
+  background: var(--pvda-surface);
   border-bottom: 1px solid var(--pvda-border);
   flex-shrink: 0;
   z-index: 10;
 }
 
 .headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerRight {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -76,7 +82,7 @@
 }
 
 .navActive {
-  background: var(--pvda-white);
+  background: var(--pvda-surface);
   color: var(--pvda-black);
   box-shadow: var(--shadow-sm);
 
@@ -96,7 +102,7 @@
 .browserPanel {
   flex: 6;
   overflow: hidden;
-  background: var(--pvda-white);
+  background: var(--pvda-surface);
   border-radius: var(--radius);
   border: 1px solid var(--pvda-border);
   box-shadow: var(--shadow-sm);
@@ -110,7 +116,7 @@
 .chatPanel {
   flex: 4;
   overflow: hidden;
-  background: var(--pvda-white);
+  background: var(--pvda-surface);
   border-radius: var(--radius);
   border: 1px solid var(--pvda-border);
   box-shadow: var(--shadow-sm);

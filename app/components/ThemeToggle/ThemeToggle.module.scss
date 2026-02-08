@@ -1,0 +1,22 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--pvda-border);
+  border-radius: var(--radius-sm);
+  background: var(--pvda-surface);
+  cursor: pointer;
+  transition: all var(--transition);
+
+  &:hover {
+    background: var(--pvda-grey);
+    border-color: var(--pvda-grey-mid);
+  }
+}
+
+.icon {
+  font-size: 16px;
+  line-height: 1;
+}

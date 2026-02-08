@@ -57,7 +57,7 @@
 }
 
 .starterButton {
-  background: var(--pvda-white);
+  background: var(--pvda-surface);
   border: 1px solid var(--pvda-border);
   border-radius: var(--radius-sm);
   padding: 10px 16px;
@@ -98,7 +98,7 @@
 
   .messageContent {
     background: var(--pvda-red);
-    color: var(--pvda-white);
+    color: var(--pvda-surface);
     border-radius: var(--radius) var(--radius) 4px var(--radius);
   }
 }
@@ -177,7 +177,7 @@
 
   &:focus {
     border-color: var(--pvda-red);
-    background: var(--pvda-white);
+    background: var(--pvda-surface);
     box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1);
   }
 
@@ -188,7 +188,7 @@
 
 .sendButton {
   background: var(--pvda-red);
-  color: var(--pvda-white);
+  color: var(--pvda-surface);
   border: none;
   border-radius: var(--radius-sm);
   padding: 10px 20px;
