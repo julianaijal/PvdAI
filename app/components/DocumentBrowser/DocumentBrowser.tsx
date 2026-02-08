@@ -169,7 +169,7 @@ export default function DocumentBrowser({
           {tocOpen ? "\u25BE" : "\u25B8"} Inhoudsopgave
         </button>
         <a
-          href="/Statuten-en-reglementen-PvdA-2023.pdf"
+          href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.pdfLink}

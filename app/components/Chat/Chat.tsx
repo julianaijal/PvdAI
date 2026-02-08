@@ -108,7 +108,7 @@ export default function Chat({ onArticleClick }: ChatProps) {
               Vraag iets over de statuten en reglementen van de PvdA.
               {" "}
               <a
-                href="/Statuten-en-reglementen-PvdA-2023.pdf"
+                href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.pdfLink}
