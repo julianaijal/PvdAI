@@ -1,135 +1,180 @@
-# PvdAI
+<p align="center">
+  <strong>Pvd<em>AI</em></strong>
+</p>
 
-AI-powered document browser for the articles of association of the Dutch Labour Party (PvdA).
+<p align="center">
+  AI-powered document browser for the articles of association of the Dutch Labour Party (PvdA).
+</p>
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs) ![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white) ![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=white) ![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)
+<p align="center">
+  <a href="https://pvdai.tech"><strong>pvdai.tech</strong></a>
+</p>
 
-![Vercel Status](https://img.shields.io/github/deployments/julianaijal/PvdAI/production?label=Vercel&logo=vercel) ![Last Commit](https://img.shields.io/github/last-commit/julianaijal/PvdAI)
+<p align="center">
+  <img src="https://img.shields.io/github/deployments/julianaijal/PvdAI/production?label=deploy&logo=vercel" alt="Deploy status" />
+  <img src="https://img.shields.io/github/last-commit/julianaijal/PvdAI" alt="Last commit" />
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16" />
+  <img src="https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white" alt="OpenAI" />
+</p>
 
-Browse and ask questions about the articles of association (statuten en reglementen) of the Dutch Labour Party (PvdA).
+---
 
-**Live demo:** [pvdai.tech](https://pvdai.tech)
+PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) accessible through a split-screen interface: a **document browser** on the left and an **AI chat** on the right. Ask questions in plain language and get answers at B1 reading level with references to specific articles.
 
-Based on the [Statuten en reglementen PvdA 2023](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) (version 2023).
+## Features
 
-## What is this?
+- **RAG-powered Q&A** — answers grounded in the actual document via semantic search over embeddings
+- **Interactive document browser** — collapsible table of contents with on-demand section loading
+- **Clickable article references** — AI responses link directly to referenced articles in the browser
+- **Dark/light mode** — system-aware with manual toggle
+- **Mobile-first** — responsive panel switching with accessible touch targets
+- **Privacy-first** — questions are not stored or used for training (`store: false`)
+- **Rate limiting** — 20 questions/day per IP with remaining count shown to users
 
-PvdAI makes the 188-page PvdA articles of association accessible through a split-screen interface:
+## Tech Stack
 
-- **Left panel**: a document browser with collapsible table of contents and on-demand content loading
-- **Right panel**: an AI chat where you can ask questions in plain language
+| Layer | Technology |
+|-------|-----------|
+| Framework | [Next.js](https://nextjs.org) 16 (App Router) |
+| UI | [React](https://react.dev) 19, SCSS Modules |
+| AI | [OpenAI](https://platform.openai.com) SDK — `text-embedding-3-small` + Responses API |
+| Language | TypeScript 5 |
+| Hosting | [Vercel](https://vercel.com) |
+| Database | None — static JSON files |
 
-The AI answers at B1 reading level and references specific articles, so you can verify the source yourself.
+## Getting Started
 
-## Stack
+### Prerequisites
 
-- **Next.js** 16.0.10 (App Router)
-- **React** 19.2.0
-- **TypeScript** ^5
-- **OpenAI** SDK ^6 (Embeddings + Responses API)
-- **SCSS** Modules
-- **No database** — embeddings and document structure stored as JSON
+- Node.js 18+
+- An [OpenAI API key](https://platform.openai.com/api-keys)
+- `pdftotext` from [Poppler](https://poppler.freedesktop.org/) (for PDF parsing only)
 
-## Performance
+  ```sh
+  # macOS
+  brew install poppler
+  ```
 
-- Lightweight TOC (84KB) served on initial load instead of full document structure (599KB)
-- Section content loaded on demand via `/api/section` with 24h cache headers
-- Chat component dynamically imported (code-split)
-- Memoized TOC tree to minimize re-renders
-- Dark mode toggle with localStorage persistence
+### Installation
 
-## Setup
-
-1. Create an OpenAI API key and set it locally:
-
-```
-echo "OPENAI_API_KEY=YOUR_KEY_HERE" > .env.local
-```
-
-2. Install dependencies:
-
-```
+```sh
+git clone https://github.com/julianaijal/PvdAI.git
+cd PvdAI
 npm install
 ```
 
-3. Parse the PDF (one-time, requires `pdftotext` from [Poppler](https://poppler.freedesktop.org/) — install with `brew install poppler` on macOS):
+### Configuration
+
+Create a `.env.local` file in the project root:
 
 ```
+OPENAI_API_KEY=sk-...
+```
+
+### Data Pipeline
+
+The project uses static JSON instead of a database. Run these once:
+
+```sh
+# 1. Parse the PDF into structured data
 npx tsx scripts/parse.ts
-```
+# Output: data/structure.json, data/toc.json, data/chunks.json
 
-This reads the PDF and generates structured data. Output: `data/structure.json`, `data/toc.json`, and `data/chunks.json`.
-
-4. Generate embeddings (one-time):
-
-```
+# 2. Generate vector embeddings for semantic search
 npx tsx scripts/embed.ts
+# Output: data/embeddings.json (~25MB, gitignored)
 ```
 
-This generates vector embeddings for semantic search. Output: `data/embeddings.json`.
+### Development
 
-5. Start the dev server:
-
-```
+```sh
 npm run dev
 ```
 
-## Project structure
+Open [http://localhost:3000](http://localhost:3000).
+
+### Production Build
+
+```sh
+npm run build   # runs embed.ts as prebuild step, then next build
+npm run start
+```
+
+## Architecture
 
 ```
 app/
-  page.tsx                  # main page (server component, loads toc.json)
-  globals.scss              # PvdA branding + dark mode
-  api/
-    ask/route.ts            # AI Q&A endpoint (RAG with embeddings)
-    section/route.ts        # on-demand section content endpoint
-  components/
-    MainLayout/             # split-screen layout with mobile nav
-    DocumentBrowser/        # collapsible TOC + on-demand article viewer
-    Chat/                   # chat interface with starter questions
-    ThemeToggle/            # dark mode toggle
+├── page.tsx                     Server component — reads toc.json at build time
+├── layout.tsx                   Root layout with metadata and theme setup
+├── globals.scss                 CSS variables, PvdA branding, dark/light themes
+├── api/
+│   ├── ask/route.ts             POST — RAG endpoint (embed → search → respond)
+│   └── section/route.ts         GET  — on-demand section content (24h cache)
+├── components/
+│   ├── MainLayout/              Split-screen layout, mobile panel toggle
+│   ├── DocumentBrowser/         Collapsible TOC tree + article viewer
+│   ├── Chat/                    Message history, starter questions, article links
+│   └── ThemeToggle/             Dark/light mode switch
 lib/
-  openai.ts                 # OpenAI client
-  embeddings.ts             # cosine similarity search
-  ratelimit.ts              # IP-based rate limiting (20/day)
+├── openai.ts                    OpenAI client singleton
+├── embeddings.ts                Cosine similarity search over precomputed vectors
+└── ratelimit.ts                 In-memory IP-based rate limiter (20/day)
 scripts/
-  parse.ts                  # PDF parser (requires pdftotext)
-  embed.ts                  # embedding generator (runs on Vercel prebuild)
-data/                       # generated JSON (embeddings.json not in git)
+├── parse.ts                     PDF → structured JSON (requires pdftotext)
+└── embed.ts                     Chunks → vector embeddings (runs at build time)
+data/                            Generated JSON files (embeddings.json gitignored)
 ```
 
-## 🔒 Privacy
+### How RAG Works
 
-Your questions are **not stored or used for AI training**. The OpenAI API is called with `store: false`, meaning your data is not retained by OpenAI beyond the immediate request.
+1. User question is embedded with `text-embedding-3-small`
+2. Top 8 chunks found via cosine similarity against precomputed embeddings
+3. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
+4. Response includes article references that become clickable links in the UI
 
-## API
+## API Reference
 
-### POST /api/ask
+### `POST /api/ask`
 
 Ask a question about the articles of association.
 
+**Request:**
 ```json
 { "question": "Hoe word ik lid van de PvdA?" }
 ```
 
-Response:
-
+**Response:**
 ```json
 { "answer": "Je kunt lid worden als je 16 jaar of ouder bent..." }
 ```
 
-Rate limit: 20 questions per day per IP.
+**Headers:** `X-RateLimit-Remaining` — questions left today.
 
-### GET /api/section?id=\<section-id\>
+**Rate limit:** 20 requests/day per IP. Returns `429` when exceeded.
 
-Load section content on demand. Returns the full section with nested children. Cached for 24 hours.
+### `GET /api/section?id=<section-id>`
 
-## Scripts
+Load section content on demand.
 
-```
-npm run dev               # start dev server
-npm run build             # production build (runs embed.ts as prebuild)
-npm run start             # start production server
-npx tsx scripts/parse.ts  # parse PDF into chunks (one-time, local)
-npx tsx scripts/embed.ts  # generate embeddings (one-time, or at build)
-```
+**Response:** Full section object with nested children. Cached for 24 hours via `Cache-Control`.
+
+## Privacy
+
+- Questions are **not stored** and **not used for AI training**
+- OpenAI API called with `store: false` — data is not retained beyond the request
+- No personal data is collected or stored
+- Anonymous usage analytics via [Google Analytics](https://marketingplatform.google.com/about/analytics/) (page views, session data)
+
+## Contributing
+
+Contributions are welcome. Please open an issue first to discuss what you'd like to change.
+
+## License
+
+This project is open source. See the repository for license details.
+
+## Disclaimer
+
+PvdAI is an independent open-source project. It is not affiliated with, endorsed by, or an official product of the Partij van de Arbeid (PvdA). AI-generated answers may contain inaccuracies. Always consult the [official document](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) for authoritative information.
