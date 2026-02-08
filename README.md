@@ -2,16 +2,16 @@
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.0.1-black?logo=nextdotjs) ![React](https://img.shields.io/badge/React-19.2.0-61dafb?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white) ![OpenAI SDK](https://img.shields.io/badge/OpenAI%20SDK-6.x-412991?logo=openai&logoColor=white)
 
-Browse en stel vragen over de statuten en reglementen van de Partij van de Arbeid (PvdA).
+Browse and ask questions about the articles of association (statuten en reglementen) of the Dutch Labour Party (PvdA).
 
-## Wat is dit?
+## What is this?
 
-PvdAI maakt de 188 pagina's statuten en reglementen van de PvdA toegankelijk via een split-screen interface:
+PvdAI makes the 188-page PvdA articles of association accessible through a split-screen interface:
 
-- **Links**: een doorzoekbare documentbrowser met inhoudsopgave
-- **Rechts**: een AI-chat waar je vragen kunt stellen in gewone taal
+- **Left panel**: a searchable document browser with table of contents
+- **Right panel**: an AI chat where you can ask questions in plain language
 
-De AI beantwoordt vragen op B1-taalniveau en verwijst naar de relevante artikelen, zodat je het zelf kunt nalezen.
+The AI answers at B1 reading level and references specific articles, so you can verify the source yourself.
 
 ## Stack
 
@@ -20,81 +20,91 @@ De AI beantwoordt vragen op B1-taalniveau en verwijst naar de relevante artikele
 - **TypeScript** ^5
 - **OpenAI** SDK ^6 (Embeddings + Responses API)
 - **SCSS** Modules
-- **Geen database** — embeddings en documentstructuur als JSON
+- **No database** — embeddings and document structure stored as JSON
 
 ## Setup
 
-1. Maak een OpenAI API key aan en stel deze in:
+1. Create an OpenAI API key and set it locally:
 
 ```
 echo "OPENAI_API_KEY=YOUR_KEY_HERE" > .env.local
 ```
 
-2. Installeer dependencies:
+2. Install dependencies:
 
 ```
 npm install
 ```
 
-3. Genereer de documentdata (eenmalig):
+3. Parse the PDF (one-time, requires `pdftotext`):
 
 ```
-npx tsx scripts/seed.ts
+npx tsx scripts/parse.ts
 ```
 
-Dit leest de PDF, splitst het document op in chunks, en genereert embeddings. Output: `data/structure.json` en `data/embeddings.json`.
+This reads the PDF, splits it into structured chapters and chunks. Output: `data/structure.json` and `data/chunks.json`.
 
-4. Start de dev server:
+4. Generate embeddings (one-time):
+
+```
+npx tsx scripts/embed.ts
+```
+
+This generates vector embeddings for semantic search. Output: `data/embeddings.json`.
+
+5. Start the dev server:
 
 ```
 npm run dev
 ```
 
-## Projectstructuur
+## Project structure
 
 ```
 app/
-  page.tsx                  # hoofdpagina (server component)
+  page.tsx                  # main page (server component)
   globals.scss              # PvdA branding
   api/
     ask/route.ts            # AI Q&A endpoint
-    chat/route.ts           # basis chat endpoint
+    chat/route.ts           # basic chat endpoint
   components/
     MainLayout/             # split-screen layout
-    DocumentBrowser/         # inhoudsopgave + artikelviewer
-    Chat/                   # chatinterface
+    DocumentBrowser/         # table of contents + article viewer
+    Chat/                   # chat interface
 lib/
   openai.ts                 # OpenAI client
   embeddings.ts             # cosine similarity search
   ratelimit.ts              # IP-based rate limiting
 scripts/
-  seed.ts                   # PDF parser + embedding generator
-data/                       # gegenereerde JSON (niet in git)
+  parse.ts                  # PDF parser (requires pdftotext)
+  embed.ts                  # embedding generator (runs on Vercel prebuild)
+data/                       # generated JSON (embeddings.json not in git)
 ```
 
 ## API
 
 ### POST /api/ask
 
-Stel een vraag over de statuten.
+Ask a question about the articles of association.
 
 ```json
 { "question": "Hoe word ik lid van de PvdA?" }
 ```
 
-Antwoord:
+Response:
 
 ```json
 { "answer": "Je kunt lid worden als je 16 jaar of ouder bent..." }
 ```
 
-Rate limit: 20 vragen per dag per IP.
+Rate limit: 20 questions per day per IP.
 
 ## Scripts
 
 ```
-npm run dev           # start dev server
-npm run build         # production build
-npm run start         # start production server
-npx tsx scripts/seed.ts  # genereer embeddings (eenmalig)
+npm run dev               # start dev server
+npm run build             # production build (runs embed.ts as prebuild)
+npm run start             # start production server
+npx tsx scripts/parse.ts  # parse PDF into chunks (one-time, local)
+npx tsx scripts/embed.ts  # generate embeddings (one-time, or at build)
 ```
