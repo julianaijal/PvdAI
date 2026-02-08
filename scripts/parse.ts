@@ -174,12 +174,28 @@ function main() {
   }));
   console.log(`   Created ${chunks.length} chunks`);
 
-  console.log("4. Writing output files...");
+  console.log("4. Generating TOC...");
+  function buildToc(sections: Section[]): { id: string; title: string; level: number; children: ReturnType<typeof buildToc> }[] {
+    return sections.map((s) => ({
+      id: s.id,
+      title: s.title,
+      level: s.level,
+      children: buildToc(s.children),
+    }));
+  }
+  const toc = buildToc(structure);
+
+  console.log("5. Writing output files...");
   mkdirSync(DATA_DIR, { recursive: true });
 
   writeFileSync(
     join(DATA_DIR, "structure.json"),
     JSON.stringify(structure, null, 2)
+  );
+
+  writeFileSync(
+    join(DATA_DIR, "toc.json"),
+    JSON.stringify(toc, null, 2)
   );
 
   writeFileSync(
@@ -189,6 +205,7 @@ function main() {
 
   console.log("Done!");
   console.log(`   structure.json: ${structure.length} sections`);
+  console.log(`   toc.json: ${toc.length} sections (lightweight)`);
   console.log(`   chunks.json: ${chunks.length} chunks`);
 }
 

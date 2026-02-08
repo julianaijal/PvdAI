@@ -1,0 +1,2548 @@
+[
+  {
+    "id": "statuten",
+    "title": "Statuten",
+    "level": 0,
+    "children": []
+  },
+  {
+    "id": "statuten-2",
+    "title": "Statuten",
+    "level": 0,
+    "children": [
+      {
+        "id": "hoofdstuk-1-algemeen",
+        "title": "Hoofdstuk 1: Algemeen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-2-de-leden",
+        "title": "Hoofdstuk 2: De leden",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-3-geledingen-van-de-partij",
+        "title": "Hoofdstuk 3: Geledingen van de partij",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-4-overige-bepalingen",
+        "title": "Hoofdstuk 4: Overige bepalingen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-5-slot--en-overgangsbepalingen",
+        "title": "Hoofdstuk 5: Slot- en overgangsbepalingen",
+        "level": 1,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "toelichting-bij-statuten",
+    "title": "Toelichting bij statuten",
+    "level": 0,
+    "children": [
+      {
+        "id": "hoofdstuk-1-algemeen",
+        "title": "Hoofdstuk 1. Algemeen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-2-de-leden",
+        "title": "Hoofdstuk 2. De leden",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-3-geledingen-van-de-partij",
+        "title": "Hoofdstuk 3. Geledingen van de partij",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-4-overige-bepalingen",
+        "title": "Hoofdstuk 4. Overige bepalingen",
+        "level": 1,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "statuten-3",
+    "title": "Statuten",
+    "level": 0,
+    "children": [
+      {
+        "id": "hoofdstuk-1-algemeen",
+        "title": "Hoofdstuk 1: Algemeen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-1-de-naam-en-de-zetel",
+            "title": "Artikel 1. De naam en de zetel",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-2-het-doel",
+            "title": "Artikel 2. Het doel",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-3-de-middelen",
+            "title": "Artikel 3. De middelen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-2-de-leden",
+        "title": "Hoofdstuk 2: De leden",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-4-het-lidmaatschap",
+            "title": "Artikel 4. Het lidmaatschap",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-3-geledingen-van-de-partij",
+        "title": "Hoofdstuk 3: Geledingen van de partij",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-5-het-congres",
+            "title": "Artikel 5. Het congres",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-6-de-afdeling",
+            "title": "Artikel 6. De afdeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-7-het-gewest",
+            "title": "Artikel 7. Het gewest",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-8-de-politieke-ledenraad",
+            "title": "Artikel 8. De Politieke Ledenraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-9-de-verenigingsraad",
+            "title": "Artikel 9. De Verenigingsraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-10-het-partijbestuur",
+            "title": "Artikel 10. Het partijbestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-11-het-presidium",
+            "title": "Artikel 11. Het presidium",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-12-de-beroepscommissie",
+            "title": "Artikel 12. De beroepscommissie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-13-de-politiek-leider",
+            "title": "Artikel 13. De politiek leider",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-4-overige-bepalingen",
+        "title": "Hoofdstuk 4: Overige bepalingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-14-vertegenwoordigers-en-bestuurders-in-het-publieke",
+            "title": "Artikel 14. Vertegenwoordigers en bestuurders in het publieke domein",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-15-de-geldmiddelen-van-de-partij",
+            "title": "Artikel 15. De geldmiddelen van de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-16-bemiddeling-en-toezicht",
+            "title": "Artikel 16. Bemiddeling en toezicht",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-17-integriteit",
+            "title": "Artikel 17. Integriteit",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-18-besluitvorming-in-de-partij",
+            "title": "Artikel 18. Besluitvorming in de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-5-lid-7-beschikbaar-maken-in-dat-geval-is-het-verlen",
+            "title": "artikel 5 lid 7 beschikbaar maken. In dat geval is het verlenen van volmachten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-19-geestverwante-organisaties-en-werkverbanden-binne",
+            "title": "Artikel 19. Geestverwante organisaties en werkverbanden binnen de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-20-samenwerking-in-de-europese-unie",
+            "title": "Artikel 20. Samenwerking in de Europese Unie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-21-uitwerking-in-reglementen",
+            "title": "Artikel 21. Uitwerking in reglementen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-22-wijziging-van-de-statuten",
+            "title": "Artikel 22. Wijziging van de statuten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-23-slotbepalingen",
+            "title": "Artikel 23. Slotbepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "toelichting-bij-statuten-2",
+    "title": "Toelichting bij statuten",
+    "level": 0,
+    "children": [
+      {
+        "id": "hoofdstuk-1-algemeen",
+        "title": "Hoofdstuk 1. Algemeen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-1-de-naam-en-de-zetel",
+            "title": "Artikel 1. De naam en de zetel",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-2-het-doel",
+            "title": "Artikel 2. Het doel",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-2-de-leden",
+        "title": "Hoofdstuk 2. De leden",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-4-het-lidmaatschap",
+            "title": "Artikel 4. Het lidmaatschap",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-3-geledingen-van-de-partij",
+        "title": "Hoofdstuk 3. Geledingen van de partij",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-5-het-congres",
+            "title": "Artikel 5. Het congres",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-6-de-afdeling",
+            "title": "Artikel 6. De afdeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-7-het-gewest",
+            "title": "Artikel 7. Het gewest",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-8-de-politieke-ledenraad",
+            "title": "Artikel 8. De Politieke Ledenraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-9-de-verenigingsraad",
+            "title": "Artikel 9. De Verenigingsraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-10-het-partijbestuur",
+            "title": "Artikel 10. Het partijbestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-11-het-presidium",
+            "title": "Artikel 11. Het presidium",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-12-de-beroepscommissie",
+            "title": "Artikel 12. De beroepscommissie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-13-de-politiek-leider",
+            "title": "Artikel 13. De politiek leider",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-4-overige-bepalingen",
+        "title": "Hoofdstuk 4. Overige bepalingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-14-vertegenwoordigers-en-bestuurders-in-het-publieke",
+            "title": "Artikel 14. Vertegenwoordigers en bestuurders in het publieke domein",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-15-de-geldmiddelen-van-de-partij",
+            "title": "Artikel 15. De geldmiddelen van de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-16-bemiddeling-en-toezicht",
+            "title": "Artikel 16. Bemiddeling en toezicht",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-17-integriteit",
+            "title": "Artikel 17. Integriteit",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-18-besluitvorming-in-de-partij",
+            "title": "Artikel 18. Besluitvorming in de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-19-geestverwante-organisaties-en-werkverbanden-binne",
+            "title": "Artikel 19. Geestverwante organisaties en werkverbanden binnen de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-20-samenwerking-in-de-europese-unie",
+            "title": "Artikel 20. Samenwerking in de Europese Unie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-21-uitwerking-in-reglementen",
+            "title": "Artikel 21. Uitwerking in reglementen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-22-wijziging-van-de-statuten",
+            "title": "Artikel 22. Wijziging van de statuten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-23-slotbepalingen",
+            "title": "Artikel 23. Slotbepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reglementen",
+    "title": "Reglementen",
+    "level": 0,
+    "children": []
+  },
+  {
+    "id": "reglementen-2",
+    "title": "Reglementen",
+    "level": 0,
+    "children": [
+      {
+        "id": "deel-1-algemeen-deel",
+        "title": "Deel 1. Algemeen deel",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-11-bepalingen-over-de-vergaderorde-van-en-de-besluitvorming",
+        "title": "Hoofdstuk 1.1. Bepalingen over de vergaderorde van en de besluitvorming",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-12-de-ledenraadpleging",
+        "title": "Hoofdstuk 1.2. De ledenraadpleging",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-13-het-lidmaatschap",
+        "title": "Hoofdstuk 1.3. Het lidmaatschap",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-14-bemiddeling,-toezicht-en-beroep",
+        "title": "Hoofdstuk 1.4. Bemiddeling, toezicht en beroep",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-15-de-geldmiddelen-en-de-contributies",
+        "title": "Hoofdstuk 1.5. De geldmiddelen en de contributies",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-16-integriteit",
+        "title": "Hoofdstuk 1.6. Integriteit",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-17-overige-bepalingen",
+        "title": "Hoofdstuk 1.7. Overige bepalingen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-2-de-afdelingen",
+        "title": "Deel 2. De Afdelingen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-3-de-gewesten",
+        "title": "Deel 3. De gewesten",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-4-de-geledingen-op-landelijk-niveau",
+        "title": "Deel 4. De geledingen op landelijk niveau",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-41-het-congres",
+        "title": "Hoofdstuk 4.1. Het Congres",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-42-de-politieke-ledenraad",
+        "title": "Hoofdstuk 4.2. De Politieke Ledenraad",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-43-de-verenigingsraad",
+        "title": "Hoofdstuk 4.3. De Verenigingsraad",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-44-het-partijbestuur",
+        "title": "Hoofdstuk 4.4. Het partijbestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-45-bepalingen-over-andere-landelijke-geledingen",
+        "title": "Hoofdstuk 4.5. Bepalingen over andere landelijke geledingen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-5-deelname-aan-het-lokaal-bestuur",
+        "title": "Deel 5. Deelname aan het lokaal bestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-6-deelname-aan-het-provinciaal-bestuur",
+        "title": "Deel 6. Deelname aan het provinciaal bestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-7-deelname-aan-het-waterschapsbestuur",
+        "title": "Deel 7. Deelname aan het waterschapsbestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-8-deelname-aan-de-tweede-kamer",
+        "title": "Deel 8. Deelname aan de Tweede Kamer",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-9-deelname-aan-de-eerste-kamer",
+        "title": "Deel 9. Deelname aan de Eerste Kamer",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-10-deelname-aan-het-europees-parlement",
+        "title": "Deel 10. Deelname aan het Europees Parlement",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-1-algemeen-deel",
+        "title": "Deel 1. Algemeen deel",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-2-de-afdelingen",
+        "title": "Deel 2. De afdelingen",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-3-de-gewesten",
+        "title": "Deel 3. De gewesten",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-4-de-geledingen-op-landelijk-niveau",
+        "title": "Deel 4. De geledingen op landelijk niveau",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-5-deelname-aan-het-lokaal-bestuur",
+        "title": "Deel 5. Deelname aan het lokaal bestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-6-deelname-aan-het-provinciaal-bestuur",
+        "title": "Deel 6. Deelname aan het provinciaal bestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-7-deelname-aan-het-waterschapsbestuur",
+        "title": "Deel 7. Deelname aan het waterschapsbestuur",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-8-deelname-aan-de-tweede-kamer",
+        "title": "Deel 8. Deelname aan de Tweede Kamer",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-9-deelname-aan-de-eerste-kamer",
+        "title": "Deel 9. Deelname aan de Eerste Kamer",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "deel-10-deelname-aan-het-europees-parlement",
+        "title": "Deel 10. Deelname aan het Europees Parlement",
+        "level": 1,
+        "children": []
+      }
+    ]
+  },
+  {
+    "id": "reglementen-3",
+    "title": "Reglementen",
+    "level": 0,
+    "children": [
+      {
+        "id": "deel-1-algemeen-deel",
+        "title": "Deel 1. Algemeen deel",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-11-algemene-bepalingen-(ten-aanzien-van-vergaderorde",
+            "title": "Artikel 1.1. Algemene bepalingen (ten aanzien van vergaderorde en",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-12-besluiten-over-de-orde-van-een-vergadering",
+            "title": "Artikel 1.2. Besluiten over de orde van een vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-13-de-voorzitter",
+            "title": "Artikel 1.3. De voorzitter",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-14-de-uitnodiging-voor-en-verslaglegging-van-een-ver",
+            "title": "Artikel 1.4. De uitnodiging voor en verslaglegging van een vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-15-het-tellen-van-stemmen-en-het-bepalen-van-de-uits",
+            "title": "Artikel 1.5. Het tellen van stemmen en het bepalen van de uitslag",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-16-besluitvorming-over-zaken",
+            "title": "Artikel 1.6. Besluitvorming over zaken",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-17-de-stemming-over-zaken",
+            "title": "Artikel 1.7. De stemming over zaken",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-18-besluitvorming-over-personen",
+            "title": "Artikel 1.8. Besluitvorming over personen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-19-de-stemming-over-personen-in-een-vergadering",
+            "title": "Artikel 1.9. De stemming over personen in een vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-110-de-verkiezing-als-er-één-positie-vervuld-moet-wo",
+            "title": "Artikel 1.10. De verkiezing als er één positie vervuld moet worden",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-111-de-verkiezing-als-tegelijk-twee-of-meer-posities",
+            "title": "Artikel 1.11. De verkiezing als tegelijk twee of meer posities vervuld moeten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-112-de-stemming-bij-het-vaststellen-van-een-kandidat",
+            "title": "Artikel 1.12. De stemming bij het vaststellen van een kandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-113-het-opzeggen-van-vertrouwen-in-een-persoon-in-de",
+            "title": "Artikel 1.13. Het opzeggen van vertrouwen in een persoon in de functie die hij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-114-besluitvorming-over-moties-die-uitmonden-in-een-",
+            "title": "Artikel 1.14. Besluitvorming over moties die uitmonden in een gevoelen of een",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-12-de-ledenraadpleging",
+        "title": "Hoofdstuk 1.2. De ledenraadpleging",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-115-algemene-bepalingen-inzake-een-ledenraadpleging",
+            "title": "Artikel 1.15. Algemene bepalingen inzake een ledenraadpleging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-116-uitsluiting-van-ledenraadpleging",
+            "title": "Artikel 1.16. Uitsluiting van ledenraadpleging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-117-de-deelname-van-kandidaten-aan-een-ledenraadpleg",
+            "title": "Artikel 1.17. De deelname van kandidaten aan een ledenraadpleging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-118-de-uitslag-en-de-geldigheid-van-een-ledenraadple",
+            "title": "Artikel 1.18. De uitslag en de geldigheid van een ledenraadpleging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-15-lid-3-zijn-bij-een-ledenraadpleging-blanco-stemme",
+            "title": "artikel 1.5. lid 3 zijn bij een ledenraadpleging blanco stemmen ongeldige",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-15",
+            "title": "artikel 1.5.",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-13-het-lidmaatschap",
+        "title": "Hoofdstuk 1.3. Het lidmaatschap",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-119-het-verkrijgen-van-het-lidmaatschap",
+            "title": "Artikel 1.19. Het verkrijgen van het lidmaatschap",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-120-het-verkrijgen-van-de-ledenrechten",
+            "title": "Artikel 1.20. Het verkrijgen van de ledenrechten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-121-plaatsing-op-een-kandidatenlijst",
+            "title": "Artikel 1.21. Plaatsing op een kandidatenlijst",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-14-bemiddeling,-toezicht-en-beroep",
+        "title": "Hoofdstuk 1.4. Bemiddeling, toezicht en beroep",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-122-bemiddeling-en-toezicht",
+            "title": "Artikel 1.22. Bemiddeling en toezicht",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-123-het-beroep",
+            "title": "Artikel 1.23. Het beroep",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-124-de-beroepscommissie",
+            "title": "Artikel 1.24. De beroepscommissie",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-15",
+        "title": "Hoofdstuk 1.5.",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-125-de-contributies",
+            "title": "Artikel 1.25. De contributies",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-126-giftenregeling",
+            "title": "Artikel 1.26 Giftenregeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-127-de-geldmiddelen-en-de-controle",
+            "title": "Artikel 1.27. De geldmiddelen en de controle",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-128-overige-bepalingen-inzake-de-geldmiddelen",
+            "title": "Artikel 1.28. Overige bepalingen inzake de geldmiddelen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-16-integriteit",
+        "title": "Hoofdstuk 1.6. Integriteit",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-129-belangenverstrengeling",
+            "title": "Artikel 1.29 Belangenverstrengeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-130-de-erecode-en-de-verklaring-bij-de-kandidaatstel",
+            "title": "Artikel 1.30. De erecode en de verklaring bij de kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-131-de-commissie-integriteit",
+            "title": "Artikel 1.31. De Commissie Integriteit",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-132-persoonsgegevens-en-privacy",
+            "title": "Artikel 1.32. Persoonsgegevens en privacy",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-17-overige-bepalingen",
+        "title": "Hoofdstuk 1.7. Overige bepalingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-133-de-binding-aan-het-verkiezingsprogramma",
+            "title": "Artikel 1.33. De binding aan het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-113",
+            "title": "artikel 1.13.",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-134-evenwichtige-vertegenwoordiging",
+            "title": "Artikel 1.34. Evenwichtige vertegenwoordiging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-135-onverenigbare-functies",
+            "title": "Artikel 1.35. Onverenigbare functies",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-136-de-zittingsduur",
+            "title": "Artikel 1.36. De zittingsduur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-137-de-jongerenorganisatie",
+            "title": "Artikel 1.37. De jongerenorganisatie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-138-leden-in-dienstverband-bij-de-partij",
+            "title": "Artikel 1.38. Leden in dienstverband bij de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-139-evenwichtige-informatie",
+            "title": "Artikel 1.39. Evenwichtige informatie",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-2-de-afdelingen",
+        "title": "Deel 2. De Afdelingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-21-de-taken-van-de-afdeling",
+            "title": "Artikel 2.1. De taken van de afdeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-22-de-afdelingsvergadering",
+            "title": "Artikel 2.2. De afdelingsvergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-23-de-uitnodiging",
+            "title": "Artikel 2.3. De uitnodiging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-24-nadere-bepalingen-over-afdelingsvergaderingen",
+            "title": "Artikel 2.4. Nadere bepalingen over afdelingsvergaderingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-25-het-afdelingsbestuur",
+            "title": "Artikel 2.5. Het afdelingsbestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-26-lokale-afdeling-van-de-jonge-socialisten",
+            "title": "Artikel 2.6. Lokale afdeling van de Jonge Socialisten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-27-afdelingen-die-niet-samenvallen-met-één-gemeente",
+            "title": "Artikel 2.7. Afdelingen die niet samenvallen met één gemeente",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-3-de-gewesten",
+        "title": "Deel 3. De gewesten",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-31-de-taken-van-het-gewest",
+            "title": "Artikel 3.1. De taken van het gewest",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-32-de-gewestelijke-vergadering",
+            "title": "Artikel 3.2. De gewestelijke vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-33-de-uitnodiging-voor-en-de-verslaglegging-van-de-g",
+            "title": "Artikel 3.3. De uitnodiging voor en de verslaglegging van de gewestelijke",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-34-nadere-bepalingen-over-gewestelijke-vergaderingen",
+            "title": "Artikel 3.4. Nadere bepalingen over gewestelijke vergaderingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-35-het-gewestelijk-bestuur",
+            "title": "Artikel 3.5. Het gewestelijk bestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-36-indelen-in-regio's",
+            "title": "Artikel 3.6. Indelen in regio's",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-37-provinciale-afdeling-van-de-jonge-socialisten",
+            "title": "Artikel 3.7. Provinciale afdeling van de Jonge Socialisten",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-4-de-geledingen-op-landelijk",
+        "title": "Deel 4. De geledingen op landelijk",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-41-het-congres",
+        "title": "Hoofdstuk 4.1. Het Congres",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-41-de-voorbereiding-van-het-congres",
+            "title": "Artikel 4.1. De voorbereiding van het congres",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-42-overige-bepalingen",
+            "title": "Artikel 4.2. Overige bepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-42-de-politieke-ledenraad",
+        "title": "Hoofdstuk 4.2. De Politieke Ledenraad",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-43-de-voorbereiding-van-de-politieke-ledenraad",
+            "title": "Artikel 4.3. De voorbereiding van de Politieke Ledenraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-44-verslaglegging-van-de-politieke-ledenraad",
+            "title": "Artikel 4.4. Verslaglegging van de Politieke Ledenraad",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-43-de-verenigingsraad",
+        "title": "Hoofdstuk 4.3. De Verenigingsraad",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-45-de-samenstelling-van-de-verenigingsraad",
+            "title": "Artikel 4.5. De samenstelling van de Verenigingsraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-46-taken-verenigingsraad",
+            "title": "Artikel 4.6. Taken Verenigingsraad",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-47-voorbereiding,-verloop-en-verslaglegging-van-de-v",
+            "title": "Artikel 4.7. Voorbereiding, verloop en verslaglegging van de vergadering van de",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-44-het-partijbestuur",
+        "title": "Hoofdstuk 4.4. Het partijbestuur",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-48-de-taken-van-het-partijbestuur",
+            "title": "Artikel 4.8. De taken van het partijbestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-49-samenstelling-en-verkiezing",
+            "title": "Artikel 4.9. Samenstelling en verkiezing",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-410-besluiten-van-het-partijbestuur",
+            "title": "Artikel 4.10. Besluiten van het partijbestuur",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-45-bepalingen",
+        "title": "Hoofdstuk 4.5. Bepalingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-411-het-presidium",
+            "title": "Artikel 4.11. Het presidium",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-412-geestverwante-organisaties-en-werkverbanden-binn",
+            "title": "Artikel 4.12. Geestverwante organisaties en werkverbanden binnen de partij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-413-partij-van-de-europese-sociaal-democraten-(pes)",
+            "title": "Artikel 4.13. Partij van de Europese Sociaal-Democraten (PES)",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-5-deelname-aan-het-lokaal",
+        "title": "Deel 5. Deelname aan het lokaal",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-51-de-gemeenteraadsfractie",
+            "title": "Artikel 5.1. De gemeenteraadsfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-52-de-taken-van-het-afdelingsbestuur-bij-de-deelname",
+            "title": "Artikel 5.2. De taken van het afdelingsbestuur bij de deelname aan het lokaal",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-53-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 5.3. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-54-de-besluitvorming-over-het-verkiezingsprogramma",
+            "title": "Artikel 5.4. De besluitvorming over het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-55-profielschets-en-kandidaatstelling",
+            "title": "Artikel 5.5. Profielschets en kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-56-de-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 5.6. De ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-57-het-voorbereiden-en-opstellen-van-de-ontwerpkandi",
+            "title": "Artikel 5.7. Het voorbereiden en opstellen van de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-58-de-besluitvorming-over-de-ontwerpkandidatenlijst",
+            "title": "Artikel 5.8. De besluitvorming over de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-59-de-positie-van-de-lijsttrekker",
+            "title": "Artikel 5.9. De positie van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-510-de-vorming-van-het-college-van-burgemeester-en-w",
+            "title": "Artikel 5.10. De vorming van het college van burgemeester en wethouders",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-511-het-functioneren-van-de-gemeenteraadsfractie-en-",
+            "title": "Artikel 5.11. Het functioneren van de gemeenteraadsfractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-512-slotbepalingen",
+            "title": "Artikel 5.12. Slotbepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-6-deelname-aan-het-provinciaal",
+        "title": "Deel 6. Deelname aan het provinciaal",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-61-de-statenfractie",
+            "title": "Artikel 6.1. De Statenfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-62-de-taken-van-het-gewestelijk-bestuur-bij-de-deeln",
+            "title": "Artikel 6.2. De taken van het gewestelijk bestuur bij de deelname aan het",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-63-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 6.3. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-64-de-besluitvorming-over-het-verkiezingsprogramma",
+            "title": "Artikel 6.4. De besluitvorming over het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-65-profielschets-en-kandidaatstelling",
+            "title": "Artikel 6.5. Profielschets en kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-66-de-ledenraadpleging-over-de-positie-van-lijsttrek",
+            "title": "Artikel 6.6. De ledenraadpleging over de positie van lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-67-het-voorbereiden-en-opstellen-van-de-ontwerpkandi",
+            "title": "Artikel 6.7. Het voorbereiden en opstellen van de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-68-de-besluitvorming-over-de-ontwerpkandidatenlijst",
+            "title": "Artikel 6.8. De besluitvorming over de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-69-de-positie-van-de-lijsttrekker",
+            "title": "Artikel 6.9. De positie van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-610-de-vorming-van-het-college-van-gedeputeerde-stat",
+            "title": "Artikel 6.10. De vorming van het college van Gedeputeerde Staten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-611-het-functioneren-van-de-statenfractie-en-het-voe",
+            "title": "Artikel 6.11. Het functioneren van de Statenfractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-612-slotbepalingen",
+            "title": "Artikel 6.12. Slotbepalingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-71-de-waterschapsfractie",
+            "title": "Artikel 7.1. De waterschapsfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-72-de-taken-van-het-gewestelijk-bestuur-bij-de-deeln",
+            "title": "Artikel 7.2. De taken van het gewestelijk bestuur bij de deelname aan het",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-73-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 7.3. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-74-de-besluitvorming-over-het-verkiezingsprogramma",
+            "title": "Artikel 7.4. De besluitvorming over het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-75-profielschets-en-kandidaatstelling",
+            "title": "Artikel 7.5. Profielschets en kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-76-de-ledenraadpleging-over-de-positie-van-lijsttrek",
+            "title": "Artikel 7.6. De ledenraadpleging over de positie van lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-77-het-voorbereiden-en-opstellen-van-de-ontwerpkandi",
+            "title": "Artikel 7.7. Het voorbereiden en opstellen van de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-78-de-besluitvorming-over-de-ontwerpkandidatenlijst",
+            "title": "Artikel 7.8. De besluitvorming over de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-79-de-positie-van-de-lijsttrekker",
+            "title": "Artikel 7.9. De positie van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-710-de-vorming-van-het-dagelijks-bestuur",
+            "title": "Artikel 7.10. De vorming van het dagelijks bestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-711-het-functioneren-van-de-waterschapsfractie-en-he",
+            "title": "Artikel 7.11. Het functioneren van de waterschapsfractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-712-waterschappen-die-in-twee-of-meer-gewesten-ligge",
+            "title": "Artikel 7.12. Waterschappen die in twee of meer gewesten liggen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-713-slotbepalingen",
+            "title": "Artikel 7.13. Slotbepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-8-deelname-aan-de-tweede",
+        "title": "Deel 8. Deelname aan de Tweede",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-81-de-tweede-kamerfractie",
+            "title": "Artikel 8.1. De Tweede Kamerfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-82-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 8.2. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-83-de-voorbereiding-van-het-verkiezingsprogramma",
+            "title": "Artikel 8.3. De voorbereiding van het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-84-het-profiel-van-(de-leden-van)-de-tweede-kamerfra",
+            "title": "Artikel 8.4. Het profiel van (de leden van) de Tweede Kamerfractie en de",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-85-de-voorbereiding-en-opstelling-van-een-ontwerpkan",
+            "title": "Artikel 8.5. De voorbereiding en opstelling van een ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-86-taken-en-werkwijze-partijbestuur-bij-het-voorbere",
+            "title": "Artikel 8.6. Taken en werkwijze partijbestuur bij het voorbereiden en opstellen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-87-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 8.7. Ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-88-bevoegdheden-van-de-lijsttrekker",
+            "title": "Artikel 8.8. Bevoegdheden van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-89-de-kandidaatstellingsprocedure",
+            "title": "Artikel 8.9. De kandidaatstellingsprocedure",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-810-het-aangaan-van-een-lijstverbinding",
+            "title": "Artikel 8.10. Het aangaan van een lijstverbinding",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-811-deelname-aan-het-kabinet",
+            "title": "Artikel 8.11. Deelname aan het kabinet",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-812-functioneren",
+            "title": "Artikel 8.12. Functioneren",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-813-gezamenlijk-deelnemen-aan-de-verkiezingen",
+            "title": "Artikel 8.13. Gezamenlijk deelnemen aan de verkiezingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-9-deelname-aan-de-eerste",
+        "title": "Deel 9. Deelname aan de Eerste",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-91-de-eerste-kamerfractie",
+            "title": "Artikel 9.1. De Eerste Kamerfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-92-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 9.2. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-93-het-profiel-van-de-eerste-kamerfractie-en-de-lijs",
+            "title": "Artikel 9.3. Het profiel van de Eerste Kamerfractie en de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-94-de-voorbereiding-en-opstelling-van-een-ontwerpkan",
+            "title": "Artikel 9.4. De voorbereiding en opstelling van een ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-95-taken-en-werkwijze-partijbestuur-bij-het-voorbere",
+            "title": "Artikel 9.5. Taken en werkwijze partijbestuur bij het voorbereiden en opstellen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-96-de-lijsttrekker",
+            "title": "Artikel 9.6. De lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-97-de-kandidaatstellingsprocedure",
+            "title": "Artikel 9.7. De kandidaatstellingsprocedure",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-98-functioneren",
+            "title": "Artikel 9.8. Functioneren",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-99-gezamenlijk-deelnemen-aan-de-verkiezingen",
+            "title": "Artikel 9.9. Gezamenlijk deelnemen aan de verkiezingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-10-deelname-aan-het-europees",
+        "title": "Deel 10. Deelname aan het Europees",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-101-de-delegatie-in-het-europees-parlement",
+            "title": "Artikel 10.1. De delegatie in het Europees Parlement",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-102-de-voorbereiding-van-de-deelname-aan-de-verkiezi",
+            "title": "Artikel 10.2. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-103-de-voorbereiding-van-het-verkiezingsprogramma",
+            "title": "Artikel 10.3. De voorbereiding van het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-104-het-profiel-van-de-delegatie-en-de-lijsttrekker",
+            "title": "Artikel 10.4. Het profiel van de delegatie en de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-105-de-voorbereiding-en-opstelling-van-een-ontwerpka",
+            "title": "Artikel 10.5. De voorbereiding en opstelling van een ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-106-taken-en-werkwijze-partijbestuur-bij-het-voorber",
+            "title": "Artikel 10.6. Taken en werkwijze partijbestuur bij het voorbereiden en opstellen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-107-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 10.7. Ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-108-de-bevoegdheden-van-de-lijsttrekker",
+            "title": "Artikel 10.8. De bevoegdheden van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-109-de-kandidaatstellingsprocedure",
+            "title": "Artikel 10.9. De kandidaatstellingsprocedure",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-1010-functioneren",
+            "title": "Artikel 10.10. Functioneren",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-1011-gezamenlijk-deelnemen-aan-de-verkiezingen",
+            "title": "Artikel 10.11 Gezamenlijk deelnemen aan de verkiezingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-1-algemeen-deel",
+        "title": "Deel 1. Algemeen deel",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-11-bepalingen-over-de-vergaderorde-van-en-de",
+        "title": "Hoofdstuk 1.1. Bepalingen over de vergaderorde van en de",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-11-algemene-bepalingen-(ten-aanzien-van-vergaderorde",
+            "title": "Artikel 1.1. Algemene bepalingen (ten aanzien van vergaderorde en",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-12-besluiten-over-de-orde-van-de-vergadering",
+            "title": "Artikel 1.2. Besluiten over de orde van de vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-13-de-voorzitter",
+            "title": "Artikel 1.3. De voorzitter",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-14-de-uitnodiging-voor-en-verslaglegging-van-een-ver",
+            "title": "Artikel 1.4. De uitnodiging voor en verslaglegging van een vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-15-het-tellen-van-stemmen-en-het-bepalen-van-de-uits",
+            "title": "Artikel 1.5. Het tellen van stemmen en het bepalen van de uitslag",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-16-besluitvorming-over-zaken",
+            "title": "Artikel 1.6. Besluitvorming over zaken",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-12-in-dit-artikel-is-ook-sprake-van-de-situatie-dat-",
+            "title": "artikel 1.2. In dit artikel is ook sprake van de situatie dat een geleding een voorstel",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-17-de-stemming-over-zaken",
+            "title": "Artikel 1.7. De stemming over zaken",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-16-in-lid-3-wordt-de-mogelijkheid-gegeven-om-niet-al",
+            "title": "artikel 1.6. In lid 3 wordt de mogelijkheid gegeven om niet alleen over een voorstel als",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-18-besluitvorming-over-personen",
+            "title": "Artikel 1.8. Besluitvorming over personen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-19-de-stemming-over-personen-in-een-vergadering",
+            "title": "Artikel 1.9. De stemming over personen in een vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-110-de-verkiezing-als-er-één-positie-vervuld-moet-wo",
+            "title": "Artikel 1.10. De verkiezing als er één positie vervuld moet worden",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-111-de-verkiezing-als-tegelijk-twee-of-meer-posities",
+            "title": "Artikel 1.11. De verkiezing als tegelijk twee of meer posities vervuld moeten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-112-de-stemming-bij-het-vaststellen-van-een-kandidat",
+            "title": "Artikel 1.12. De stemming bij het vaststellen van een kandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-113-het-opzeggen-van-vertrouwen-in-een-persoon-in-de",
+            "title": "Artikel 1.13. Het opzeggen van vertrouwen in een persoon in de functie die hij",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-114-besluitvorming-over-moties-die-uitmonden-in-een-",
+            "title": "Artikel 1.14. Besluitvorming over moties die uitmonden in een gevoelen of een",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-12-de-ledenraadpleging",
+        "title": "Hoofdstuk 1.2. De ledenraadpleging",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-115-tot-en-met-118-bepalingen-inzake-de-ledenraadple",
+            "title": "Artikel 1.15 tot en met 1.18. Bepalingen inzake de ledenraadpleging",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-13-het-lidmaatschap",
+        "title": "Hoofdstuk 1.3. Het lidmaatschap",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-119-het-verkrijgen-van-het-lidmaatschap",
+            "title": "Artikel 1.19. Het verkrijgen van het lidmaatschap",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-120-het-verkrijgen-van-de-ledenrechten",
+            "title": "Artikel 1.20. Het verkrijgen van de ledenrechten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-121-plaatsing-op-een-kandidatenlijst",
+            "title": "Artikel 1.21. Plaatsing op een kandidatenlijst",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-14-bemiddeling,-toezicht-en-beroep",
+        "title": "Hoofdstuk 1.4. Bemiddeling, toezicht en beroep",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-122-bemiddeling-en-toezicht",
+            "title": "Artikel 1.22. Bemiddeling en toezicht",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-123-het-beroep",
+            "title": "Artikel 1.23. Het beroep",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-124-de-beroepscommissie",
+            "title": "Artikel 1.24. De beroepscommissie",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-15-de-geldmiddelen-en-de-contributies",
+        "title": "Hoofdstuk 1.5. De geldmiddelen en de contributies",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-125-de-contributies",
+            "title": "Artikel 1.25. De contributies",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-126-giftenregeling",
+            "title": "Artikel 1.26 Giftenregeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-127-de-geldmiddelen-en-de-controle",
+            "title": "Artikel 1.27. De geldmiddelen en de controle",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-128-overige-bepalingen-inzake-de-geldmiddelen",
+            "title": "Artikel 1.28. Overige bepalingen inzake de geldmiddelen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-16-integriteit",
+        "title": "Hoofdstuk 1.6. Integriteit",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-129-belangenverstrengeling",
+            "title": "Artikel 1.29 Belangenverstrengeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-130-de-erecode-en-de-verklaring-bij-de-kandidaatstel",
+            "title": "Artikel 1.30. De erecode en de verklaring bij de kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-131-de-commissie-integriteit",
+            "title": "Artikel 1.31. De Commissie Integriteit",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-132-persoonsgegevens-en-privacy",
+            "title": "Artikel 1.32. Persoonsgegevens en privacy",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-17-overige-bepalingen",
+        "title": "Hoofdstuk 1.7. Overige bepalingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-133-de-binding-aan-het-verkiezingsprogramma",
+            "title": "Artikel 1.33. De binding aan het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-134-evenwichtige-vertegenwoordiging",
+            "title": "Artikel 1.34. Evenwichtige vertegenwoordiging",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-135-onverenigbare-functies",
+            "title": "Artikel 1.35 Onverenigbare functies",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-136-de-zittingsduur",
+            "title": "Artikel 1.36. De zittingsduur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-137-de-jongerenorganisatie",
+            "title": "Artikel 1.37. De jongerenorganisatie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-138-leden-in-dienstverband-bij-de-partij-medewerkers",
+            "title": "Artikel 1.38. Leden in dienstverband bij de partij Medewerkers van de partij of van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-139-evenwichtige-informatie-bij-de-kandidaatstelling",
+            "title": "Artikel 1.39. Evenwichtige informatie bij de kandidaatstelling en de",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-2-de-afdelingen",
+        "title": "Deel 2. De afdelingen",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-6-van-de-statuten-dat-over-de-afdelingen-gaat-verder",
+            "title": "artikel 6 van de statuten dat over de afdelingen gaat. Verder wordt gewezen op deel",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-21-de-taken-van-de-afdeling",
+            "title": "Artikel 2.1. De taken van de afdeling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-22-de-afdelingsvergadering",
+            "title": "Artikel 2.2. De afdelingsvergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-23-de-uitnodiging-voor-en-de-verslaglegging-van-de",
+            "title": "Artikel 2.3. De uitnodiging voor en de verslaglegging van de",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-24-nadere-bepalingen-over-afdelingsvergaderingen",
+            "title": "Artikel 2.4. Nadere bepalingen over afdelingsvergaderingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-25-het-afdelingsbestuur",
+            "title": "Artikel 2.5. Het afdelingsbestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-25-beschrijft-de-samenstelling-en-verkiezing-van-het",
+            "title": "Artikel 2.5. beschrijft de samenstelling en verkiezing van het afdelingsbestuur en",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-26-lokale-afdeling-van-de-jonge-socialisten",
+            "title": "Artikel 2.6. Lokale afdeling van de Jonge Socialisten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-27-beschrijft-de-positie-van-de-lokale-jongerenafdel",
+            "title": "Artikel 2.7. beschrijft de positie van de lokale jongerenafdeling ten opzichte van de",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-27-afdelingen-die-niet-samenvallen-met-één-gemeente",
+            "title": "Artikel 2.7. Afdelingen die niet samenvallen met één gemeente",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-3-de-gewesten",
+        "title": "Deel 3. De gewesten",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-31-de-taken-van-het-gewest",
+            "title": "Artikel 3.1. De taken van het gewest",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-32-de-gewestelijke-vergadering",
+            "title": "Artikel 3.2. De gewestelijke vergadering",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-33-de-uitnodiging-voor-en-de-verslaglegging-van-de-g",
+            "title": "Artikel 3.3. De uitnodiging voor en de verslaglegging van de gewestelijke",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-35-het-gewestelijk-bestuur",
+            "title": "Artikel 3.5. Het gewestelijk bestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-35-beschrijft-de-samenstelling-en-verkiezing-van-het",
+            "title": "Artikel 3.5. beschrijft de samenstelling en verkiezing van het gewestelijk bestuur en",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-36-indelen-in-regio’s",
+            "title": "Artikel 3.6. Indelen in regio’s",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-36-beschrijft-de-bepalingen-over-het-aanwijzen-van-r",
+            "title": "Artikel 3.6. beschrijft de bepalingen over het aanwijzen van regio’s door het gewest.",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-37-provinciale-afdeling-van-de-jonge-socialisten",
+            "title": "Artikel 3.7. Provinciale afdeling van de Jonge Socialisten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-37-beschrijft-de-positie-van-de-provinciale-jongeren",
+            "title": "Artikel 3.7. beschrijft de positie van de provinciale jongerenafdeling ten opzichte van",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-4-de-geledingen-op-landelijk",
+        "title": "Deel 4. De geledingen op landelijk",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-41-het-congres-(artikelen-41-tot-en-42)",
+        "title": "Hoofdstuk 4.1. Het congres (artikelen 4.1. tot en 4.2.)",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-42-de-politieke-ledenraad-(artikelen-43-tot-en-44)",
+        "title": "Hoofdstuk 4.2. De Politieke Ledenraad (artikelen 4.3. tot en 4.4.)",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-43-de-verenigingsraad-(artikelen-45-tot-en-met-47)",
+        "title": "Hoofdstuk 4.3. De Verenigingsraad (artikelen 4.5. tot en met 4.7.)",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "hoofdstuk-44-het-partijbestuur-(artikelen-48-tot-en-met-410)",
+        "title": "Hoofdstuk 4.4. Het partijbestuur (artikelen 4.8. tot en met 4.10.)",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-48-beschrijft-de-taken-van-het-partijbestuur",
+            "title": "Artikel 4.8. beschrijft de taken van het partijbestuur.",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-49-geeft,-aanvullend-op-de-statuten,-nadere-regels-v",
+            "title": "Artikel 4.9. geeft, aanvullend op de statuten, nadere regels voor de verkiezing van de",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-410-borgt-het-inzicht-in-de-uitkomsten-van-de-beslui",
+            "title": "Artikel 4.10. borgt het inzicht in de uitkomsten van de besluitvorming door het",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-45-het-presidium-(artikel-411)",
+        "title": "Hoofdstuk 4.5. Het presidium (artikel 4.11.)",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-411-beschrijft-de-taken-en-de-werkwijze-van-het-pres",
+            "title": "Artikel 4.11. beschrijft de taken en de werkwijze van het presidium.",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "hoofdstuk-46-geestverwante-organisaties-(artikel-412)",
+        "title": "Hoofdstuk 4.6. Geestverwante organisaties (artikel 4.12.)",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-412-legt-de-status-en-rechten-van-de-geestverwante-o",
+            "title": "Artikel 4.12. legt de status en rechten van de geestverwante organisaties en",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-5-deelname-aan-het-lokaal",
+        "title": "Deel 5. Deelname aan het lokaal",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-51-de-gemeenteraadsfractie",
+            "title": "Artikel 5.1. De gemeenteraadsfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-52-de-taken-van-het-afdelingsbestuur-bij-de-deelname",
+            "title": "Artikel 5.2. De taken van het afdelingsbestuur bij de deelname aan het lokaal",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-53-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 5.3. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-54-de-besluitvorming-over-het-verkiezingsprogramma",
+            "title": "Artikel 5.4. De besluitvorming over het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-55-profielschets-en-kandidaatstelling",
+            "title": "Artikel 5.5. Profielschets en kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-56-de-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 5.6. De ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-57-het-voorbereiden-en-opstellen-van-de-ontwerpkandi",
+            "title": "Artikel 5.7. Het voorbereiden en opstellen van de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-58-de-besluitvorming-over-de-ontwerpkandidatenlijst",
+            "title": "Artikel 5.8. De besluitvorming over de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-59-de-positie-van-de-lijsttrekker",
+            "title": "Artikel 5.9. De positie van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-510-de-vorming-van-het-college-van-burgemeester-en-w",
+            "title": "Artikel 5.10. De vorming van het college van burgemeester en wethouders",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-511-het-functioneren-van-de-fractie-en-het-voeren-va",
+            "title": "Artikel 5.11. Het functioneren van de fractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-512-slotbepalingen",
+            "title": "Artikel 5.12. Slotbepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-6-deelname-aan-het-provinciaal",
+        "title": "Deel 6. Deelname aan het provinciaal",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-61-de-statenfractie",
+            "title": "Artikel 6.1. De Statenfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-62-de-taken-van-het-gewestelijk-bestuur-bij-de-deeln",
+            "title": "Artikel 6.2. De taken van het gewestelijk bestuur bij de deelname aan het",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-63-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 6.3. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-64-de-besluitvorming-over-het-verkiezingsprogramma",
+            "title": "Artikel 6.4. De besluitvorming over het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-65-profielschets-en-kandidaatstelling",
+            "title": "Artikel 6.5. Profielschets en kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-66-de-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 6.6. De ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-67-het-voorbereiden-en-opstellen-van-de-ontwerpkandi",
+            "title": "Artikel 6.7. Het voorbereiden en opstellen van de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-68-de-besluitvorming-over-de-ontwerpkandidatenlijst",
+            "title": "Artikel 6.8. De besluitvorming over de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-69-de-positie-van-de-lijsttrekker",
+            "title": "Artikel 6.9. De positie van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-610-de-vorming-van-het-college-van-gedeputeerde-stat",
+            "title": "Artikel 6.10. De vorming van het college van Gedeputeerde Staten",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-611-het-functioneren-van-de-fractie-en-het-voeren-va",
+            "title": "Artikel 6.11. Het functioneren van de fractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-612-slotbepalingen",
+            "title": "Artikel 6.12. Slotbepalingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-71-de-waterschapsfractie",
+            "title": "Artikel 7.1. De waterschapsfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-72-de-taken-van-het-gewestelijk-bestuur-bij-de-deeln",
+            "title": "Artikel 7.2. De taken van het gewestelijk bestuur bij de deelname aan het",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-73-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 7.3. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-74-de-besluitvorming-over-het-verkiezingsprogramma",
+            "title": "Artikel 7.4. De besluitvorming over het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-75-profielschets-en-kandidaatstelling",
+            "title": "Artikel 7.5. Profielschets en kandidaatstelling",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-76-de-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 7.6. De ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-77-het-voorbereiden-en-opstellen-van-de-ontwerpkandi",
+            "title": "Artikel 7.7. Het voorbereiden en opstellen van de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-78-de-besluitvorming-over-de-ontwerpkandidatenlijst",
+            "title": "Artikel 7.8. De besluitvorming over de ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-79-de-positie-van-de-lijsttrekker",
+            "title": "Artikel 7.9. De positie van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-710-de-vorming-van-het-dagelijks-bestuur",
+            "title": "Artikel 7.10. De vorming van het dagelijks bestuur",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-711-het-functioneren-van-de-fractie-en-het-voeren-va",
+            "title": "Artikel 7.11. Het functioneren van de fractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-712-waterschappen-die-in-twee-of-meer-gewesten-ligge",
+            "title": "Artikel 7.12. Waterschappen die in twee of meer gewesten liggen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-713-slotbepalingen",
+            "title": "Artikel 7.13. Slotbepalingen",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-8-deelname-aan-de-tweede",
+        "title": "Deel 8. Deelname aan de Tweede",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-81-de-tweede-kamerfractie",
+            "title": "Artikel 8.1. De Tweede Kamerfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-82-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 8.2. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-83-de-voorbereiding-van-het-verkiezingsprogramma",
+            "title": "Artikel 8.3. De voorbereiding van het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-84-het-profiel-van-de-tweede-kamerfractie-en-lijsttr",
+            "title": "Artikel 8.4. Het profiel van de Tweede Kamerfractie en lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-85-de-voorbereiding-en-opstelling-van-een-ontwerpkan",
+            "title": "Artikel 8.5. De voorbereiding en opstelling van een ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-86-taken-en-werkwijze-partijbestuur-bij-het-voorbere",
+            "title": "Artikel 8.6. Taken en werkwijze partijbestuur bij het voorbereiden en opstellen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-87-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 8.7. Ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-88-bevoegdheden-van-de-lijsttrekker",
+            "title": "Artikel 8.8. Bevoegdheden van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-89-de-kandidaatstellingsprocedure",
+            "title": "Artikel 8.9. De kandidaatstellingsprocedure",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-810-het-aangaan-van-een-lijstverbinding",
+            "title": "Artikel 8.10. Het aangaan van een lijstverbinding",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-811-deelname-aan-het-kabinet",
+            "title": "Artikel 8.11. Deelname aan het kabinet",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-812-functioneren-van-de-fractie-en-het-voeren-van",
+            "title": "Artikel 8.12. Functioneren van de fractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-813-het-bijzonder-verkiezingsreglement-bij-gezamenli",
+            "title": "Artikel 8.13. Het bijzonder verkiezingsreglement bij gezamenlijke deelname aan",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-9-deelname-aan-de-eerste",
+        "title": "Deel 9. Deelname aan de Eerste",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-91-de-eerste-kamerfractie",
+            "title": "Artikel 9.1. De Eerste Kamerfractie",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-92-de-voorbereiding-van-de-deelname-aan-de-verkiezin",
+            "title": "Artikel 9.2. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-93-het-profiel-van-de-eerste-kamerfractie-en-de-lijs",
+            "title": "Artikel 9.3. Het profiel van de Eerste Kamerfractie en de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-94-de-voorbereiding-en-opstelling-van-een-ontwerpkan",
+            "title": "Artikel 9.4. De voorbereiding en opstelling van een ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-95-taken-en-werkwijze-partijbestuur-bij-het-voorbere",
+            "title": "Artikel 9.5. Taken en werkwijze partijbestuur bij het voorbereiden en opstellen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-96-de-lijsttrekker",
+            "title": "Artikel 9.6. De lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-97-de-kandidaatstellingsprocedure",
+            "title": "Artikel 9.7. De kandidaatstellingsprocedure",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-98-functioneren-van-de-fractie-en-het-voeren-van",
+            "title": "Artikel 9.8. Functioneren van de fractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-99-het-bijzonder-verkiezingsreglement-bij-gezamenlij",
+            "title": "Artikel 9.9. Het bijzonder verkiezingsreglement bij gezamenlijke deelname aan",
+            "level": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "deel-10-deelname-aan-het-europees",
+        "title": "Deel 10. Deelname aan het Europees",
+        "level": 1,
+        "children": [
+          {
+            "id": "artikel-101-de-delegatie-in-het-europees-parlement",
+            "title": "Artikel 10.1. De delegatie in het Europees Parlement",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-102-de-voorbereiding-van-de-deelname-aan-de-verkiezi",
+            "title": "Artikel 10.2. De voorbereiding van de deelname aan de verkiezingen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-103-de-voorbereiding-van-het-verkiezingsprogramma",
+            "title": "Artikel 10.3. De voorbereiding van het verkiezingsprogramma",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-104-het-profiel-van-de-delegatie-en-de-lijsttrekker",
+            "title": "Artikel 10.4. Het profiel van de delegatie en de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-105-de-voorbereiding-en-opstelling-van-een-ontwerpka",
+            "title": "Artikel 10.5. De voorbereiding en opstelling van een ontwerpkandidatenlijst",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-106-taken-en-werkwijze-partijbestuur-bij-het-voorber",
+            "title": "Artikel 10.6. Taken en werkwijze partijbestuur bij het voorbereiden en opstellen",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-107-ledenraadpleging-over-de-lijsttrekker",
+            "title": "Artikel 10.7. Ledenraadpleging over de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-108-bevoegdheden-van-de-lijsttrekker",
+            "title": "Artikel 10.8. Bevoegdheden van de lijsttrekker",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-109-de-kandidaatstellingsprocedure",
+            "title": "Artikel 10.9. De kandidaatstellingsprocedure",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-1010-functioneren-van-de-fractie-en-het-voeren-van",
+            "title": "Artikel 10.10. Functioneren van de fractie en het voeren van",
+            "level": 2,
+            "children": []
+          },
+          {
+            "id": "artikel-1011-het-bijzonder-verkiezingsreglement-bij-gezamenl",
+            "title": "Artikel 10.11. Het bijzonder verkiezingsreglement bij gezamenlijke deelname",
+            "level": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+]
