@@ -8,6 +8,8 @@ AI-powered document browser for the articles of association of the Dutch Labour 
 
 Browse and ask questions about the articles of association (statuten en reglementen) of the Dutch Labour Party (PvdA).
 
+Based on the [Statuten en reglementen PvdA 2023](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) (version 2023).
+
 ## What is this?
 
 PvdAI makes the 188-page PvdA articles of association accessible through a split-screen interface:
