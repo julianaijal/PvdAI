@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#FAFAFA"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#E30613"/>
+  <text x="100" y="280" font-family="Arial,sans-serif" font-weight="700" font-size="72" fill="#0A0A0A">Pvd<tspan fill="#E30613">AI</tspan></text>
+  <text x="100" y="340" font-family="Arial,sans-serif" font-size="32" fill="#4B5563">Stel vragen over de statuten en reglementen</text>
+  <text x="100" y="385" font-family="Arial,sans-serif" font-size="32" fill="#4B5563">van de Partij van de Arbeid</text>
+  <rect x="100" y="440" width="200" height="44" rx="8" fill="#E30613"/>
+  <text x="200" y="469" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="18" fill="#fff">Stel een vraag</text>
+</svg>
