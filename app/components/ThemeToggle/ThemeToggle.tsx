@@ -1,17 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./ThemeToggle.module.scss";
 
-export default function ThemeToggle() {
-  const [dark, setDark] = useState(true);
+function getInitialTheme(): boolean {
+  if (typeof window === "undefined") return true;
+  return localStorage.getItem("theme") !== "light";
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "light") {
-      setDark(false);
-    }
-  }, []);
+export default function ThemeToggle() {
+  const [dark, setDark] = useState(getInitialTheme);
 
   function toggle() {
     const next = !dark;
