@@ -12,6 +12,23 @@
   border-bottom: 1px solid var(--pvda-border-light);
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.pdfLink {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--pvda-text-secondary);
+  text-decoration: none;
+  padding: 3px 8px;
+  border: 1px solid var(--pvda-border);
+  border-radius: 4px;
+  transition: all var(--transition);
+
+  &:hover {
+    color: var(--pvda-red);
+    border-color: var(--pvda-red);
+  }
 }
 
 .tocHeaderToggle {

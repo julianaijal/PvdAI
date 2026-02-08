@@ -106,6 +106,15 @@ export default function Chat({ onArticleClick }: ChatProps) {
             <h3 className={styles.welcomeTitle}>Stel een vraag</h3>
             <p className={styles.welcomeText}>
               Vraag iets over de statuten en reglementen van de PvdA.
+              {" "}
+              <a
+                href="/Statuten-en-reglementen-PvdA-2023.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.pdfLink}
+              >
+                Bekijk het originele document (PDF)
+              </a>
             </p>
             <div className={styles.starters}>
               {STARTER_QUESTIONS.map((q) => (

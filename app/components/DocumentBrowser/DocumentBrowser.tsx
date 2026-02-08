@@ -168,6 +168,15 @@ export default function DocumentBrowser({
         >
           {tocOpen ? "\u25BE" : "\u25B8"} Inhoudsopgave
         </button>
+        <a
+          href="/Statuten-en-reglementen-PvdA-2023.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.pdfLink}
+          title="Origineel document openen"
+        >
+          PDF
+        </a>
       </div>
       {tocOpen && (
         <nav className={styles.toc}>

@@ -48,6 +48,21 @@
   line-height: 1.5;
 }
 
+.pdfLink {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--pvda-red);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--pvda-red);
+  transition: all var(--transition);
+
+  &:hover {
+    color: var(--pvda-red-dark);
+    border-bottom-style: solid;
+  }
+}
+
 .starters {
   display: flex;
   flex-direction: column;
