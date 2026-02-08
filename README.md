@@ -94,7 +94,7 @@ scripts/
 data/                       # generated JSON (embeddings.json not in git)
 ```
 
-## Privacy
+## 🔒 Privacy
 
 Your questions are **not stored or used for AI training**. The OpenAI API is called with `store: false`, meaning your data is not retained by OpenAI beyond the immediate request.
 
