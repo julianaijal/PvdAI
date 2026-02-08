@@ -1,6 +1,7 @@
-import { execSync } from "child_process";
-import { writeFileSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
+import { PDFParse } from "pdf-parse";
+import { encoding_for_model } from "tiktoken";
 
 const PDF_PATH = join(
   process.cwd(),
@@ -8,8 +9,13 @@ const PDF_PATH = join(
   "Statuten-en-reglementen-PvdA-2023.pdf"
 );
 const DATA_DIR = join(process.cwd(), "data");
-const CHUNK_SIZE = 800;
-const CHUNK_OVERLAP = 200;
+const CHUNK_SIZE = 500; // tokens (was 800 chars)
+
+const encoder = encoding_for_model("gpt-4o-mini");
+
+function countTokens(text: string): number {
+  return encoder.encode(text).length;
+}
 
 interface Section {
   id: string;
@@ -19,11 +25,12 @@ interface Section {
   children: Section[];
 }
 
-function extractText(): string {
-  return execSync(`pdftotext "${PDF_PATH}" -`, {
-    encoding: "utf-8",
-    maxBuffer: 10 * 1024 * 1024,
-  });
+async function extractText(): Promise<string> {
+  const dataBuffer = readFileSync(PDF_PATH);
+  const pdf = new PDFParse({ data: new Uint8Array(dataBuffer) });
+  const result = await pdf.getText();
+  await pdf.destroy();
+  return result.text;
 }
 
 /**
@@ -247,7 +254,7 @@ function chunkText(
           ? current + "\n\n" + para
           : para;
 
-        if (candidate.length > CHUNK_SIZE && current.length > 50) {
+        if (countTokens(candidate) > CHUNK_SIZE && countTokens(current) > 20) {
           chunks.push({
             text: `${section.title}\n\n${current}`,
             sectionId: section.id,
@@ -260,7 +267,7 @@ function chunkText(
         }
       }
 
-      if (current.trim().length > 50) {
+      if (current.trim().length > 20) {
         chunks.push({
           text: `${section.title}\n\n${current}`,
           sectionId: section.id,
@@ -279,9 +286,9 @@ function chunkText(
   return chunks;
 }
 
-function main() {
+async function main() {
   console.log("1. Extracting text from PDF...");
-  const text = extractText();
+  const text = await extractText();
   console.log(`   Extracted ${text.length} characters`);
 
   console.log("2. Parsing document structure...");
@@ -300,7 +307,7 @@ function main() {
     `   Found ${structure.length} main sections, ${totalChapters} chapters, ${totalArticles} articles`
   );
 
-  console.log("3. Chunking text...");
+  console.log("3. Chunking text (token-based)...");
   const rawChunks = chunkText(structure);
   const chunks = rawChunks.map((c, i) => ({
     id: i,
@@ -338,10 +345,16 @@ function main() {
     JSON.stringify(chunks, null, 2)
   );
 
+  encoder.free();
+
   console.log("Done!");
   console.log(`   structure.json: ${structure.length} main sections`);
   console.log(`   toc.json: lightweight TOC`);
   console.log(`   chunks.json: ${chunks.length} chunks`);
 }
 
-main();
+main().catch((error) => {
+  console.error("Error parsing PDF:", error);
+  encoder.free();
+  process.exit(1);
+});
