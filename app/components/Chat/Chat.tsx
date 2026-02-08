@@ -27,13 +27,32 @@ const STARTER_QUESTIONS = [
   "Wat zijn de rechten van leden?",
 ];
 
-function buildArticleLookup(items: TocItem[]): Map<number, string> {
-  const map = new Map<number, string>();
+function buildArticleLookup(items: TocItem[]): Map<string, string> {
+  const map = new Map<string, string>();
   function walk(list: TocItem[]) {
     for (const item of list) {
       const match = item.id.match(/artikel-(\d+)/);
-      if (match && !map.has(Number(match[1]))) {
-        map.set(Number(match[1]), item.id);
+      if (match) {
+        const num = match[1];
+        // Store as plain number key (e.g. "4" for statuten artikel-4)
+        // and as dot-notation key (e.g. "1.1" for reglementen artikel-11)
+        if (!map.has(num)) {
+          map.set(num, item.id);
+        }
+        // For reglementen: artikel-51 → key "5.1", artikel-101 → key "10.1"
+        if (item.id.startsWith("reglementen") && num.length >= 2) {
+          const dotKey = num.slice(0, -1) + "." + num.slice(-1);
+          if (!map.has(dotKey)) {
+            map.set(dotKey, item.id);
+          }
+          // Also handle two-digit sub-articles: artikel-110 → "1.10"
+          if (num.length >= 3) {
+            const dotKey2 = num.slice(0, -2) + "." + num.slice(-2);
+            if (!map.has(dotKey2)) {
+              map.set(dotKey2, item.id);
+            }
+          }
+        }
       }
       walk(item.children);
     }
@@ -45,14 +64,14 @@ function buildArticleLookup(items: TocItem[]): Map<number, string> {
 function parseArticleRefs(
   text: string,
   onClick?: (id: string) => void,
-  articleLookup?: Map<number, string>
+  articleLookup?: Map<string, string>
 ) {
-  const parts = text.split(/(Artikel\s+\d+[\w.]*(?:,?\s*lid\s+\d+)?)/gi);
+  const parts = text.split(/(Artikel\s+\d+(?:\.\d+)?(?:,?\s*lid\s+\d+)?)/gi);
   return parts.map((part, i) => {
-    const numMatch = part.match(/^Artikel\s+(\d+)/i);
+    const numMatch = part.match(/^Artikel\s+(\d+(?:\.\d+)?)/i);
     if (numMatch) {
-      const articleNum = Number(numMatch[1]);
-      const tocId = articleLookup?.get(articleNum);
+      const key = numMatch[1];
+      const tocId = articleLookup?.get(key);
       if (tocId && onClick) {
         return (
           <button
@@ -75,7 +94,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const articleLookup = useMemo(() => buildArticleLookup(toc || []), [toc]);
+  const articleLookup = useMemo<Map<string, string>>(() => buildArticleLookup(toc || []), [toc]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
