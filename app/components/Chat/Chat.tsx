@@ -246,6 +246,41 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
+function ShareButton({ question }: { question: string }) {
+  const [shared, setShared] = useState(false);
+
+  const handleShare = useCallback(() => {
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("q", question);
+    navigator.clipboard.writeText(url.toString()).then(() => {
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    });
+  }, [question]);
+
+  return (
+    <button
+      className={styles.shareButton}
+      onClick={handleShare}
+      aria-label={shared ? "Link gekopieerd" : "Deel dit antwoord"}
+      title={shared ? "Link gekopieerd!" : "Deel"}
+    >
+      {shared ? (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+          <polyline points="16 6 12 2 8 6" />
+          <line x1="12" y1="2" x2="12" y2="15" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -434,7 +469,14 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                   <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
                     {msg.content}
                   </ReactMarkdown>
-                  {msg.content && !msg.isError && <CopyButton text={msg.content} />}
+                  {msg.content && !msg.isError && (
+                    <div className={styles.messageActions}>
+                      <CopyButton text={msg.content} />
+                      {i > 0 && messages[i - 1]?.role === "user" && (
+                        <ShareButton question={messages[i - 1].content} />
+                      )}
+                    </div>
+                  )}
                 </>
               ) : (
                 msg.content
