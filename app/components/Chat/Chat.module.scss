@@ -192,6 +192,26 @@
   }
 }
 
+.copyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--pvda-border);
+  border-radius: var(--radius-sm);
+  color: var(--pvda-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  margin-top: 6px;
+  transition: all var(--transition);
+
+  &:hover {
+    color: var(--pvda-red);
+    border-color: var(--pvda-red);
+    background: var(--pvda-red-light);
+  }
+}
+
 .errorMessage {
   .messageContent {
     background: color-mix(in srgb, var(--pvda-red) 10%, var(--pvda-grey)) !important;
