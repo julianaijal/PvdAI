@@ -20,7 +20,7 @@
   font-weight: 600;
   color: var(--pvda-text-secondary);
   text-decoration: none;
-  padding: 3px 8px;
+  padding: 6px 10px;
   border: 1px solid var(--pvda-border);
   border-radius: 4px;
   transition: all var(--transition);
@@ -28,6 +28,11 @@
   &:hover {
     color: var(--pvda-red);
     border-color: var(--pvda-red);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 2px;
   }
 }
 
@@ -90,10 +95,16 @@
   min-height: 32px;
   line-height: 1;
   flex-shrink: 0;
+  border-radius: 4px;
   transition: color var(--transition);
 
   &:hover {
     color: var(--pvda-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 1px;
   }
 }
 

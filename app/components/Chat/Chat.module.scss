@@ -151,6 +151,12 @@
   &:hover {
     opacity: 0.8;
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 .markdownList {
@@ -184,11 +190,17 @@
   cursor: pointer;
   padding: 0;
   border-bottom: 1px dashed var(--pvda-red);
+  border-radius: 2px;
   transition: all var(--transition);
 
   &:hover {
     color: var(--pvda-red-dark);
     border-bottom-style: solid;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 2px;
   }
 }
 
