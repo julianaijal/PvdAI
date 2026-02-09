@@ -108,6 +108,7 @@ export default function DocumentBrowser({
   highlightId,
 }: DocumentBrowserProps) {
   const [tocOpen, setTocOpen] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loadedSections, setLoadedSections] = useState<Record<string, Section>>({});
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [errorId, setErrorId] = useState<string | null>(null);
@@ -192,6 +193,25 @@ export default function DocumentBrowser({
         >
           PDF
         </a>
+      </div>
+      <div className={styles.searchBar}>
+        <input
+          className={styles.searchInput}
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Zoek in het document..."
+          aria-label="Zoek in het document"
+        />
+        {searchQuery && (
+          <button
+            className={styles.searchClear}
+            onClick={() => setSearchQuery("")}
+            aria-label="Zoekopdracht wissen"
+          >
+            &times;
+          </button>
+        )}
       </div>
       {tocOpen && (
         <nav id="toc-nav" className={styles.toc} aria-label="Inhoudsopgave">

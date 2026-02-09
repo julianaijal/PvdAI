@@ -240,6 +240,54 @@
   animation: spin 0.6s linear infinite;
 }
 
+/* ── Search bar ── */
+
+.searchBar {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pvda-border-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--pvda-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--pvda-text);
+  background: var(--pvda-grey);
+  transition: all var(--transition);
+
+  &:focus {
+    border-color: var(--pvda-red);
+    background: var(--pvda-surface);
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 1px;
+  }
+
+  &::placeholder {
+    color: var(--pvda-text-secondary);
+  }
+}
+
+.searchClear {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--pvda-text-secondary);
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+  transition: color var(--transition);
+
+  &:hover {
+    color: var(--pvda-text);
+  }
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
