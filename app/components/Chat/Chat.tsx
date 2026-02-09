@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo, useCallback, Children } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback, Children, type ReactElement } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
@@ -118,31 +118,59 @@ function buildArticleLookup(items: TocItem[]): Map<string, string> {
   return map;
 }
 
+function makeArticleButton(
+  text: string,
+  key: string,
+  index: number | string,
+  onClick?: (id: string) => void,
+  articleLookup?: Map<string, string>
+): React.ReactElement {
+  const tocId = articleLookup?.get(key);
+  if (tocId && onClick) {
+    return (
+      <button
+        key={index}
+        className={styles.articleRef}
+        onClick={() => onClick(tocId)}
+        aria-label={`Ga naar Artikel ${key} in documentbrowser`}
+      >
+        {text}
+      </button>
+    );
+  }
+  return <span key={index}>{text}</span>;
+}
+
 function parseArticleRefs(
   text: string,
   onClick?: (id: string) => void,
   articleLookup?: Map<string, string>
 ) {
-  const parts = text.split(/(Artikel\s+\d+(?:\.\d+)?(?:,?\s*lid\s+\d+)?)/gi);
-  return parts.map((part, i) => {
+  // Match both singular "Artikel X" and plural "Artikelen X, Y, Z"
+  const parts = text.split(/(Artikelen\s+\d+(?:\.\d+)?(?:(?:,\s*(?:en\s+)?|\s+en\s+)\d+(?:\.\d+)?)*|Artikel\s+\d+(?:\.\d+)?(?:,?\s*lid\s+\d+)?)/gi);
+  return parts.flatMap((part, i): React.ReactElement[] => {
+    // Handle plural "Artikelen 1.12, 5.7, en 6.7"
+    const pluralMatch = part.match(/^Artikelen\s+(.+)/i);
+    if (pluralMatch) {
+      const numberStr = pluralMatch[1];
+      const numbers = numberStr.split(/(?:,\s*(?:en\s+)?|\s+en\s+)/);
+      const result: React.ReactElement[] = [<span key={`${i}-prefix`}>Artikelen </span>];
+      numbers.forEach((num, j) => {
+        const trimmed = num.trim();
+        if (j > 0) {
+          const isLast = j === numbers.length - 1;
+          result.push(<span key={`${i}-sep-${j}`}>{isLast ? " en " : ", "}</span>);
+        }
+        result.push(makeArticleButton(trimmed, trimmed, `${i}-${j}`, onClick, articleLookup));
+      });
+      return result;
+    }
+    // Handle singular "Artikel X"
     const numMatch = part.match(/^Artikel\s+(\d+(?:\.\d+)?)/i);
     if (numMatch) {
-      const key = numMatch[1];
-      const tocId = articleLookup?.get(key);
-      if (tocId && onClick) {
-        return (
-          <button
-            key={i}
-            className={styles.articleRef}
-            onClick={() => onClick(tocId)}
-            aria-label={`Ga naar ${part} in documentbrowser`}
-          >
-            {part}
-          </button>
-        );
-      }
+      return [makeArticleButton(part, numMatch[1], i, onClick, articleLookup)];
     }
-    return <span key={i}>{part}</span>;
+    return [<span key={i}>{part}</span>];
   });
 }
 
@@ -185,6 +213,37 @@ function useMarkdownComponents(
     ol: ({ children }) => <ol className={styles.markdownList}>{children}</ol>,
     code: ({ children }) => <code className={styles.markdownCode}>{children}</code>,
   }), [onClick, articleLookup]);
+}
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [text]);
+
+  return (
+    <button
+      className={styles.copyButton}
+      onClick={handleCopy}
+      aria-label={copied ? "Gekopieerd" : "Kopieer antwoord"}
+      title={copied ? "Gekopieerd!" : "Kopieer"}
+    >
+      {copied ? (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+      )}
+    </button>
+  );
 }
 
 export default function Chat({ onArticleClick, toc }: ChatProps) {
@@ -356,9 +415,12 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           >
             <div className={styles.messageContent}>
               {msg.role === "assistant" ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-                  {msg.content}
-                </ReactMarkdown>
+                <>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                    {msg.content}
+                  </ReactMarkdown>
+                  {msg.content && !msg.isError && <CopyButton text={msg.content} />}
+                </>
               ) : (
                 msg.content
               )}
