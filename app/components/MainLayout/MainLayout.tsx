@@ -87,7 +87,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           ref={browserPanelRef}
           className={`${styles.browserPanel} ${activePanel === "browser" ? styles.panelActive : ""}`}
           aria-label="Documentbrowser"
-          aria-hidden={activePanel !== "browser" ? true : undefined}
+          {...(activePanel !== "browser" ? { inert: true } : {})}
         >
           <DocumentBrowser
             toc={toc}
@@ -98,7 +98,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           ref={chatPanelRef}
           className={`${styles.chatPanel} ${activePanel === "chat" ? styles.panelActive : ""}`}
           aria-label="Chat"
-          aria-hidden={activePanel !== "chat" ? true : undefined}
+          {...(activePanel !== "chat" ? { inert: true } : {})}
         >
           <Chat onArticleClick={handleArticleClick} toc={toc} />
         </section>
