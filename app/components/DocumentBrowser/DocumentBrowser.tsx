@@ -343,13 +343,14 @@ export default function DocumentBrowser({
         )}
       </div>
       {debouncedQuery && searchResults.length > 0 && (
-        <div className={styles.searchResults} role="listbox" aria-label="Zoekresultaten">
+        <div className={styles.searchResults} role="listbox" aria-label="Zoekresultaten" aria-live="polite">
           {searchResults.map((result, i) => (
             <button
               key={`${result.sectionId}-${i}`}
               className={styles.searchResultItem}
               onClick={() => handleSelect(result.sectionId)}
               role="option"
+              aria-selected={false}
             >
               <span className={styles.searchResultTitle}>{result.sectionTitle}</span>
               <span className={styles.searchResultSnippet}>
@@ -360,7 +361,7 @@ export default function DocumentBrowser({
         </div>
       )}
       {debouncedQuery && searchResults.length === 0 && structureData && (
-        <div className={styles.searchNoResults}>
+        <div className={styles.searchNoResults} role="status">
           Geen resultaten voor &ldquo;{debouncedQuery}&rdquo;
         </div>
       )}
