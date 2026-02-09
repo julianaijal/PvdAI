@@ -192,32 +192,14 @@
   }
 }
 
-.copyButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: 1px solid var(--pvda-border);
-  border-radius: var(--radius-sm);
-  color: var(--pvda-text-secondary);
-  cursor: pointer;
-  padding: 4px;
-  transition: all var(--transition);
-
-  &:hover {
-    color: var(--pvda-red);
-    border-color: var(--pvda-red);
-    background: var(--pvda-red-light);
-  }
-}
-
 .messageActions {
   display: flex;
   gap: 4px;
   margin-top: 6px;
 }
 
-.shareButton {
+.actionButton {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,6 +215,62 @@
     color: var(--pvda-red);
     border-color: var(--pvda-red);
     background: var(--pvda-red-light);
+
+    .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      visibility: visible;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--pvda-red);
+    outline-offset: 1px;
+
+    .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      visibility: visible;
+    }
+  }
+}
+
+.actionButtonSuccess {
+  color: var(--pvda-red);
+  border-color: var(--pvda-red);
+
+  .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    visibility: visible;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--pvda-black);
+  color: var(--pvda-surface);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, transform 150ms ease, visibility 150ms ease;
+  pointer-events: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--pvda-black);
   }
 }
 

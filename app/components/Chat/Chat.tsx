@@ -227,10 +227,9 @@ function CopyButton({ text }: { text: string }) {
 
   return (
     <button
-      className={styles.copyButton}
+      className={`${styles.actionButton} ${copied ? styles.actionButtonSuccess : ""}`}
       onClick={handleCopy}
       aria-label={copied ? "Gekopieerd" : "Kopieer antwoord"}
-      title={copied ? "Gekopieerd!" : "Kopieer"}
     >
       {copied ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -242,6 +241,7 @@ function CopyButton({ text }: { text: string }) {
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
         </svg>
       )}
+      <span className={styles.tooltip} role="status">{copied ? "Gekopieerd!" : "Kopieer"}</span>
     </button>
   );
 }
@@ -261,10 +261,9 @@ function ShareButton({ question }: { question: string }) {
 
   return (
     <button
-      className={styles.shareButton}
+      className={`${styles.actionButton} ${shared ? styles.actionButtonSuccess : ""}`}
       onClick={handleShare}
       aria-label={shared ? "Link gekopieerd" : "Deel dit antwoord"}
-      title={shared ? "Link gekopieerd!" : "Deel"}
     >
       {shared ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -277,6 +276,7 @@ function ShareButton({ question }: { question: string }) {
           <line x1="12" y1="2" x2="12" y2="15" />
         </svg>
       )}
+      <span className={styles.tooltip} role="status">{shared ? "Link gekopieerd!" : "Deel"}</span>
     </button>
   );
 }
