@@ -134,9 +134,10 @@ data/                            Generated JSON files (embeddings.json gitignore
 ### How RAG Works
 
 1. User question is embedded with `text-embedding-3-small`
-2. Top 8 chunks found via cosine similarity against precomputed embeddings
-3. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
-4. Response includes article references that become clickable links in the UI
+2. For follow-up questions, the query is automatically rewritten using conversation history for better context
+3. Top 8 chunks found via cosine similarity against precomputed embeddings
+4. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
+5. Response includes article references that become clickable links in the UI
 
 ## API Reference
 
@@ -146,7 +147,10 @@ Ask a question about the articles of association.
 
 **Request:**
 ```json
-{ "question": "Hoe word ik lid van de PvdA?" }
+{
+  "question": "Hoe word ik lid van de PvdA?",
+  "history": []
+}
 ```
 
 **Response:**
@@ -163,6 +167,10 @@ Ask a question about the articles of association.
 Load section content on demand.
 
 **Response:** Full section object with nested children. Cached for 24 hours via `Cache-Control`.
+
+### `GET /api/structure`
+
+Returns the full document structure for client-side search.
 
 ## Privacy
 
