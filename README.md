@@ -56,12 +56,6 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 
 - Node.js 18+
 - An [OpenAI API key](https://platform.openai.com/api-keys)
-- `pdftotext` from [Poppler](https://poppler.freedesktop.org/) (for PDF parsing only)
-
-  ```sh
-  # macOS
-  brew install poppler
-  ```
 
 ### Installation
 
