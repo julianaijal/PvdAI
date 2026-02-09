@@ -85,7 +85,9 @@
   cursor: pointer;
   font-size: 10px;
   color: var(--pvda-text-secondary);
-  padding: 4px;
+  padding: 8px;
+  min-width: 32px;
+  min-height: 32px;
   line-height: 1;
   flex-shrink: 0;
   transition: color var(--transition);
@@ -279,7 +281,12 @@
   font-size: 18px;
   color: var(--pvda-text-secondary);
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   transition: color var(--transition);
 

@@ -208,7 +208,9 @@
   border-radius: var(--radius-sm);
   color: var(--pvda-text-secondary);
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
+  min-width: 32px;
+  min-height: 32px;
   transition: all var(--transition);
 
   &:hover {
