@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import DocumentBrowser from "../DocumentBrowser/DocumentBrowser";
 import styles from "./MainLayout.module.scss";
@@ -24,17 +24,17 @@ interface MainLayoutProps {
 export default function MainLayout({ toc }: MainLayoutProps) {
   const [activePanel, setActivePanel] = useState<"browser" | "chat">("chat");
   const [highlightId, setHighlightId] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useSyncExternalStore(
+    (callback) => {
+      const mql = window.matchMedia("(max-width: 768px)");
+      mql.addEventListener("change", callback);
+      return () => mql.removeEventListener("change", callback);
+    },
+    () => window.matchMedia("(max-width: 768px)").matches,
+    () => false,
+  );
   const browserPanelRef = useRef<HTMLElement>(null);
   const chatPanelRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
 
   useEffect(() => {
     // Only manage focus on mobile
