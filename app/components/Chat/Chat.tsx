@@ -284,10 +284,12 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     setLoading(true);
 
     try {
+      const recentHistory = messages.slice(-6).map(({ role, content }) => ({ role, content }));
+
       const res = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: text }),
+        body: JSON.stringify({ question: text, history: recentHistory.length > 0 ? recentHistory : undefined }),
       });
 
       const remaining = res.headers.get("X-RateLimit-Remaining");
