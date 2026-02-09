@@ -26,10 +26,16 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 ## Features
 
 - **RAG-powered Q&A** — answers grounded in the actual document via semantic search over embeddings
+- **Conversational context** — follow-up questions use conversation history with automatic query rewriting
 - **Interactive document browser** — collapsible table of contents with on-demand section loading
-- **Clickable article references** — AI responses link directly to referenced articles in the browser
+- **Document search** — full-text search with text snippet previews and highlighted matches
+- **Clickable article references** — AI responses link directly to referenced articles in the browser (including plural "Artikelen X, Y, Z" references)
+- **Copy & share** — copy or share AI responses directly from the chat
+- **Shareable questions** — link to a question via URL query parameter for auto-submission on load
 - **Dark/light mode** — system-aware with manual toggle
 - **Mobile-first** — responsive panel switching with accessible touch targets
+- **Accessible** — WCAG AA contrast compliance, 44px touch targets, `prefers-reduced-motion` support, `aria-live` announcements, focus-visible styles, and `inert` attribute on hidden panels
+- **SEO-friendly** — server-rendered summary, sitemap, and robots.txt
 - **Privacy-first** — questions are not stored or used for training (`store: false`)
 - **Rate limiting** — 20 questions/day per IP with remaining count shown to users
 
