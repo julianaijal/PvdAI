@@ -69,6 +69,19 @@ function searchStructure(
   return results;
 }
 
+function highlightMatch(text: string, query: string) {
+  const lower = text.toLowerCase();
+  const idx = lower.indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  return (
+    <>
+      {text.slice(0, idx)}
+      <mark>{text.slice(idx, idx + query.length)}</mark>
+      {text.slice(idx + query.length)}
+    </>
+  );
+}
+
 function tocMatchesQuery(item: TocItem, matchingIds: Set<string>): boolean {
   if (matchingIds.has(item.id)) return true;
   return item.children.some((child) => tocMatchesQuery(child, matchingIds));
@@ -329,6 +342,28 @@ export default function DocumentBrowser({
           </button>
         )}
       </div>
+      {debouncedQuery && searchResults.length > 0 && (
+        <div className={styles.searchResults} role="listbox" aria-label="Zoekresultaten">
+          {searchResults.map((result, i) => (
+            <button
+              key={`${result.sectionId}-${i}`}
+              className={styles.searchResultItem}
+              onClick={() => handleSelect(result.sectionId)}
+              role="option"
+            >
+              <span className={styles.searchResultTitle}>{result.sectionTitle}</span>
+              <span className={styles.searchResultSnippet}>
+                {highlightMatch(result.snippet, debouncedQuery)}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+      {debouncedQuery && searchResults.length === 0 && structureData && (
+        <div className={styles.searchNoResults}>
+          Geen resultaten voor &ldquo;{debouncedQuery}&rdquo;
+        </div>
+      )}
       {tocOpen && (
         <nav id="toc-nav" className={styles.toc} aria-label="Inhoudsopgave">
           <ul className={styles.tocList} role="tree">
