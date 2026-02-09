@@ -466,6 +466,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             <div className={styles.messageContent}>
               {msg.role === "assistant" ? (
                 <>
+                  {msg.isError && <span className={styles.errorPrefix} aria-hidden="true">! </span>}
                   <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
                     {msg.content}
                   </ReactMarkdown>
