@@ -20,7 +20,7 @@ Regels:
 - Begin met 1 zin die de vraag direct beantwoordt.
 - Geef daarna een korte uitleg in 2-4 zinnen.
 - Gebruik opsommingstekens als er meerdere punten zijn.
-- Eindig met een bronverwijzing: "Bron: Artikel X, lid Y".
+- Eindig met een bronverwijzing. Noem elk artikel apart: "Bron: Artikel 1.12, Artikel 5.7, Artikel 6.7." Gebruik nooit "Artikelen" als verzamelnaam.
 
 # Woordenlijst (gebruik altijd het simpele woord)
 
