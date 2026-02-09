@@ -47,6 +47,27 @@ Antwoord: "Je kunt lid worden als je 16 jaar of ouder bent en in Nederland woont
 - Als je het antwoord niet weet, zeg dat eerlijk. Verzin niets.
 - Als iemand in het Engels vraagt, antwoord dan in het Engels op dezelfde manier.`;
 
+async function rewriteQuery(
+  question: string,
+  history: { role: string; content: string }[]
+): Promise<string> {
+  const historyText = history
+    .map((m) => `${m.role === "user" ? "Vraag" : "Antwoord"}: ${m.content}`)
+    .join("\n");
+
+  const response = await openai.responses.create({
+    model: "gpt-4.1-mini",
+    instructions:
+      "Herschrijf de laatste vraag van de gebruiker als een zelfstandige vraag in het Nederlands. Gebruik de gespreksgeschiedenis als context. Geef alleen de herschreven vraag terug, zonder uitleg.",
+    input: `Gesprek:\n${historyText}\n\nLaatste vraag: ${question}`,
+    max_output_tokens: 200,
+    store: false,
+  });
+
+  const text = response.output_text?.trim();
+  return text || question;
+}
+
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const parsed = AskRequestSchema.safeParse(body);
@@ -76,10 +97,16 @@ export async function POST(req: Request) {
   }
 
   try {
-    // Generate embedding for the question
+    const history = parsed.data.history || [];
+
+    // Rewrite vague follow-ups into standalone questions
+    const searchQuery =
+      history.length > 0 ? await rewriteQuery(question, history) : question;
+
+    // Generate embedding for the (possibly rewritten) question
     const embeddingResponse = await openai.embeddings.create({
       model: "text-embedding-3-small",
-      input: question,
+      input: searchQuery,
     });
     const queryEmbedding = embeddingResponse.data[0].embedding;
 
@@ -89,11 +116,17 @@ export async function POST(req: Request) {
       .map((c) => `[${c.sectionTitle}]\n${c.text}`)
       .join("\n\n---\n\n");
 
+    // Build conversation context for the LLM
+    const historyPrompt =
+      history.length > 0
+        ? `\n\nEerdere berichten:\n${history.map((m) => `${m.role === "user" ? "Gebruiker" : "Assistent"}: ${m.content}`).join("\n")}\n\n`
+        : "";
+
     // Stream the response
     const stream = openai.responses.stream({
       model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
-      input: `Context uit de statuten en reglementen:\n\n${context}\n\n---\n\nVraag: ${question}`,
+      input: `Context uit de statuten en reglementen:\n\n${context}\n\n---${historyPrompt}\nVraag: ${question}`,
       max_output_tokens: 1024,
       store: false,
     });
