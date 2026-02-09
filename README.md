@@ -109,20 +109,24 @@ app/
 ├── page.tsx                     Server component — reads toc.json at build time
 ├── layout.tsx                   Root layout with metadata and theme setup
 ├── globals.scss                 CSS variables, PvdA branding, dark/light themes
+├── robots.ts                    Dynamic robots.txt
+├── sitemap.ts                   Dynamic sitemap
 ├── api/
 │   ├── ask/route.ts             POST — RAG endpoint (embed → search → respond)
-│   └── section/route.ts         GET  — on-demand section content (24h cache)
+│   ├── section/route.ts         GET  — on-demand section content (24h cache)
+│   └── structure/route.ts       GET  — full structure.json for client-side search
 ├── components/
 │   ├── MainLayout/              Split-screen layout, mobile panel toggle
-│   ├── DocumentBrowser/         Collapsible TOC tree + article viewer
-│   ├── Chat/                    Message history, starter questions, article links
+│   ├── DocumentBrowser/         Collapsible TOC tree, article viewer, document search
+│   ├── Chat/                    Message history, starter questions, copy/share, article links
 │   └── ThemeToggle/             Dark/light mode switch
 lib/
 ├── openai.ts                    OpenAI client singleton
 ├── embeddings.ts                Cosine similarity search over precomputed vectors
-└── ratelimit.ts                 In-memory IP-based rate limiter (20/day)
+├── ratelimit.ts                 In-memory IP-based rate limiter (20/day)
+└── schemas.ts                   Zod schemas for API request validation
 scripts/
-├── parse.ts                     PDF → structured JSON (requires pdftotext)
+├── parse.ts                     PDF → structured JSON (pure JS, no system deps)
 └── embed.ts                     Chunks → vector embeddings (runs at build time)
 data/                            Generated JSON files (embeddings.json gitignored)
 ```
