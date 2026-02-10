@@ -7,9 +7,9 @@
     "prebuild": "npx tsx scripts/embed.ts",
     "build": "next build",
     "start": "next start",
-    "postbuild": "npx tsx scripts/indexnow.ts",
     "lint": "eslint",
-    "indexnow": "npx tsx scripts/indexnow.ts"
+    "indexnow": "npx tsx scripts/indexnow.ts",
+    "content-update": "npx tsx scripts/parse.ts && npx tsx scripts/embed.ts && npx tsx scripts/indexnow.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
