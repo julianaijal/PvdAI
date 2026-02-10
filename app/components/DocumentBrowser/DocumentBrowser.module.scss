@@ -265,7 +265,57 @@
   }
 }
 
-/* ── Loading spinner ── */
+/* ── Skeleton loader ── */
+
+.skeleton {
+  padding: 40px 48px;
+  animation: contentFade 300ms ease;
+
+  @media (max-width: 768px) {
+    padding: 24px 20px;
+  }
+}
+
+.skeletonTitle {
+  height: 28px;
+  width: 60%;
+  background: linear-gradient(90deg, var(--pvda-grey) 25%, var(--pvda-border) 50%, var(--pvda-grey) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.skeletonLine {
+  height: 14px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--pvda-grey) 25%, var(--pvda-border) 50%, var(--pvda-grey) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.skeletonLineShort {
+  height: 14px;
+  width: 75%;
+  background: linear-gradient(90deg, var(--pvda-grey) 25%, var(--pvda-border) 50%, var(--pvda-grey) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.skeletonGap {
+  height: 20px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Loading spinner (legacy) ── */
 
 .spinner {
   width: 20px;

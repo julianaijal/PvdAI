@@ -393,8 +393,15 @@ export default function DocumentBrowser({
           </div>
         )}
         {loadingId && (
-          <div className={styles.placeholder} role="status" aria-label="Sectie wordt geladen">
-            <div className={styles.spinner} aria-hidden="true" />
+          <div className={styles.skeleton} role="status" aria-label="Sectie wordt geladen">
+            <div className={styles.skeletonTitle} />
+            <div className={styles.skeletonLine} />
+            <div className={styles.skeletonLine} />
+            <div className={styles.skeletonLineShort} />
+            <div className={styles.skeletonGap} />
+            <div className={styles.skeletonLine} />
+            <div className={styles.skeletonLine} />
+            <div className={styles.skeletonLineShort} />
             <span className="sr-only">Laden...</span>
           </div>
         )}
