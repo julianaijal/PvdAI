@@ -35,9 +35,10 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 - **Dark/light mode** — system-aware with manual toggle
 - **Mobile-first** — responsive panel switching with accessible touch targets
 - **Accessible** — WCAG AA contrast compliance, 44px touch targets, `prefers-reduced-motion` support, `aria-live` announcements, focus-visible styles, and `inert` attribute on hidden panels
-- **SEO-friendly** — server-rendered summary, sitemap, and robots.txt
+- **SEO-friendly** — server-rendered summary and TOC, sitemap, robots.txt, IndexNow, FAQPage schema, SearchAction, canonical URL
 - **Privacy-first** — questions are not stored or used for training (`store: false`)
-- **Rate limiting** — 20 questions/day per IP with remaining count shown to users
+- **Rate limiting** — 20 questions/day per IP via Redis (Vercel/Upstash), with remaining count shown to users
+- **Error handling** — custom 404 page, error boundaries, incomplete stream detection
 
 ## Tech Stack
 
@@ -48,6 +49,9 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 | AI | [OpenAI](https://platform.openai.com) SDK — `text-embedding-3-small` + Responses API |
 | Language | TypeScript 5 |
 | Hosting | [Vercel](https://vercel.com) |
+| Rate Limiting | [Redis](https://redis.io) via Upstash (in-memory fallback for local dev) |
+| Testing | [Vitest](https://vitest.dev) |
+| CI | [GitHub Actions](https://github.com/features/actions) |
 | Database | None — static JSON files |
 
 ## Getting Started
@@ -71,6 +75,7 @@ Create a `.env.local` file in the project root:
 
 ```
 OPENAI_API_KEY=sk-...
+REDIS_URL=redis://...      # optional, falls back to in-memory rate limiting
 ```
 
 ### Data Pipeline
@@ -95,11 +100,25 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Running Tests
+
+```sh
+npm test
+```
+
 ### Production Build
 
 ```sh
 npm run build   # runs embed.ts as prebuild step, then next build
 npm run start
+```
+
+### Content Update
+
+When the source PDF changes, run:
+
+```sh
+npm run content-update   # parse + embed + notify search engines via IndexNow
 ```
 
 ## Architecture
@@ -123,11 +142,14 @@ app/
 lib/
 ├── openai.ts                    OpenAI client singleton
 ├── embeddings.ts                Cosine similarity search over precomputed vectors
-├── ratelimit.ts                 In-memory IP-based rate limiter (20/day)
+├── ratelimit.ts                 Redis rate limiter with in-memory fallback (20/day)
 └── schemas.ts                   Zod schemas for API request validation
 scripts/
 ├── parse.ts                     PDF → structured JSON (pure JS, no system deps)
-└── embed.ts                     Chunks → vector embeddings (runs at build time)
+├── embed.ts                     Chunks → vector embeddings (runs at build time)
+└── indexnow.ts                  Notify search engines of content changes
+tests/                           Unit tests (Vitest)
+.github/workflows/ci.yml        CI pipeline (lint + test)
 data/                            Generated JSON files (embeddings.json gitignored)
 ```
 
@@ -135,7 +157,7 @@ data/                            Generated JSON files (embeddings.json gitignore
 
 1. User question is embedded with `text-embedding-3-small`
 2. For follow-up questions, the query is automatically rewritten using conversation history for better context
-3. Top 8 chunks found via cosine similarity against precomputed embeddings
+3. Top 5 chunks found via cosine similarity against precomputed embeddings
 4. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
 5. Response includes article references that become clickable links in the UI
 
