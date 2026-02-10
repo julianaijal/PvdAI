@@ -437,7 +437,14 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
       }
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
-        // User stopped the request — keep partial content if any
+        // Remove empty assistant message if no content was streamed yet
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if (last?.role === "assistant" && !last.content) {
+            return prev.slice(0, -1);
+          }
+          return prev;
+        });
         return;
       }
       setMessages((prev) => [
