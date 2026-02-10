@@ -442,6 +442,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     } finally {
       abortControllerRef.current = null;
       setLoading(false);
+      setTimeout(() => textareaRef.current?.focus(), 50);
     }
   }
 
