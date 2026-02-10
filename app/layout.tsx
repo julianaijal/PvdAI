@@ -47,6 +47,10 @@ export const metadata: Metadata = {
     title,
     description,
   },
+  alternates: {
+    canonical: "https://pvdai.tech",
+    languages: { nl: "https://pvdai.tech" },
+  },
   robots: {
     index: true,
     follow: true,
@@ -84,6 +88,12 @@ export default function RootLayout({
                   description,
                   inLanguage: "nl",
                   isAccessibleForFree: true,
+                  sameAs: ["https://github.com/julianaijal/PvdAI"],
+                  potentialAction: {
+                    "@type": "SearchAction",
+                    target: "https://pvdai.tech/?q={search_term_string}",
+                    "query-input": "required name=search_term_string",
+                  },
                 },
                 {
                   "@type": "WebPage",
@@ -94,7 +104,55 @@ export default function RootLayout({
                   description,
                   inLanguage: "nl",
                   isAccessibleForFree: true,
+                  datePublished: "2024-06-01",
+                  dateModified: "2025-01-01",
                   author: { "@type": "Person", name: "Julian Aijal" },
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": "https://pvdai.tech/#faq",
+                  mainEntity: [
+                    {
+                      "@type": "Question",
+                      name: "Hoe word ik lid van de PvdA?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Je kunt lid worden als je 16 jaar of ouder bent. Je meldt je aan bij de partij en het bestuur beslist over je toelating.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Wat doet het congres van de PvdA?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Het congres is het hoogste orgaan van de PvdA. Het stelt het politiek programma vast, wijzigt statuten en reglementen, en kiest het partijbestuur.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Hoe wordt de lijsttrekker van de PvdA gekozen?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "De lijsttrekker wordt gekozen door de leden via een ledenraadpleging of door het congres, afhankelijk van de procedure die het partijbestuur vaststelt.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Wat is het verschil tussen statuten en reglementen?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Statuten zijn de grondregels van de partij en kunnen alleen door het congres gewijzigd worden. Reglementen werken de statuten verder uit en bevatten praktische regels.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Welke organen heeft de PvdA?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "De PvdA heeft onder andere het congres, het partijbestuur, de Politieke Ledenraad, de Verenigingsraad, afdelingen, gewesten en diverse commissies.",
+                      },
+                    },
+                  ],
                 },
                 {
                   "@type": "WebApplication",
@@ -136,9 +194,9 @@ export default function RootLayout({
         <SpeedInsights />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-H4VK7HXVHV"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-H4VK7HXVHV');`}
         </Script>
       </body>
