@@ -14,8 +14,8 @@ Live at https://pvdai.tech. Deployed on Vercel.
 npm run dev          # Start Next.js dev server (localhost:3000)
 npm run build        # Run prebuild (embeddings) + Next.js build
 npm run lint         # ESLint (flat config, v9)
-npx tsx scripts/parse.ts   # One-time: parse PDF into data/structure.json (pure JS, no system deps)
-npx tsx scripts/embed.ts   # Generate embeddings into data/embeddings.json
+npm run content-update   # After PDF change: parse + embed + notify search engines (IndexNow)
+npm run indexnow         # Manually ping search engines without re-parsing
 ```
 
 No test framework is configured.
