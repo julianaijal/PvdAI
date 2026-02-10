@@ -13,6 +13,7 @@
 <p align="center">
   <img src="https://img.shields.io/github/deployments/julianaijal/PvdAI/production?label=deploy&logo=vercel" alt="Deploy status" />
   <img src="https://img.shields.io/github/last-commit/julianaijal/PvdAI" alt="Last commit" />
+  <img src="https://img.shields.io/github/license/julianaijal/PvdAI" alt="License" />
   <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16" />
   <img src="https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white" alt="React 19" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
@@ -21,7 +22,12 @@
 
 ---
 
+Party statutes are long, dense, and written in legal Dutch. PvdAI lets members ask questions in plain language and get answers they can actually understand.
+
 PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) accessible through a split-screen interface: a **document browser** on the left and an **AI chat** on the right. Ask questions in plain language and get answers at B1 reading level with references to specific articles.
+
+<!-- TODO: Add a screenshot of the split-screen interface here -->
+<!-- ![PvdAI screenshot](docs/screenshot.png) -->
 
 ## Features
 
@@ -51,32 +57,27 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 | Hosting | [Vercel](https://vercel.com) |
 | Rate Limiting | [Redis](https://redis.io) via Upstash (in-memory fallback for local dev) |
 | Testing | [Vitest](https://vitest.dev) |
-| CI | [GitHub Actions](https://github.com/features/actions) |
+| CI | [GitHub Actions](.github/workflows/ci.yml) — lint + test on push/PR |
 | Database | None — static JSON files |
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- An [OpenAI API key](https://platform.openai.com/api-keys)
-
-### Installation
+## Quick Start
 
 ```sh
 git clone https://github.com/julianaijal/PvdAI.git
 cd PvdAI
+cp .env.example .env.local   # then add your OpenAI API key
 npm install
+npm run dev
 ```
 
-### Configuration
+Open [http://localhost:3000](http://localhost:3000).
 
-Create a `.env.local` file in the project root:
+### Environment Variables
 
-```
-OPENAI_API_KEY=sk-...
-REDIS_URL=redis://...      # optional, falls back to in-memory rate limiting
-```
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OPENAI_API_KEY` | Yes | [OpenAI API key](https://platform.openai.com/api-keys) |
+| `REDIS_URL` | No | Upstash Redis URL. Falls back to in-memory rate limiting |
 
 ### Data Pipeline
 
@@ -92,14 +93,6 @@ npx tsx scripts/embed.ts
 # Output: data/embeddings.json (~25MB, gitignored)
 ```
 
-### Development
-
-```sh
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
 ### Running Tests
 
 ```sh
@@ -110,12 +103,11 @@ npm test
 
 ```sh
 npm run build   # runs embed.ts as prebuild step, then next build
-npm run start
 ```
 
 ### Content Update
 
-When the source PDF changes, run:
+When the source PDF changes:
 
 ```sh
 npm run content-update   # parse + embed + notify search engines via IndexNow
@@ -147,9 +139,10 @@ lib/
 scripts/
 ├── parse.ts                     PDF → structured JSON (pure JS, no system deps)
 ├── embed.ts                     Chunks → vector embeddings (runs at build time)
+├── seed.ts                      Legacy: parse + embed in one step
 └── indexnow.ts                  Notify search engines of content changes
 tests/                           Unit tests (Vitest)
-.github/workflows/ci.yml        CI pipeline (lint + test)
+.github/workflows/ci.yml        CI pipeline (lint + test on push/PR)
 data/                            Generated JSON files (embeddings.json gitignored)
 ```
 
@@ -159,7 +152,7 @@ data/                            Generated JSON files (embeddings.json gitignore
 2. For follow-up questions, the query is automatically rewritten using conversation history for better context
 3. Top 5 chunks found via cosine similarity against precomputed embeddings
 4. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
-5. Response includes article references that become clickable links in the UI
+5. Response streamed back as SSE; article references become clickable links in the UI
 
 ## API Reference
 
@@ -175,14 +168,21 @@ Ask a question about the articles of association.
 }
 ```
 
-**Response:**
-```json
-{ "answer": "Je kunt lid worden als je 16 jaar of ouder bent..." }
+**Response** (SSE stream):
+```
+data: {"delta": "Je kunt lid worden als je 16 jaar of ouder bent..."}
+data: [DONE]
 ```
 
 **Headers:** `X-RateLimit-Remaining` — questions left today.
 
-**Rate limit:** 20 requests/day per IP. Returns `429` when exceeded.
+**Errors:**
+
+| Status | Body | Cause |
+|--------|------|-------|
+| `400` | `{"error": "..."}` | Invalid request (missing/malformed question) |
+| `429` | `{"error": "Je hebt het maximum aantal vragen voor vandaag bereikt..."}` | Rate limit exceeded (20/day per IP) |
+| `500` | `{"error": "Er is een fout opgetreden bij het verwerken van je vraag."}` | Internal server error |
 
 ### `GET /api/section?id=<section-id>`
 

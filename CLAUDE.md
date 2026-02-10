@@ -18,7 +18,7 @@ npm run content-update   # After PDF change: parse + embed + notify search engin
 npm run indexnow         # Manually ping search engines without re-parsing
 ```
 
-No test framework is configured.
+Tests use Vitest (`npm test`).
 
 ## Environment
 
@@ -38,7 +38,7 @@ Requires `OPENAI_API_KEY` (or `OPENAI_API_KEY_PVDAI`) in `.env.local`.
 
 ### API Routes (`app/api/`)
 
-- **POST `/api/ask`** — Main RAG endpoint. Embeds the question with `text-embedding-3-small`, finds top 8 chunks via cosine similarity (`lib/embeddings.ts`), then calls OpenAI responses API with a Dutch B1-level system prompt. Rate limited to 20 req/day/IP (`lib/ratelimit.ts`, in-memory).
+- **POST `/api/ask`** — Main RAG endpoint. Embeds the question with `text-embedding-3-small`, finds top 5 chunks via cosine similarity (`lib/embeddings.ts`), then calls OpenAI responses API with a Dutch B1-level system prompt. Rate limited to 20 req/day/IP (`lib/ratelimit.ts`, in-memory).
 - **GET `/api/section?id=<id>`** — Returns section content from `data/structure.json`. Cached 24h via `Cache-Control`.
 - **POST `/api/chat`** — Basic chat endpoint (minimal use).
 
