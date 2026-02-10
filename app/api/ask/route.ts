@@ -56,11 +56,11 @@ async function rewriteQuery(
     .join("\n");
 
   const response = await openai.responses.create({
-    model: "gpt-4.1-mini",
+    model: "gpt-4.1-nano",
     instructions:
       "Herschrijf de laatste vraag van de gebruiker als een zelfstandige vraag in het Nederlands. Gebruik de gespreksgeschiedenis als context. Geef alleen de herschreven vraag terug, zonder uitleg.",
     input: `Gesprek:\n${historyText}\n\nLaatste vraag: ${question}`,
-    max_output_tokens: 200,
+    max_output_tokens: 80,
     store: false,
   });
 
