@@ -447,7 +447,35 @@
   flex-direction: column;
 }
 
+.inputGlow {
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-sm) + 2px);
+  background: conic-gradient(from var(--glow-angle, 0deg), var(--pvda-red), #FF6B81, var(--pvda-red), transparent, var(--pvda-red));
+  opacity: 0;
+  transition: opacity 300ms ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.inputContainerFocused .inputGlow {
+  opacity: 1;
+  animation: glowSpin 3s linear infinite;
+}
+
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes glowSpin {
+  to { --glow-angle: 360deg; }
+}
+
 .input {
+  position: relative;
+  z-index: 1;
   width: 100%;
   padding: 10px 14px;
   border: 1px solid var(--pvda-border);
@@ -467,7 +495,6 @@
     border-color: transparent;
     background: var(--pvda-surface);
     outline: none;
-    box-shadow: 0 0 0 2px var(--pvda-red), 0 0 12px rgba(244, 63, 94, 0.15);
 
     & + .inputHint {
       opacity: 1;

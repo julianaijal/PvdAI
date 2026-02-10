@@ -285,6 +285,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [inputFocused, setInputFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [starterQuestions, setStarterQuestions] = useState<string[]>([]);
   const [remainingQuestions, setRemainingQuestions] = useState<number | null>(null);
@@ -534,7 +535,8 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           <label htmlFor="chat-input" className="sr-only">
             Stel een vraag over de statuten
           </label>
-          <div className={styles.inputContainer}>
+          <div className={`${styles.inputContainer} ${inputFocused ? styles.inputContainerFocused : ""}`}>
+            <div className={styles.inputGlow} aria-hidden="true" />
             <textarea
               ref={textareaRef}
               id="chat-input"
@@ -546,6 +548,8 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                 el.style.height = "auto";
                 el.style.height = Math.min(el.scrollHeight, 120) + "px";
               }}
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
