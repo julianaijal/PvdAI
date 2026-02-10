@@ -4,6 +4,36 @@
   height: 100%;
 }
 
+.chatHeader {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pvda-border-light);
+  flex-shrink: 0;
+}
+
+.newChatButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--pvda-border);
+  border-radius: var(--radius-sm);
+  color: var(--pvda-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 150ms ease;
+
+  &:hover {
+    color: var(--pvda-red);
+    border-color: var(--pvda-red);
+    background: var(--pvda-red-light);
+  }
+}
+
 .messages {
   flex: 1;
   overflow-y: auto;
