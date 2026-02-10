@@ -99,19 +99,35 @@ export async function POST(req: Request) {
   try {
     const history = parsed.data.history || [];
 
-    // Rewrite vague follow-ups into standalone questions
-    const searchQuery =
-      history.length > 0 ? await rewriteQuery(question, history) : question;
+    // Run rewrite + embedding in parallel when possible
+    let queryEmbedding: number[];
+    if (history.length > 0) {
+      // Start both in parallel: rewrite the query AND embed the original
+      const [searchQuery, originalEmbedding] = await Promise.all([
+        rewriteQuery(question, history),
+        openai.embeddings.create({ model: "text-embedding-3-small", input: question }),
+      ]);
 
-    // Generate embedding for the (possibly rewritten) question
-    const embeddingResponse = await openai.embeddings.create({
-      model: "text-embedding-3-small",
-      input: searchQuery,
-    });
-    const queryEmbedding = embeddingResponse.data[0].embedding;
+      // If rewrite changed the query, re-embed; otherwise use original
+      if (searchQuery !== question) {
+        const rewrittenEmbedding = await openai.embeddings.create({
+          model: "text-embedding-3-small",
+          input: searchQuery,
+        });
+        queryEmbedding = rewrittenEmbedding.data[0].embedding;
+      } else {
+        queryEmbedding = originalEmbedding.data[0].embedding;
+      }
+    } else {
+      const embeddingResponse = await openai.embeddings.create({
+        model: "text-embedding-3-small",
+        input: question,
+      });
+      queryEmbedding = embeddingResponse.data[0].embedding;
+    }
 
     // Find relevant chunks
-    const relevantChunks = findRelevantChunks(queryEmbedding, 8);
+    const relevantChunks = findRelevantChunks(queryEmbedding, 5);
     const context = relevantChunks
       .map((c) => `[${c.sectionTitle}]\n${c.text}`)
       .join("\n\n---\n\n");
@@ -127,7 +143,7 @@ export async function POST(req: Request) {
       model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
       input: `Context uit de statuten en reglementen:\n\n${context}\n\n---${historyPrompt}\nVraag: ${question}`,
-      max_output_tokens: 1024,
+      max_output_tokens: 512,
       store: false,
     });
 
