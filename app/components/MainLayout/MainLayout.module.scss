@@ -119,6 +119,12 @@
   overflow: hidden;
   padding: 12px;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    position: relative;
+    padding: 0;
+    gap: 0;
+  }
 }
 
 .browserPanel {
@@ -132,9 +138,18 @@
   box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent);
 
   @media (max-width: 768px) {
-    display: none;
-    flex: 1;
-    border-radius: var(--radius);
+    position: absolute;
+    inset: 0;
+    flex: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    background: var(--pvda-surface);
+    opacity: 0;
+    transform: translateX(-8px);
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 200ms ease;
   }
 }
 
@@ -149,15 +164,26 @@
   box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent);
 
   @media (max-width: 768px) {
-    display: none;
-    flex: 1;
-    border-radius: var(--radius);
+    position: absolute;
+    inset: 0;
+    flex: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    background: var(--pvda-surface);
+    opacity: 0;
+    transform: translateX(8px);
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 200ms ease;
   }
 }
 
 .panelActive {
   @media (max-width: 768px) {
-    display: block;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
   }
 }
 
