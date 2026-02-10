@@ -108,6 +108,19 @@ export default function MainLayout({ toc }: MainLayoutProps) {
             toc={toc}
             highlightId={highlightId}
           />
+          {isMobile && activePanel === "browser" && (
+            <button
+              className={styles.backToChat}
+              onClick={() => setActivePanel("chat")}
+              aria-label="Terug naar chat"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              Terug naar chat
+            </button>
+          )}
         </section>
         <section
           ref={chatPanelRef}
