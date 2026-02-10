@@ -297,6 +297,7 @@ export default function DocumentBrowser({
   // Auto-load section when highlightId changes (e.g. from chat article links)
   useEffect(() => {
     if (highlightId) {
+      setTocOpen(false);
       handleSelect(highlightId);
     }
   }, [highlightId, handleSelect]);
