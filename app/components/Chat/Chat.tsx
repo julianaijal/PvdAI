@@ -192,9 +192,18 @@ function useMarkdownComponents(
   articleLookup?: Map<string, string>
 ): Components {
   return useMemo(() => ({
-    p: ({ children }) => (
-      <p>{processChildren(children, onClick, articleLookup)}</p>
-    ),
+    p: ({ children }) => {
+      const text = typeof children === "string" ? children :
+        Array.isArray(children) ? children.filter(c => typeof c === "string").join("") : "";
+      if (/^Bron(?:nen)?:/i.test(text.trim())) {
+        return (
+          <div className={styles.sourceChips}>
+            {processChildren(children, onClick, articleLookup)}
+          </div>
+        );
+      }
+      return <p>{processChildren(children, onClick, articleLookup)}</p>;
+    },
     li: ({ children }) => (
       <li>{processChildren(children, onClick, articleLookup)}</li>
     ),
