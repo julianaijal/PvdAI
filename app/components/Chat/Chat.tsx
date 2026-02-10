@@ -285,6 +285,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [starterQuestions, setStarterQuestions] = useState<string[]>([]);
   const [remainingQuestions, setRemainingQuestions] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -327,6 +328,9 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     if (!text || loading) return;
 
     setInput("");
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+    }
     const userMessage: Message = { role: "user", content: text };
     setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
@@ -530,16 +534,33 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           <label htmlFor="chat-input" className="sr-only">
             Stel een vraag over de statuten
           </label>
-          <input
-            id="chat-input"
-            className={`${styles.input} ${loading ? styles.inputLoading : ""}`}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Stel een vraag over de statuten..."
-            disabled={loading}
-            autoComplete="off"
-          />
+          <div className={styles.inputContainer}>
+            <textarea
+              ref={textareaRef}
+              id="chat-input"
+              className={`${styles.input} ${loading ? styles.inputLoading : ""}`}
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                const el = e.target;
+                el.style.height = "auto";
+                el.style.height = Math.min(el.scrollHeight, 120) + "px";
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit();
+                }
+              }}
+              placeholder="Stel een vraag over de statuten..."
+              disabled={loading}
+              autoComplete="off"
+              rows={1}
+            />
+            <span className={styles.inputHint} aria-hidden="true">
+              <kbd>Enter</kbd> om te versturen
+            </span>
+          </div>
           <button
             className={styles.sendButton}
             type="submit"
