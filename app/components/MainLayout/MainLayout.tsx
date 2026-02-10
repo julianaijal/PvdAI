@@ -8,6 +8,7 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 const Chat = dynamic(() => import("../Chat/Chat"), {
   loading: () => <div className={styles.chatLoading}>Laden...</div>,
+  ssr: false,
 });
 
 interface TocItem {
