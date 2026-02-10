@@ -548,6 +548,28 @@
   text-align: right;
 }
 
+.stopButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pvda-grey);
+  color: var(--pvda-text);
+  border: 1px solid var(--pvda-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 150ms ease;
+  animation: popIn 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:hover {
+    border-color: var(--pvda-red);
+    color: var(--pvda-red);
+  }
+}
+
 .sendButton {
   background: linear-gradient(135deg, var(--pvda-red), color-mix(in srgb, var(--pvda-red) 85%, #FF6B81));
   color: #fff;

@@ -287,6 +287,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [loading, setLoading] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const [starterQuestions, setStarterQuestions] = useState<string[]>([]);
   const [remainingQuestions, setRemainingQuestions] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -324,6 +325,12 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     isNearBottomRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < 150;
   }, []);
 
+  function handleStop() {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+    setLoading(false);
+  }
+
   async function handleSubmit(question?: string) {
     const text = question || input.trim();
     if (!text || loading) return;
@@ -336,6 +343,9 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
 
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     try {
       const recentHistory = messages.slice(-6).map(({ role, content }) => ({ role, content }));
 
@@ -343,6 +353,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: text, history: recentHistory.length > 0 ? recentHistory : undefined }),
+        signal: controller.signal,
       });
 
       const remaining = res.headers.get("X-RateLimit-Remaining");
@@ -415,7 +426,11 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           }
         }
       }
-    } catch {
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") {
+        // User stopped the request — keep partial content if any
+        return;
+      }
       setMessages((prev) => [
         ...prev,
         {
@@ -425,6 +440,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         },
       ]);
     } finally {
+      abortControllerRef.current = null;
       setLoading(false);
     }
   }
@@ -565,14 +581,28 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
               <kbd>Enter</kbd> om te versturen
             </span>
           </div>
-          <button
-            className={styles.sendButton}
-            type="submit"
-            disabled={loading || !input.trim()}
-            aria-label="Verstuur vraag"
-          >
-            Vraag
-          </button>
+          {loading ? (
+            <button
+              className={styles.stopButton}
+              type="button"
+              onClick={handleStop}
+              aria-label="Stop antwoord"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+              Stop
+            </button>
+          ) : (
+            <button
+              className={styles.sendButton}
+              type="submit"
+              disabled={!input.trim()}
+              aria-label="Verstuur vraag"
+            >
+              Vraag
+            </button>
+          )}
         </form>
         {remainingQuestions !== null && remainingQuestions <= 5 && (
           <div className={styles.rateLimit} aria-live="polite">
