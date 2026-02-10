@@ -36,6 +36,32 @@ export default function Home() {
           of goedgekeurd door de PvdA. Raadpleeg altijd het officiële document
           voor bindende informatie.
         </p>
+        <nav>
+          <h3>Inhoudsopgave</h3>
+          <ul>
+            {toc.map((section: { id: string; title: string; children: { id: string; title: string; children: { id: string; title: string }[] }[] }) => (
+              <li key={section.id}>
+                {section.title}
+                {section.children.length > 0 && (
+                  <ul>
+                    {section.children.map((child) => (
+                      <li key={child.id}>
+                        {child.title}
+                        {child.children?.length > 0 && (
+                          <ul>
+                            {child.children.map((sub) => (
+                              <li key={sub.id}>{sub.title}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </>
   );
