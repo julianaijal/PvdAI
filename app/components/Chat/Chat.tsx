@@ -391,6 +391,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
 
       const decoder = new TextDecoder();
       let buffer = "";
+      let receivedDone = false;
 
       while (true) {
         const { done, value } = await reader.read();
@@ -403,7 +404,10 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
         for (const line of lines) {
           if (!line.startsWith("data: ")) continue;
           const payload = line.slice(6);
-          if (payload === "[DONE]") break;
+          if (payload === "[DONE]") {
+            receivedDone = true;
+            break;
+          }
 
           try {
             const parsed = JSON.parse(payload);
@@ -417,6 +421,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                 };
                 return updated;
               });
+              receivedDone = true;
               break;
             }
             if (parsed.delta) {
@@ -434,6 +439,22 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             // skip malformed JSON
           }
         }
+      }
+
+      // Warn if stream ended without [DONE] (connection dropped)
+      if (!receivedDone) {
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if (last?.role === "assistant" && last.content) {
+            const updated = [...prev];
+            updated[updated.length - 1] = {
+              ...last,
+              content: last.content + "\n\n*Antwoord mogelijk onvolledig door een verbindingsprobleem.*",
+            };
+            return updated;
+          }
+          return prev;
+        });
       }
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
