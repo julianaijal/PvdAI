@@ -85,7 +85,7 @@ export async function POST(req: Request) {
     headersList.get("x-real-ip") ||
     "unknown";
 
-  const { allowed, remaining } = checkRateLimit(ip);
+  const { allowed, remaining } = await checkRateLimit(ip);
   if (!allowed) {
     return Response.json(
       {
