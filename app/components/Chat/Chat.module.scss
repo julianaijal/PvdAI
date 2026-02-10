@@ -524,6 +524,10 @@
     border: 1px solid var(--pvda-border);
     background: var(--pvda-grey);
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .inputLoading {
