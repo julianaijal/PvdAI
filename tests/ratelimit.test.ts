@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-// Mock @vercel/kv so the module doesn't fail to import
-vi.mock("@vercel/kv", () => ({ kv: {} }));
+// Mock redis so the module doesn't try to connect
+vi.mock("redis", () => ({ createClient: vi.fn() }));
 
 let checkRateLimit: typeof import("@/lib/ratelimit").checkRateLimit;
 

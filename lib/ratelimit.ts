@@ -1,10 +1,10 @@
-import { kv } from "@vercel/kv";
+import { createClient } from "redis";
 
 const LIMIT = 20;
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 const WINDOW_S = 24 * 60 * 60; // 24 hours in seconds
 
-// In-memory fallback for local dev (no KV configured)
+// In-memory fallback for local dev (no Redis configured)
 const store = new Map<string, { count: number; resetAt: number }>();
 
 function checkRateLimitMemory(ip: string): { allowed: boolean; remaining: number } {
@@ -24,13 +24,24 @@ function checkRateLimitMemory(ip: string): { allowed: boolean; remaining: number
   return { allowed: true, remaining: LIMIT - entry.count };
 }
 
-async function checkRateLimitKV(ip: string): Promise<{ allowed: boolean; remaining: number }> {
+let redis: ReturnType<typeof createClient> | null = null;
+
+async function getRedis() {
+  if (!redis) {
+    redis = createClient({ url: process.env.REDIS_URL });
+    await redis.connect();
+  }
+  return redis;
+}
+
+async function checkRateLimitRedis(ip: string): Promise<{ allowed: boolean; remaining: number }> {
+  const client = await getRedis();
   const key = `ratelimit:${ip}`;
-  const count = await kv.incr(key);
+  const count = await client.incr(key);
 
   // Set TTL on first request (when count is 1)
   if (count === 1) {
-    await kv.expire(key, WINDOW_S);
+    await client.expire(key, WINDOW_S);
   }
 
   if (count > LIMIT) {
@@ -40,11 +51,11 @@ async function checkRateLimitKV(ip: string): Promise<{ allowed: boolean; remaini
   return { allowed: true, remaining: LIMIT - count };
 }
 
-const useKV = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+const useRedis = !!process.env.REDIS_URL;
 
 export function checkRateLimit(ip: string): Promise<{ allowed: boolean; remaining: number }> {
-  if (useKV) {
-    return checkRateLimitKV(ip);
+  if (useRedis) {
+    return checkRateLimitRedis(ip);
   }
   return Promise.resolve(checkRateLimitMemory(ip));
 }
