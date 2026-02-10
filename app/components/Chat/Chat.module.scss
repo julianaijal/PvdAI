@@ -19,19 +19,22 @@
   text-align: center;
   height: 100%;
   animation: welcomeFade 400ms ease;
+  background: radial-gradient(ellipse at 50% 30%, var(--pvda-red-subtle) 0%, transparent 70%);
 }
 
 .welcomeIcon {
-  width: 48px;
-  height: 48px;
-  background: var(--pvda-red-light);
-  border-radius: var(--radius);
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--pvda-red), color-mix(in srgb, var(--pvda-red) 80%, #FF6B81));
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
   margin-bottom: 16px;
   animation: popIn 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(244, 63, 94, 0.3);
 }
 
 .welcomeTitle {
@@ -74,17 +77,21 @@
 }
 
 .starterButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background: var(--pvda-surface);
   border: 1px solid var(--pvda-border);
-  border-radius: var(--radius-sm);
-  padding: 10px 16px;
+  border-radius: var(--radius);
+  padding: 12px 16px;
   font-size: 13px;
   font-family: inherit;
   color: var(--pvda-text);
   cursor: pointer;
   text-align: left;
-  transition: all var(--transition);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   animation: slideUp 300ms ease both;
+  box-shadow: var(--shadow-sm);
 
   @for $i from 1 through 4 {
     &:nth-child(#{$i}) {
@@ -96,9 +103,27 @@
     border-color: var(--pvda-red);
     color: var(--pvda-red);
     background: var(--pvda-red-light);
-    box-shadow: var(--shadow-sm);
-    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+
+    .starterIcon {
+      background: var(--pvda-red);
+      color: #fff;
+    }
   }
+}
+
+.starterIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--pvda-red-light);
+  color: var(--pvda-red);
+  flex-shrink: 0;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .message {
@@ -108,7 +133,7 @@
 
 .userMessage {
   justify-content: flex-end;
-  animation: slideInRight 250ms ease;
+  animation: slideInRight 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
   .messageContent {
     background: var(--pvda-red);
@@ -120,20 +145,42 @@
 
 .assistantMessage {
   justify-content: flex-start;
-  animation: slideInLeft 250ms ease;
+  animation: slideInLeft 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  gap: 8px;
 
   .messageContent {
     background: var(--pvda-grey);
     color: var(--pvda-text);
     border-radius: var(--radius) var(--radius) var(--radius) 4px;
+    border-left: 3px solid var(--pvda-red);
+  }
+}
+
+.aiBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pvda-red), color-mix(in srgb, var(--pvda-red) 80%, #FF6B81));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.25);
+
+  span {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
   }
 }
 
 .messageContent {
-  max-width: 85%;
-  padding: 12px 16px;
-  font-size: 14px;
-  line-height: 1.65;
+  max-width: 80%;
+  padding: 14px 18px;
+  font-size: 14.5px;
+  line-height: 1.7;
 
   p {
     margin: 0 0 0.5em;
@@ -310,6 +357,41 @@
   }
 }
 
+.typingDots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 4px 0;
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pvda-red);
+    opacity: 0.4;
+    animation: typingBounce 1.4s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
 @keyframes dots {
   0%, 20% { content: ''; }
   40% { content: '.'; }
@@ -333,13 +415,15 @@
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(12px); }
-  to { opacity: 1; transform: translateX(0); }
+  0% { opacity: 0; transform: translateX(16px) scale(0.97); }
+  60% { opacity: 1; transform: translateX(-2px) scale(1.01); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-12px); }
-  to { opacity: 1; transform: translateX(0); }
+  0% { opacity: 0; transform: translateX(-16px) scale(0.97); }
+  60% { opacity: 1; transform: translateX(2px) scale(1.01); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 .inputWrapper {
@@ -361,13 +445,13 @@
   font-family: inherit;
   color: var(--pvda-text);
   background: var(--pvda-grey);
-  transition: all var(--transition);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:focus {
     border-color: var(--pvda-red);
     background: var(--pvda-surface);
-    outline: 2px solid var(--pvda-red);
-    outline-offset: 1px;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2), 0 0 12px rgba(244, 63, 94, 0.1);
   }
 
   &::placeholder {
@@ -394,8 +478,8 @@
 }
 
 .sendButton {
-  background: var(--pvda-red);
-  color: var(--pvda-surface);
+  background: linear-gradient(135deg, var(--pvda-red), color-mix(in srgb, var(--pvda-red) 85%, #FF6B81));
+  color: #fff;
   border: none;
   border-radius: var(--radius-sm);
   padding: 10px 20px;
@@ -403,20 +487,22 @@
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.25);
 
   &:hover:not(:disabled) {
-    background: var(--pvda-red-dark);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 16px rgba(244, 63, 94, 0.35);
+    transform: translateY(-1px);
   }
 
   &:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: scale(0.98) translateY(0);
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     background: var(--pvda-grey-mid);
+    box-shadow: none;
   }
 }

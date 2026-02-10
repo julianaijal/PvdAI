@@ -429,7 +429,11 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
       <div className={styles.messages} aria-live="polite" aria-relevant="additions" ref={messagesContainerRef} onScroll={handleScroll}>
         {messages.length === 0 && (
           <div className={styles.welcome}>
-            <div className={styles.welcomeIcon} aria-hidden="true">?</div>
+            <div className={styles.welcomeIcon} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                <path d="M12 2C9.5 2 7.5 3.5 7 5.5C5 5 3 6.5 3 9c0 2 1.5 3.5 3 4-0.5 1.5 0 3.5 1.5 4.5 1 0.7 2.2 0.8 3.2 0.5L12 21l1.3-3c1 0.3 2.2 0.2 3.2-0.5C18 16.5 18.5 14.5 18 13c1.5-0.5 3-2 3-4 0-2.5-2-4-4-3.5C16.5 3.5 14.5 2 12 2z"/>
+              </svg>
+            </div>
             <h2 className={styles.welcomeTitle}>Stel een vraag</h2>
             <p className={styles.welcomeText}>
               Vraag iets over de statuten en reglementen van de PvdA.
@@ -450,6 +454,13 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                   className={styles.starterButton}
                   onClick={() => handleSubmit(q)}
                 >
+                  <span className={styles.starterIcon} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                  </span>
                   {q}
                 </button>
               ))}
@@ -463,6 +474,11 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             role={msg.role === "user" ? "log" : "status"}
             aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
           >
+            {msg.role === "assistant" && (
+              <div className={styles.aiBadge} aria-hidden="true">
+                <span>AI</span>
+              </div>
+            )}
             <div className={styles.messageContent}>
               {msg.role === "assistant" ? (
                 <>
@@ -491,8 +507,13 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
             role="status"
             aria-label="Antwoord wordt geladen"
           >
+            <div className={styles.aiBadge} aria-hidden="true">
+              <span>AI</span>
+            </div>
             <div className={styles.messageContent}>
-              <span className={styles.loading}>Aan het nadenken...</span>
+              <div className={styles.typingDots} aria-label="Aan het nadenken">
+                <span /><span /><span />
+              </div>
             </div>
           </div>
         )}
