@@ -38,11 +38,14 @@
 }
 
 .welcomeTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--pvda-black);
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--pvda-black), var(--pvda-text-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 6px;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
 }
 
 .welcomeText {
