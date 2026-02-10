@@ -8,10 +8,12 @@ const KEY = "b5f6e2442369211c559e2d4b0b87fbed";
 const HOST = "pvdai.tech";
 const SEARCH_ENGINES = ["api.indexnow.org", "www.bing.com", "yandex.com"];
 
+const DEFAULT_URLS = [`https://${HOST}`, `https://${HOST}/sitemap.xml`];
+
 const urls =
   process.argv.length > 2
     ? process.argv.slice(2)
-    : [`https://${HOST}`];
+    : DEFAULT_URLS;
 
 async function submit(engine: string) {
   const body = {
