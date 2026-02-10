@@ -6,13 +6,20 @@
   background: var(--pvda-canvas);
 }
 
+.accentBar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--pvda-red), #FF6B81, var(--pvda-red));
+  background-size: 200% 100%;
+  flex-shrink: 0;
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
   height: 56px;
-  background: var(--pvda-surface);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--pvda-red) 4%, var(--pvda-surface)), var(--pvda-surface));
   border-bottom: 1px solid var(--pvda-border);
   flex-shrink: 0;
   z-index: 10;
@@ -28,6 +35,20 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logoRose {
+  width: 28px;
+  height: 28px;
+  color: var(--pvda-red);
+  flex-shrink: 0;
 }
 
 .logo {
@@ -103,28 +124,34 @@
 .browserPanel {
   flex: 6;
   overflow: hidden;
-  background: var(--pvda-surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--pvda-border);
-  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--pvda-surface) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--pvda-border) 60%, transparent);
+  box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent);
 
   @media (max-width: 768px) {
     display: none;
     flex: 1;
+    border-radius: var(--radius);
   }
 }
 
 .chatPanel {
   flex: 4;
   overflow: hidden;
-  background: var(--pvda-surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--pvda-border);
-  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--pvda-surface) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--pvda-border) 60%, transparent);
+  box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent);
 
   @media (max-width: 768px) {
     display: none;
     flex: 1;
+    border-radius: var(--radius);
   }
 }
 

@@ -64,9 +64,15 @@ export default function MainLayout({ toc }: MainLayoutProps) {
       <a href="#main-content" className="skip-link">
         Ga naar inhoud
       </a>
+      <div className={styles.accentBar} aria-hidden="true" />
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          <h1 className={styles.logo}>Pvd<span>AI</span></h1>
+          <div className={styles.logoLink}>
+            <svg className={styles.logoRose} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C9.5 2 7.5 3.5 7 5.5C5 5 3 6.5 3 9c0 2 1.5 3.5 3 4-0.5 1.5 0 3.5 1.5 4.5 1 0.7 2.2 0.8 3.2 0.5L12 21l1.3-3c1 0.3 2.2 0.2 3.2-0.5C18 16.5 18.5 14.5 18 13c1.5-0.5 3-2 3-4 0-2.5-2-4-4-3.5C16.5 3.5 14.5 2 12 2z"/>
+            </svg>
+            <h1 className={styles.logo}>Pvd<span>AI</span></h1>
+          </div>
           <span className={styles.tagline}>
             Stel vragen over de statuten en reglementen van de PvdA
           </span>
@@ -117,28 +123,20 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           <a href="https://github.com/julianaijal/PvdAI" target="_blank" rel="noopener noreferrer">
             PvdAI
           </a>{" "}
-          is een onafhankelijk open-source project van{" "}
+          is een open-source project van{" "}
           <a href="https://github.com/julianaijal" target="_blank" rel="noopener noreferrer">
             Julian Aijal
-          </a>.
-          Dit is geen officieel product van en niet goedgekeurd door de Partij van de Arbeid (PvdA).
-          Antwoorden worden gegenereerd door AI en kunnen onjuistheden bevatten.
-          Aan de inhoud kunnen geen rechten worden ontleend.
-          Raadpleeg altijd het{" "}
+          </a>{" "}
+          — geen officieel product van de PvdA.
+          AI-antwoorden kunnen onjuistheden bevatten; raadpleeg altijd het{" "}
           <a
             href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
             officiële document
-          </a>{" "}
-          voor bindende informatie.
-          Je vragen worden niet opgeslagen of gebruikt voor AI-training.
-          Er worden geen persoonsgegevens bewaard.
-          De broncode is openbaar beschikbaar op{" "}
-          <a href="https://github.com/julianaijal/PvdAI" target="_blank" rel="noopener noreferrer">
-            GitHub
           </a>.
+          Er worden geen gegevens opgeslagen.
         </p>
       </footer>
     </div>
