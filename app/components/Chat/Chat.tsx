@@ -507,11 +507,28 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                   <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
                     {msg.content}
                   </ReactMarkdown>
-                  {msg.content && !msg.isError && (
+                  {msg.content && (
                     <div className={styles.messageActions}>
-                      <CopyButton text={msg.content} />
-                      {i > 0 && messages[i - 1]?.role === "user" && (
+                      {!msg.isError && <CopyButton text={msg.content} />}
+                      {!msg.isError && i > 0 && messages[i - 1]?.role === "user" && (
                         <ShareButton question={messages[i - 1].content} />
+                      )}
+                      {i > 0 && messages[i - 1]?.role === "user" && (
+                        <button
+                          className={styles.actionButton}
+                          onClick={() => {
+                            const question = messages[i - 1].content;
+                            setMessages((prev) => prev.slice(0, i - 1));
+                            handleSubmit(question);
+                          }}
+                          aria-label="Opnieuw proberen"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="23 4 23 10 17 10" />
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                          </svg>
+                          <span className={styles.tooltip}>Opnieuw</span>
+                        </button>
                       )}
                     </div>
                   )}
