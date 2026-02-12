@@ -14,7 +14,7 @@ export async function GET() {
 
   return Response.json(structureCache, {
     headers: {
-      "Cache-Control": "public, max-age=86400, s-maxage=86400",
+      "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
     },
   });
 }
