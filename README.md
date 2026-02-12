@@ -90,7 +90,7 @@ npx tsx scripts/parse.ts
 
 # 2. Generate vector embeddings for semantic search
 npx tsx scripts/embed.ts
-# Output: data/embeddings.json (~25MB, gitignored)
+# Output: data/embeddings.bin + data/embeddings.meta.json (gitignored)
 ```
 
 ### Running Tests
@@ -138,12 +138,11 @@ lib/
 └── schemas.ts                   Zod schemas for API request validation
 scripts/
 ├── parse.ts                     PDF → structured JSON (pure JS, no system deps)
-├── embed.ts                     Chunks → vector embeddings (runs at build time)
-├── seed.ts                      Legacy: parse + embed in one step
+├── embed.ts                     Chunks → binary vector embeddings (runs at build time)
 └── indexnow.ts                  Notify search engines of content changes
 tests/                           Unit tests (Vitest)
 .github/workflows/ci.yml        CI pipeline (lint + test on push/PR)
-data/                            Generated JSON files (embeddings.json gitignored)
+data/                            Generated data files (embeddings gitignored)
 ```
 
 ### How RAG Works
