@@ -136,6 +136,7 @@
   border-radius: var(--radius-lg);
   border: 1px solid color-mix(in srgb, var(--pvda-border) 60%, transparent);
   box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent);
+  contain: layout style;
 
   @media (max-width: 768px) {
     position: absolute;
@@ -162,6 +163,7 @@
   border-radius: var(--radius-lg);
   border: 1px solid color-mix(in srgb, var(--pvda-border) 60%, transparent);
   box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent);
+  contain: layout style;
 
   @media (max-width: 768px) {
     position: absolute;
