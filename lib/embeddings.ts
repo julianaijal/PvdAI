@@ -14,122 +14,158 @@ interface RawChunk extends ChunkMeta {
   embedding: number[];
 }
 
-interface Chunk {
-  id: number;
-  text: string;
-  sectionId: string;
-  sectionTitle: string;
+export interface Chunk extends ChunkMeta {
   embedding: Float32Array;
-  norm: number;
 }
 
-let chunks: Chunk[] | null = null;
+// Singleton state: metadata array + contiguous vector matrix
+let meta: ChunkMeta[] | null = null;
+let matrix: Float32Array | null = null; // n × d row-major
+let dim: number = EMBEDDING_DIM;        // actual embedding dimension
 
-function computeNorm(emb: Float32Array): number {
-  let sum = 0;
-  for (let i = 0; i < emb.length; i++) {
-    sum += emb[i] * emb[i];
-  }
-  return Math.sqrt(sum);
-}
-
-function loadBinary(): Chunk[] {
+function loadBinary(): { meta: ChunkMeta[]; matrix: Float32Array; dim: number } {
   const metaPath = join(process.cwd(), "data", "embeddings.meta.json");
   const binPath = join(process.cwd(), "data", "embeddings.bin");
-  const meta: ChunkMeta[] = JSON.parse(readFileSync(metaPath, "utf-8"));
+  const m: ChunkMeta[] = JSON.parse(readFileSync(metaPath, "utf-8"));
   const raw = readFileSync(binPath);
-  const vectors = new Float32Array(raw.buffer, raw.byteOffset, raw.byteLength / 4);
-
-  return meta.map((c, i) => {
-    const emb = vectors.subarray(i * EMBEDDING_DIM, (i + 1) * EMBEDDING_DIM);
-    return {
-      id: c.id,
-      text: c.text,
-      sectionId: c.sectionId,
-      sectionTitle: c.sectionTitle,
-      embedding: emb,
-      norm: computeNorm(emb),
-    };
-  });
+  // Vectors are already L2-normalized at build time
+  const mat = new Float32Array(raw.buffer, raw.byteOffset, raw.byteLength / 4);
+  const d = m.length > 0 ? mat.length / m.length : EMBEDDING_DIM;
+  return { meta: m, matrix: mat, dim: d };
 }
 
-function loadJson(): Chunk[] {
+function loadJson(): { meta: ChunkMeta[]; matrix: Float32Array; dim: number } {
   const data = readFileSync(
     join(process.cwd(), "data", "embeddings.json"),
     "utf-8"
   );
   const raw: RawChunk[] = JSON.parse(data);
-  return raw.map((c) => {
-    const emb = new Float32Array(c.embedding);
-    return {
-      id: c.id,
-      text: c.text,
-      sectionId: c.sectionId,
-      sectionTitle: c.sectionTitle,
-      embedding: emb,
-      norm: computeNorm(emb),
-    };
-  });
+  const d = raw[0]?.embedding.length || EMBEDDING_DIM;
+  const m = raw.map((c) => ({
+    id: c.id,
+    text: c.text,
+    sectionId: c.sectionId,
+    sectionTitle: c.sectionTitle,
+  }));
+  // Build contiguous matrix and normalize
+  const mat = new Float32Array(raw.length * d);
+  for (let i = 0; i < raw.length; i++) {
+    const offset = i * d;
+    const emb = raw[i].embedding;
+    let norm2 = 0;
+    for (let j = 0; j < d; j++) norm2 += emb[j] * emb[j];
+    const invNorm = 1 / Math.sqrt(norm2);
+    for (let j = 0; j < d; j++) mat[offset + j] = emb[j] * invNorm;
+  }
+  return { meta: m, matrix: mat, dim: d };
+}
+
+function ensureLoaded() {
+  if (!meta) {
+    const binPath = join(process.cwd(), "data", "embeddings.bin");
+    const loaded = existsSync(binPath) ? loadBinary() : loadJson();
+    meta = loaded.meta;
+    matrix = loaded.matrix;
+    dim = loaded.dim;
+  }
 }
 
 export function getChunks(): Chunk[] {
-  if (!chunks) {
-    const binPath = join(process.cwd(), "data", "embeddings.bin");
-    chunks = existsSync(binPath) ? loadBinary() : loadJson();
-  }
-  return chunks!;
+  ensureLoaded();
+  return meta!.map((c, i) => ({
+    ...c,
+    embedding: matrix!.subarray(i * dim, (i + 1) * dim),
+  }));
 }
 
+/**
+ * Find the top-K most relevant chunks by cosine similarity.
+ *
+ * Mathematical optimizations:
+ * 1. All vectors are L2-normalized at build time, so cos(q, v) = q · v.
+ *    No norm computation or division at query time.
+ * 2. Dot products computed directly over the contiguous Float32Array matrix
+ *    for optimal CPU cache line utilization (sequential memory access).
+ * 3. Inner loop 4-way unrolled — reduces branch overhead and enables
+ *    instruction-level parallelism. 1536 % 4 = 0, so no remainder handling.
+ * 4. Min-heap of size k for O(n log k) selection instead of O(n log n) sort.
+ */
 export function findRelevantChunks(
   queryEmbedding: number[],
   topK: number = 5
 ): Chunk[] {
-  const allChunks = getChunks();
+  ensureLoaded();
+  const n = meta!.length;
+  const mat = matrix!;
+
+  // Normalize the query vector (OpenAI returns unit vectors,
+  // but defensive normalization costs ~1μs for 1536 dims)
+  const d = dim;
   const q = new Float32Array(queryEmbedding);
-  const qNorm = computeNorm(q);
+  let qNorm2 = 0;
+  for (let i = 0; i < d; i++) qNorm2 += q[i] * q[i];
+  if (Math.abs(qNorm2 - 1.0) > 1e-6) {
+    const invNorm = 1 / Math.sqrt(qNorm2);
+    for (let i = 0; i < d; i++) q[i] *= invNorm;
+  }
 
-  // Min-heap for top-K selection: O(n log k) instead of O(n log n) full sort
-  const heap: { chunk: Chunk; score: number }[] = [];
+  // Min-heap for top-K: stores (chunkIndex, score) pairs
+  const heapIdx: number[] = [];
+  const heapScore: number[] = [];
 
-  const dim = q.length;
-
-  for (const chunk of allChunks) {
+  for (let ci = 0; ci < n; ci++) {
+    // Dot product: q · mat[ci] via 4-way unrolled loop over contiguous memory
+    const base = ci * d;
     let dot = 0;
-    const emb = chunk.embedding;
-    for (let i = 0; i < dim; i++) {
-      dot += q[i] * emb[i];
+    let i = 0;
+    for (; i + 3 < d; i += 4) {
+      dot +=
+        q[i]     * mat[base + i] +
+        q[i + 1] * mat[base + i + 1] +
+        q[i + 2] * mat[base + i + 2] +
+        q[i + 3] * mat[base + i + 3];
     }
-    const score = dot / (qNorm * chunk.norm);
+    for (; i < d; i++) dot += q[i] * mat[base + i];
 
-    if (heap.length < topK) {
-      heap.push({ chunk, score });
-      // Bubble up to maintain min-heap
-      let idx = heap.length - 1;
-      while (idx > 0) {
-        const parent = (idx - 1) >> 1;
-        if (heap[idx].score < heap[parent].score) {
-          [heap[idx], heap[parent]] = [heap[parent], heap[idx]];
-          idx = parent;
+    // Min-heap insertion
+    if (heapIdx.length < topK) {
+      heapIdx.push(ci);
+      heapScore.push(dot);
+      // Bubble up
+      let k = heapIdx.length - 1;
+      while (k > 0) {
+        const parent = (k - 1) >> 1;
+        if (heapScore[k] < heapScore[parent]) {
+          [heapIdx[k], heapIdx[parent]] = [heapIdx[parent], heapIdx[k]];
+          [heapScore[k], heapScore[parent]] = [heapScore[parent], heapScore[k]];
+          k = parent;
         } else break;
       }
-    } else if (score > heap[0].score) {
-      // Replace min element and sift down
-      heap[0] = { chunk, score };
-      let idx = 0;
+    } else if (dot > heapScore[0]) {
+      heapIdx[0] = ci;
+      heapScore[0] = dot;
+      // Sift down
+      let k = 0;
       while (true) {
-        const left = 2 * idx + 1;
-        const right = 2 * idx + 2;
-        let smallest = idx;
-        if (left < topK && heap[left].score < heap[smallest].score) smallest = left;
-        if (right < topK && heap[right].score < heap[smallest].score) smallest = right;
-        if (smallest === idx) break;
-        [heap[idx], heap[smallest]] = [heap[smallest], heap[idx]];
-        idx = smallest;
+        const left = 2 * k + 1;
+        const right = 2 * k + 2;
+        let smallest = k;
+        if (left < topK && heapScore[left] < heapScore[smallest]) smallest = left;
+        if (right < topK && heapScore[right] < heapScore[smallest]) smallest = right;
+        if (smallest === k) break;
+        [heapIdx[k], heapIdx[smallest]] = [heapIdx[smallest], heapIdx[k]];
+        [heapScore[k], heapScore[smallest]] = [heapScore[smallest], heapScore[k]];
+        k = smallest;
       }
     }
   }
 
-  // Sort the small heap (size k) in descending order — O(k log k), negligible
-  heap.sort((a, b) => b.score - a.score);
-  return heap.map((s) => s.chunk);
+  // Sort the small heap (size ≤ k) by descending score
+  const indices = heapIdx.map((idx, i) => ({ idx, score: heapScore[i] }));
+  indices.sort((a, b) => b.score - a.score);
+
+  return indices.map((entry) => ({
+    ...meta![entry.idx],
+    embedding: mat.subarray(entry.idx * d, (entry.idx + 1) * d),
+  }));
 }
