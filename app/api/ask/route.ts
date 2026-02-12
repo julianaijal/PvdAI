@@ -4,6 +4,30 @@ import { checkRateLimit } from "@/lib/ratelimit";
 import { AskRequestSchema } from "@/lib/schemas";
 import { headers } from "next/headers";
 
+// LRU cache for query embeddings — avoids redundant OpenAI calls for repeated questions
+// ~6KB per entry (1536 floats × 4 bytes), 100 entries ≈ 600KB
+const EMBEDDING_CACHE_SIZE = 100;
+const embeddingCache = new Map<string, number[]>();
+
+async function getQueryEmbedding(query: string): Promise<number[]> {
+  const cached = embeddingCache.get(query);
+  if (cached) return cached;
+
+  const response = await openai.embeddings.create({
+    model: "text-embedding-3-small",
+    input: query,
+  });
+  const embedding = response.data[0].embedding;
+
+  // LRU eviction: delete oldest entry if at capacity
+  if (embeddingCache.size >= EMBEDDING_CACHE_SIZE) {
+    const oldest = embeddingCache.keys().next().value!;
+    embeddingCache.delete(oldest);
+  }
+  embeddingCache.set(query, embedding);
+  return embedding;
+}
+
 const SYSTEM_PROMPT = `Je bent een vriendelijke assistent die de statuten en reglementen van de PvdA uitlegt. Iedereen in Nederland moet je antwoord kunnen begrijpen — ook mensen die Nederlands als tweede taal spreken.
 
 # Taalniveau: B1
@@ -99,32 +123,11 @@ export async function POST(req: Request) {
   try {
     const history = parsed.data.history || [];
 
-    // Run rewrite + embedding in parallel when possible
-    let queryEmbedding: number[];
-    if (history.length > 0) {
-      // Start both in parallel: rewrite the query AND embed the original
-      const [searchQuery, originalEmbedding] = await Promise.all([
-        rewriteQuery(question, history),
-        openai.embeddings.create({ model: "text-embedding-3-small", input: question }),
-      ]);
+    // Rewrite query if there's conversation history, then embed once
+    const searchQuery =
+      history.length > 0 ? await rewriteQuery(question, history) : question;
 
-      // If rewrite changed the query, re-embed; otherwise use original
-      if (searchQuery !== question) {
-        const rewrittenEmbedding = await openai.embeddings.create({
-          model: "text-embedding-3-small",
-          input: searchQuery,
-        });
-        queryEmbedding = rewrittenEmbedding.data[0].embedding;
-      } else {
-        queryEmbedding = originalEmbedding.data[0].embedding;
-      }
-    } else {
-      const embeddingResponse = await openai.embeddings.create({
-        model: "text-embedding-3-small",
-        input: question,
-      });
-      queryEmbedding = embeddingResponse.data[0].embedding;
-    }
+    const queryEmbedding = await getQueryEmbedding(searchQuery);
 
     // Find relevant chunks
     const relevantChunks = findRelevantChunks(queryEmbedding, 5);
