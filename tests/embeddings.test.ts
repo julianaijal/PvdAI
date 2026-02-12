@@ -10,6 +10,7 @@ vi.mock("fs", () => ({
       { id: 3, text: "chunk D", sectionId: "s4", sectionTitle: "Section 4", embedding: [0.7, 0.7, 0] },
     ])
   ),
+  existsSync: vi.fn(() => false),
 }));
 
 let findRelevantChunks: typeof import("@/lib/embeddings").findRelevantChunks;
