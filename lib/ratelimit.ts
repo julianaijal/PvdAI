@@ -7,6 +7,18 @@ const WINDOW_S = 24 * 60 * 60; // 24 hours in seconds
 // In-memory fallback for local dev (no Redis configured)
 const store = new Map<string, { count: number; resetAt: number }>();
 
+function pruneExpiredEntries() {
+  const now = Date.now();
+  for (const [key, entry] of store) {
+    if (now > entry.resetAt) store.delete(key);
+  }
+}
+
+// Clean up expired entries every hour
+if (typeof setInterval !== "undefined") {
+  setInterval(pruneExpiredEntries, 60 * 60 * 1000);
+}
+
 function checkRateLimitMemory(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now();
   const entry = store.get(ip);
