@@ -133,7 +133,7 @@ app/
 │   └── ThemeToggle/             Dark/light mode switch
 lib/
 ├── openai.ts                    OpenAI client singleton
-├── embeddings.ts                Cosine similarity search over precomputed vectors
+├── embeddings.ts                Dot-product search over L2-normalized vectors
 ├── ratelimit.ts                 Redis rate limiter with in-memory fallback (20/day)
 └── schemas.ts                   Zod schemas for API request validation
 scripts/
@@ -149,7 +149,7 @@ data/                            Generated data files (embeddings gitignored)
 
 1. User question is embedded with `text-embedding-3-small`
 2. For follow-up questions, the query is automatically rewritten using conversation history for better context
-3. Top 5 chunks found via cosine similarity against precomputed embeddings
+3. Top 5 chunks found via dot-product search against L2-normalized embeddings
 4. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
 5. Response streamed back as SSE; article references become clickable links in the UI
 
