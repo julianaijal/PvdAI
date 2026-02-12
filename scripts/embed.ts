@@ -97,10 +97,17 @@ function writeBinaryFormat(chunks: ChunkWithEmbedding[]) {
   }));
   writeFileSync(META_PATH, JSON.stringify(meta));
 
-  // Vectors: flat Float32Array buffer
+  // Vectors: flat Float32Array buffer, L2-normalized
+  // OpenAI text-embedding-3-small already returns unit vectors, but we normalize
+  // explicitly to guarantee cos(q, v) = q · v at query time (no division needed).
   const buffer = new Float32Array(chunks.length * EMBEDDING_DIM);
   for (let i = 0; i < chunks.length; i++) {
-    buffer.set(chunks[i].embedding, i * EMBEDDING_DIM);
+    const offset = i * EMBEDDING_DIM;
+    const emb = chunks[i].embedding;
+    let norm2 = 0;
+    for (let j = 0; j < EMBEDDING_DIM; j++) norm2 += emb[j] * emb[j];
+    const invNorm = 1 / Math.sqrt(norm2);
+    for (let j = 0; j < EMBEDDING_DIM; j++) buffer[offset + j] = emb[j] * invNorm;
   }
   writeFileSync(VECTORS_PATH, Buffer.from(buffer.buffer));
 
