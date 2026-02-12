@@ -154,7 +154,7 @@ const TOCItem = memo(function TOCItem({
   );
 });
 
-function SectionContent({ section }: { section: Section }) {
+const SectionContent = memo(function SectionContent({ section }: { section: Section }) {
   const Tag = section.level === 0 ? "h2" : section.level === 1 ? "h3" : "h4";
   const titleClass =
     section.level === 0
@@ -180,7 +180,7 @@ function SectionContent({ section }: { section: Section }) {
       ))}
     </div>
   );
-}
+});
 
 export default function DocumentBrowser({
   toc,
