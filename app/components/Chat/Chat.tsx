@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo, useCallback, Children, type ReactElement } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback, memo, Children } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
@@ -290,6 +290,67 @@ function ShareButton({ question }: { question: string }) {
   );
 }
 
+const ChatMessage = memo(function ChatMessage({
+  msg,
+  index,
+  messages,
+  markdownComponents,
+  onRetry,
+}: {
+  msg: Message;
+  index: number;
+  messages: Message[];
+  markdownComponents: Components;
+  onRetry: (index: number) => void;
+}) {
+  return (
+    <div
+      className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage} ${msg.isError ? styles.errorMessage : ""}`}
+      role={msg.role === "user" ? "log" : "status"}
+      aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
+    >
+      {msg.role === "assistant" && (
+        <div className={styles.aiBadge} aria-hidden="true">
+          <span>AI</span>
+        </div>
+      )}
+      <div className={styles.messageContent}>
+        {msg.role === "assistant" ? (
+          <>
+            {msg.isError && <span className={styles.errorPrefix} aria-hidden="true">! </span>}
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+              {msg.content}
+            </ReactMarkdown>
+            {msg.content && (
+              <div className={styles.messageActions}>
+                {!msg.isError && <CopyButton text={msg.content} />}
+                {!msg.isError && index > 0 && messages[index - 1]?.role === "user" && (
+                  <ShareButton question={messages[index - 1].content} />
+                )}
+                {index > 0 && messages[index - 1]?.role === "user" && (
+                  <button
+                    className={styles.actionButton}
+                    onClick={() => onRetry(index)}
+                    aria-label="Opnieuw proberen"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="23 4 23 10 17 10" />
+                      <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                    </svg>
+                    <span className={styles.tooltip}>Opnieuw</span>
+                  </button>
+                )}
+              </div>
+            )}
+          </>
+        ) : (
+          msg.content
+        )}
+      </div>
+    </div>
+  );
+});
+
 export default function Chat({ onArticleClick, toc }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -304,6 +365,13 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const isNearBottomRef = useRef(true);
   const articleLookup = useMemo<Map<string, string>>(() => buildArticleLookup(toc || []), [toc]);
   const markdownComponents = useMarkdownComponents(onArticleClick, articleLookup);
+
+  const handleRetry = useCallback((index: number) => {
+    const question = messages[index - 1].content;
+    setMessages((prev) => prev.slice(0, index - 1));
+    handleSubmit(question);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
 
   useEffect(() => {
     setStarterQuestions(pickRandomQuestions(4));
@@ -547,55 +615,14 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           </div>
         )}
         {messages.map((msg, i) => (
-          <div
+          <ChatMessage
             key={i}
-            className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage} ${msg.isError ? styles.errorMessage : ""}`}
-            role={msg.role === "user" ? "log" : "status"}
-            aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
-          >
-            {msg.role === "assistant" && (
-              <div className={styles.aiBadge} aria-hidden="true">
-                <span>AI</span>
-              </div>
-            )}
-            <div className={styles.messageContent}>
-              {msg.role === "assistant" ? (
-                <>
-                  {msg.isError && <span className={styles.errorPrefix} aria-hidden="true">! </span>}
-                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-                    {msg.content}
-                  </ReactMarkdown>
-                  {msg.content && (
-                    <div className={styles.messageActions}>
-                      {!msg.isError && <CopyButton text={msg.content} />}
-                      {!msg.isError && i > 0 && messages[i - 1]?.role === "user" && (
-                        <ShareButton question={messages[i - 1].content} />
-                      )}
-                      {i > 0 && messages[i - 1]?.role === "user" && (
-                        <button
-                          className={styles.actionButton}
-                          onClick={() => {
-                            const question = messages[i - 1].content;
-                            setMessages((prev) => prev.slice(0, i - 1));
-                            handleSubmit(question);
-                          }}
-                          aria-label="Opnieuw proberen"
-                        >
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="23 4 23 10 17 10" />
-                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-                          </svg>
-                          <span className={styles.tooltip}>Opnieuw</span>
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </>
-              ) : (
-                msg.content
-              )}
-            </div>
-          </div>
+            msg={msg}
+            index={i}
+            messages={messages}
+            markdownComponents={markdownComponents}
+            onRetry={handleRetry}
+          />
         ))}
         {loading && !(messages.length > 0 && messages[messages.length - 1].role === "assistant" && messages[messages.length - 1].content.length > 0) && (
           <div
