@@ -14,7 +14,7 @@ const inter = Inter({
 
 const title = "PvdAI — Statuten & Reglementen van de PvdA";
 const description =
-  "Doorzoek en stel vragen over de statuten en reglementen van de Partij van de Arbeid. AI-gestuurde antwoorden in begrijpelijke taal. Geen officieel product van of goedgekeurd door de PvdA.";
+  "Doorzoek de statuten en reglementen van de PvdA met AI. Stel vragen in gewone taal en krijg direct antwoord. Gratis, open source en onafhankelijk.";
 const url = "https://pvdai.tech";
 
 export const metadata: Metadata = {
