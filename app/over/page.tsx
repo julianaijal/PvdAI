@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     "PvdAI is een gratis, open-source AI-tool waarmee je de statuten en reglementen van de PvdA kunt doorzoeken en er vragen over kunt stellen. Onafhankelijk en niet gelieerd aan de PvdA.",
   alternates: {
     canonical: "https://pvdai.tech/over",
+    languages: { nl: "https://pvdai.tech/over" },
   },
   openGraph: {
     title: "Over PvdAI — AI-documentbrowser voor PvdA-statuten",
@@ -17,9 +18,67 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://pvdai.tech/over/#webpage",
+      name: "Over PvdAI",
+      url: "https://pvdai.tech/over",
+      isPartOf: { "@id": "https://pvdai.tech/#website" },
+      description:
+        "PvdAI is een gratis, open-source AI-tool waarmee je de statuten en reglementen van de PvdA kunt doorzoeken.",
+      inLanguage: "nl",
+      breadcrumb: { "@id": "https://pvdai.tech/over/#breadcrumb" },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pvdai.tech/over/#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://pvdai.tech",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Over PvdAI",
+          item: "https://pvdai.tech/over",
+        },
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "PvdAI",
+      url: "https://pvdai.tech",
+      applicationCategory: "ReferenceApplication",
+      operatingSystem: "Any",
+      inLanguage: "nl",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "EUR",
+      },
+      author: {
+        "@type": "Person",
+        name: "Julian Aijal",
+        url: "https://github.com/julianaijal",
+      },
+      license: "https://opensource.org/licenses/MIT",
+    },
+  ],
+};
+
 export default function OverPage() {
   return (
     <div className={styles.container}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className={styles.header}>
         <Link href="/" className={styles.logo}>
           Pvd<span className={styles.logoAccent}>AI</span>
