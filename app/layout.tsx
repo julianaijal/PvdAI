@@ -156,6 +156,86 @@ export default async function RootLayout({
                         text: "De PvdA heeft onder andere het congres, het partijbestuur, de Politieke Ledenraad, de Verenigingsraad, afdelingen, gewesten en diverse commissies.",
                       },
                     },
+                    {
+                      "@type": "Question",
+                      name: "Hoe kan ik de statuten van de PvdA doorzoeken?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Met PvdAI kun je de statuten en reglementen van de PvdA doorzoeken via een AI-gestuurde zoekmachine. Je kunt vragen stellen in gewone taal en krijgt direct antwoord.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Is PvdAI gratis te gebruiken?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Ja, PvdAI is volledig gratis en open source. Je kunt het gebruiken zonder account of registratie.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Zijn de statuten van de PvdA openbaar?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Ja, de statuten en reglementen van de PvdA zijn openbaar beschikbaar. Het officiële document is te vinden op de website van de PvdA.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Kan ik vragen stellen over de reglementen van de PvdA?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Ja, PvdAI heeft een AI-chatfunctie waarmee je in gewone taal vragen kunt stellen over zowel de statuten als de reglementen van de PvdA.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Is PvdAI een officieel product van de PvdA?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Nee, PvdAI is een onafhankelijk open-source project en is niet gelieerd aan of goedgekeurd door de PvdA. Raadpleeg altijd het officiële document voor bindende informatie.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Wat zijn de statuten van een politieke partij?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Statuten zijn de grondregels van een politieke partij. Ze beschrijven hoe de partij is georganiseerd, wie lid kan worden, hoe besluiten worden genomen en welke organen de partij heeft.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Hoe is de PvdA georganiseerd?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "De PvdA is opgebouwd uit lokale afdelingen, gewesten, een congres, een partijbestuur, een Politieke Ledenraad en diverse commissies. Het congres is het hoogste orgaan.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Waar vind ik de reglementen van de PvdA?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "De officiële reglementen zijn beschikbaar op de website van de PvdA als PDF. Je kunt ze ook doorzoeken via PvdAI, een gratis AI-tool die de reglementen toegankelijk maakt.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Hoe werkt de AI-chat van PvdAI?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "De AI-chat zoekt relevante passages in de statuten en reglementen op basis van je vraag en geeft een antwoord in begrijpelijk Nederlands. Het verwijst altijd naar de specifieke artikelen.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Kan ik als niet-lid de PvdA-statuten inzien?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Ja, de statuten en reglementen zijn openbaar. Iedereen kan ze inzien via de officiële PvdA-website of doorzoeken via PvdAI.",
+                      },
+                    },
                   ],
                 },
                 {
