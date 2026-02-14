@@ -49,6 +49,24 @@ export default function MainLayout({ toc }: MainLayoutProps) {
     focusable?.focus({ preventScroll: true });
   }, [activePanel, isMobile]);
 
+  const handleShare = useCallback(async () => {
+    const shareData = {
+      title: "PvdAI — Statuten & Reglementen van de PvdA",
+      text: "Doorzoek de statuten en reglementen van de PvdA met AI",
+      url: "https://pvdai.tech",
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // User cancelled share
+      }
+    } else {
+      await navigator.clipboard.writeText(shareData.url);
+    }
+  }, []);
+
   const handleArticleClick = useCallback((articleId: string) => {
     setHighlightId(articleId);
     setActivePanel("browser");
@@ -95,6 +113,18 @@ export default function MainLayout({ toc }: MainLayoutProps) {
               Chat
             </button>
           </nav>
+          <button
+            className={styles.shareButton}
+            onClick={handleShare}
+            aria-label="Deel PvdAI"
+            title="Deel PvdAI"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+              <polyline points="16 6 12 2 8 6" />
+              <line x1="12" y1="2" x2="12" y2="15" />
+            </svg>
+          </button>
           <ThemeToggle />
         </div>
       </header>
