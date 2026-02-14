@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import DocumentBrowser from "../DocumentBrowser/DocumentBrowser";
 import styles from "./MainLayout.module.scss";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
@@ -180,7 +181,8 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           >
             officiële document
           </a>.
-          Er worden geen gegevens opgeslagen.
+          Er worden geen gegevens opgeslagen.{" "}
+          <Link href="/over">Over PvdAI</Link>
         </p>
       </footer>
     </div>
