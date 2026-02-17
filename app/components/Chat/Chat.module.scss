@@ -249,14 +249,14 @@
 }
 
 .markdownCode {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.1em 0.35em;
   border-radius: 3px;
   font-family: 'Monaco', 'Courier New', monospace;
   font-size: 0.9em;
 
-  [data-theme="dark"] & {
-    background: rgba(255, 255, 255, 0.1);
+  [data-theme="light"] & {
+    background: rgba(0, 0, 0, 0.06);
   }
 }
 

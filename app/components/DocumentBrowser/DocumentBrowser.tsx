@@ -344,14 +344,13 @@ export default function DocumentBrowser({
         )}
       </div>
       {debouncedQuery && searchResults.length > 0 && (
-        <div className={styles.searchResults} role="listbox" aria-label="Zoekresultaten" aria-live="polite">
+        <div className={styles.searchResults} role="list" aria-label="Zoekresultaten" aria-live="polite">
           {searchResults.map((result, i) => (
             <button
               key={`${result.sectionId}-${i}`}
               className={styles.searchResultItem}
               onClick={() => handleSelect(result.sectionId)}
-              role="option"
-              aria-selected={false}
+              role="listitem"
             >
               <span className={styles.searchResultTitle}>{result.sectionTitle}</span>
               <span className={styles.searchResultSnippet}>

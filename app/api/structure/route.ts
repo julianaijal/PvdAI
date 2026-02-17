@@ -1,18 +1,7 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-
-let structureCache: unknown = null;
+import { getStructure } from "@/lib/structure";
 
 export async function GET() {
-  if (!structureCache) {
-    const data = readFileSync(
-      join(process.cwd(), "data", "structure.json"),
-      "utf-8"
-    );
-    structureCache = JSON.parse(data);
-  }
-
-  return Response.json(structureCache, {
+  return Response.json(getStructure(), {
     headers: {
       "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
     },

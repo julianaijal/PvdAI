@@ -115,7 +115,7 @@ export default async function RootLayout({
                   inLanguage: "nl",
                   isAccessibleForFree: true,
                   datePublished: "2024-06-01",
-                  dateModified: "2025-01-01",
+                  dateModified: new Date().toISOString().split("T")[0],
                   author: { "@type": "Person", name: "Julian Aijal" },
                 },
                 {
