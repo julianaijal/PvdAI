@@ -141,14 +141,14 @@ export async function POST(req: Request) {
         ? `\n\nEerdere berichten:\n${history.map((m) => `${m.role === "user" ? "Gebruiker" : "Assistent"}: ${m.content}`).join("\n")}\n\n`
         : "";
 
-    // Stream the response
+    // Stream the response (30s timeout to prevent hanging connections)
     const stream = openai.responses.stream({
       model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
       input: `Context uit de statuten en reglementen:\n\n${context}\n\n---${historyPrompt}\nVraag: ${question}`,
       max_output_tokens: 512,
       store: false,
-    });
+    }, { signal: AbortSignal.timeout(30_000) });
 
     const encoder = new TextEncoder();
 
