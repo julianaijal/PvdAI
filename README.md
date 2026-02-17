@@ -115,6 +115,78 @@ npm run content-update   # parse + embed + notify search engines via IndexNow
 
 ## Architecture
 
+```mermaid
+graph TB
+    subgraph Client["Browser"]
+        ML["MainLayout<br/><small>split-screen · mobile toggle</small>"]
+        DB["DocumentBrowser<br/><small>TOC tree · article viewer · search</small>"]
+        CH["Chat<br/><small>messages · starter questions · article links</small>"]
+        TT["ThemeToggle<br/><small>dark / light</small>"]
+        ML --> DB
+        ML --> CH
+        ML --> TT
+    end
+
+    subgraph Server["Next.js Server"]
+        PAGE["page.tsx<br/><small>SSR · reads toc.json</small>"]
+        ASK["/api/ask<br/><small>POST · RAG endpoint</small>"]
+        SEC["/api/section<br/><small>GET · 24h cache</small>"]
+        STR["/api/structure<br/><small>GET · full doc</small>"]
+    end
+
+    subgraph Pipeline["Data Pipeline <small>(build time)</small>"]
+        PDF["PvdA PDF<br/><small>188 pages</small>"]
+        PARSE["parse.ts"]
+        EMBED["embed.ts"]
+        PDF --> PARSE
+        PARSE --> DATA
+        PARSE --> EMBED
+    end
+
+    subgraph Data["Static JSON"]
+        TOC["toc.json"]
+        STRUCT["structure.json"]
+        CHUNKS["chunks.json"]
+        EMB["embeddings.bin"]
+    end
+
+    subgraph Lib["lib/"]
+        OAI["openai.ts<br/><small>client singleton</small>"]
+        EMBLIB["embeddings.ts<br/><small>dot-product search</small>"]
+        RL["ratelimit.ts<br/><small>Redis / in-memory</small>"]
+    end
+
+    subgraph External["External Services"]
+        OPENAI["OpenAI API<br/><small>embeddings + responses</small>"]
+        REDIS["Upstash Redis<br/><small>rate limiting</small>"]
+        VERCEL["Vercel<br/><small>hosting</small>"]
+    end
+
+    PAGE --> TOC
+    DB -->|"fetch section"| SEC
+    DB -->|"search"| STR
+    CH -->|"question"| ASK
+    SEC --> STRUCT
+    STR --> STRUCT
+    ASK --> EMBLIB
+    ASK --> OAI
+    EMBLIB --> EMB
+    EMBLIB --> CHUNKS
+    OAI --> OPENAI
+    RL --> REDIS
+    ASK --> RL
+    EMBED --> EMB
+
+    style Client fill:#f8f9fa,stroke:#dee2e6
+    style Server fill:#e8f4f8,stroke:#bee5eb
+    style Pipeline fill:#fff3cd,stroke:#ffc107
+    style Data fill:#d4edda,stroke:#28a745
+    style Lib fill:#e2e3f1,stroke:#6c757d
+    style External fill:#f8d7da,stroke:#dc3545
+```
+
+### Project Structure
+
 ```
 app/
 ├── page.tsx                     Server component — reads toc.json at build time
