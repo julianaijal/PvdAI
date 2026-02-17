@@ -65,6 +65,10 @@ async function checkRateLimitRedis(ip: string): Promise<{ allowed: boolean; rema
 
 const useRedis = !!process.env.REDIS_URL;
 
+if (!useRedis && process.env.NODE_ENV === "production") {
+  console.warn("[ratelimit] REDIS_URL not configured — using in-memory rate limiting which does not persist across serverless invocations");
+}
+
 export function checkRateLimit(ip: string): Promise<{ allowed: boolean; remaining: number }> {
   if (useRedis) {
     return checkRateLimitRedis(ip);
