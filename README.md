@@ -26,8 +26,7 @@ Party statutes are long, dense, and written in legal Dutch. PvdAI lets members a
 
 PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf) accessible through a split-screen interface: a **document browser** on the left and an **AI chat** on the right. Ask questions in plain language and get answers at B1 reading level with references to specific articles.
 
-<!-- TODO: Add a screenshot of the split-screen interface here -->
-<!-- ![PvdAI screenshot](docs/screenshot.png) -->
+![PvdAI screenshot](docs/screenshot.png)
 
 ## Features
 
@@ -139,7 +138,6 @@ graph TB
         PARSE["parse.ts"]
         EMBED["embed.ts"]
         PDF --> PARSE
-        PARSE --> DATA
         PARSE --> EMBED
     end
 
@@ -159,10 +157,12 @@ graph TB
     subgraph External["External Services"]
         OPENAI["OpenAI API<br/><small>embeddings + responses</small>"]
         REDIS["Upstash Redis<br/><small>rate limiting</small>"]
-        VERCEL["Vercel<br/><small>hosting</small>"]
     end
 
     PAGE --> TOC
+    PARSE --> TOC
+    PARSE --> STRUCT
+    PARSE --> CHUNKS
     DB -->|"fetch section"| SEC
     DB -->|"search"| STR
     CH -->|"question"| ASK
