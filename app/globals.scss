@@ -3,8 +3,8 @@
   --pvda-red-dark: #FB7185;
   --pvda-red-light: rgba(244, 63, 94, 0.12);
   --pvda-red-subtle: rgba(244, 63, 94, 0.08);
-  --pvda-white: #0A0A0A;
-  --pvda-black: #F9FAFB;
+  --pvda-bg: #0A0A0A;
+  --pvda-fg: #F9FAFB;
   --pvda-text: #E5E7EB;
   --pvda-text-secondary: #9CA3AF;
   --pvda-grey: #1A1A1A;
@@ -31,8 +31,8 @@
   --pvda-red-dark: #9E0410;
   --pvda-red-light: #FEF2F2;
   --pvda-red-subtle: #FDE8E9;
-  --pvda-white: #FFFFFF;
-  --pvda-black: #0A0A0A;
+  --pvda-bg: #FFFFFF;
+  --pvda-fg: #0A0A0A;
   --pvda-text: #1F2937;
   --pvda-text-secondary: #4B5563;
   --pvda-grey: #F3F4F6;
@@ -42,7 +42,7 @@
   --pvda-surface: #FFFFFF;
   --pvda-surface-raised: #FFFFFF;
   --pvda-canvas: #F3F4F6;
-  --background: var(--pvda-white);
+  --background: var(--pvda-bg);
   --foreground: var(--pvda-text);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -74,7 +74,7 @@ body {
     background-repeat: repeat;
     background-size: 256px 256px;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1;
     contain: strict;
     will-change: transform;
   }
@@ -134,7 +134,7 @@ a {
 
 ::selection {
   background: var(--pvda-red-subtle);
-  color: var(--pvda-black);
+  color: var(--pvda-fg);
 }
 
 ::-webkit-scrollbar {

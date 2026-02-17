@@ -70,7 +70,7 @@
 .welcomeTitle {
   font-size: 22px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--pvda-black), var(--pvda-text-secondary));
+  background: linear-gradient(135deg, var(--pvda-fg), var(--pvda-text-secondary));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -378,7 +378,7 @@
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%) translateY(4px);
-  background: var(--pvda-black);
+  background: var(--pvda-fg);
   color: var(--pvda-surface);
   font-size: 11px;
   font-weight: 500;
@@ -397,7 +397,7 @@
     left: 50%;
     transform: translateX(-50%);
     border: 4px solid transparent;
-    border-top-color: var(--pvda-black);
+    border-top-color: var(--pvda-fg);
   }
 }
 

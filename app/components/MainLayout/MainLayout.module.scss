@@ -54,7 +54,7 @@
 .logo {
   font-size: 18px;
   font-weight: 700;
-  color: var(--pvda-black);
+  color: var(--pvda-fg);
   letter-spacing: -0.3px;
 
   span {
@@ -105,11 +105,11 @@
 
 .navActive {
   background: var(--pvda-surface);
-  color: var(--pvda-black);
+  color: var(--pvda-fg);
   box-shadow: var(--shadow-sm);
 
   &:hover {
-    color: var(--pvda-black);
+    color: var(--pvda-fg);
   }
 }
 
