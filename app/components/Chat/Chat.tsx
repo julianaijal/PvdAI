@@ -377,17 +377,15 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     }
   }, [messages]);
 
-  // Auto-submit question from URL query parameter
+  // Pre-fill question from URL query parameter
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
     if (q) {
-      // Clean the URL
       window.history.replaceState({}, "", window.location.pathname);
-      // Submit the question
-      handleSubmit(q);
+      setInput(q);
+      textareaRef.current?.focus();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleScroll = useCallback(() => {
