@@ -105,8 +105,8 @@ export async function POST(req: Request) {
 
   const headersList = await headers();
   const ip =
-    headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     headersList.get("x-real-ip") ||
+    headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     "unknown";
 
   const { allowed, remaining } = await checkRateLimit(ip);
