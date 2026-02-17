@@ -11,13 +11,14 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/deployments/julianaijal/PvdAI/production?label=deploy&logo=vercel" alt="Deploy status" />
-  <img src="https://img.shields.io/github/last-commit/julianaijal/PvdAI" alt="Last commit" />
-  <img src="https://img.shields.io/github/license/julianaijal/PvdAI" alt="License" />
-  <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16" />
+  <a href="https://pvdai.tech"><img src="https://img.shields.io/github/deployments/julianaijal/PvdAI/production?label=live&logo=vercel&logoColor=white" alt="Live on Vercel" /></a>
+  <img src="https://img.shields.io/github/last-commit/julianaijal/PvdAI?label=updated" alt="Last updated" />
+  <img src="https://img.shields.io/github/license/julianaijal/PvdAI?label=license" alt="MIT License" />
+  <br />
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white" alt="Next.js 16" />
   <img src="https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white" alt="React 19" />
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white" alt="OpenAI" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript 5" />
+  <img src="https://img.shields.io/badge/OpenAI-RAG-412991?logo=openai&logoColor=white" alt="OpenAI RAG" />
 </p>
 
 ---
