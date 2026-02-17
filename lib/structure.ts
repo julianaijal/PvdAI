@@ -1,13 +1,8 @@
 import { readFileSync } from "fs";
 import { join } from "path";
+import type { Section } from "./types";
 
-export interface Section {
-  id: string;
-  title: string;
-  level: number;
-  content: string;
-  children: Section[];
-}
+export type { Section };
 
 let cache: Section[] | null = null;
 

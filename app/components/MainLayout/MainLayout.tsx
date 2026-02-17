@@ -6,18 +6,12 @@ import Link from "next/link";
 import DocumentBrowser from "../DocumentBrowser/DocumentBrowser";
 import styles from "./MainLayout.module.scss";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import type { TocItem } from "@/lib/types";
 
 const Chat = dynamic(() => import("../Chat/Chat"), {
   loading: () => <div className={styles.chatLoading}>Laden...</div>,
   ssr: false,
 });
-
-interface TocItem {
-  id: string;
-  title: string;
-  level: number;
-  children: TocItem[];
-}
 
 interface MainLayoutProps {
   toc: TocItem[];

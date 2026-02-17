@@ -2,21 +2,7 @@
 
 import { useState, useCallback, useEffect, memo, useMemo, useRef } from "react";
 import styles from "./DocumentBrowser.module.scss";
-
-interface TocItem {
-  id: string;
-  title: string;
-  level: number;
-  children: TocItem[];
-}
-
-interface Section {
-  id: string;
-  title: string;
-  level: number;
-  content: string;
-  children: Section[];
-}
+import type { TocItem, Section } from "@/lib/types";
 
 interface SearchResult {
   sectionId: string;
@@ -47,8 +33,12 @@ function searchStructure(
 
     if (section.content && results.length < maxResults) {
       const contentLower = section.content.toLowerCase();
-      const contentIdx = contentLower.indexOf(lower);
-      if (contentIdx !== -1) {
+      let searchFrom = 0;
+      const maxPerSection = 3;
+      let found = 0;
+      while (found < maxPerSection && results.length < maxResults) {
+        const contentIdx = contentLower.indexOf(lower, searchFrom);
+        if (contentIdx === -1) break;
         const start = Math.max(0, contentIdx - 50);
         const end = Math.min(section.content.length, contentIdx + query.length + 50);
         const prefix = start > 0 ? "..." : "";
@@ -59,6 +49,8 @@ function searchStructure(
           snippet: prefix + section.content.slice(start, end) + suffix,
           matchIndex: contentIdx - start + prefix.length,
         });
+        searchFrom = contentIdx + query.length;
+        found++;
       }
     }
 

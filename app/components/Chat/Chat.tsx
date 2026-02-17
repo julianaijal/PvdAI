@@ -5,18 +5,12 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 import styles from "./Chat.module.scss";
+import type { TocItem } from "@/lib/types";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
   isError?: boolean;
-}
-
-interface TocItem {
-  id: string;
-  title: string;
-  level: number;
-  children: TocItem[];
 }
 
 interface ChatProps {
