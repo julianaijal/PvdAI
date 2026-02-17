@@ -57,7 +57,8 @@
     <div class="icon">AI</div>
     <h1>Je bent offline</h1>
     <p>PvdAI heeft een internetverbinding nodig om te werken. Controleer je verbinding en probeer het opnieuw.</p>
-    <button onclick="location.reload()">Opnieuw proberen</button>
+    <button id="retry">Opnieuw proberen</button>
   </div>
+  <script>document.getElementById("retry").addEventListener("click", function() { location.reload(); });</script>
 </body>
 </html>
