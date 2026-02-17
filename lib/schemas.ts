@@ -15,5 +15,5 @@ export const AskRequestSchema = z.object({
 });
 
 export const SectionRequestSchema = z.object({
-  id: z.string().min(1, "Missing id parameter"),
+  id: z.string().min(1, "Missing id parameter").max(200).regex(/^[a-z0-9-]+$/),
 });
