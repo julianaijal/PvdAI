@@ -574,18 +574,20 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
               </svg>
             </div>
             <h2 className={styles.welcomeTitle}>Stel een vraag</h2>
-            <p className={styles.welcomeText}>
-              Vraag iets over de statuten en reglementen van de PvdA.
-              {" "}
-              <a
-                href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.pdfLink}
-              >
-                Bekijk het originele document (PDF)
-              </a>
-            </p>
+            <ol className={styles.howItWorks} aria-label="Hoe het werkt">
+              <li className={styles.howItWorksStep}>
+                <span className={styles.howItWorksIcon} aria-hidden="true">💬</span>
+                <span>Stel een vraag over de statuten of reglementen</span>
+              </li>
+              <li className={styles.howItWorksStep}>
+                <span className={styles.howItWorksIcon} aria-hidden="true">📎</span>
+                <span>Ik verwijs je naar de relevante artikelen</span>
+              </li>
+              <li className={styles.howItWorksStep}>
+                <span className={styles.howItWorksIcon} aria-hidden="true">📄</span>
+                <span>Klik een artikel om het te lezen in de documentbrowser</span>
+              </li>
+            </ol>
             <div className={styles.starters} role="group" aria-label="Voorbeeldvragen">
               {starterQuestions.map((q) => (
                 <button
@@ -604,6 +606,14 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                 </button>
               ))}
             </div>
+            <a
+              href="https://www.pvda.nl/wp-content/uploads/2017/06/Statuten-en-reglementen-PvdA-2023.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.pdfLink}
+            >
+              Bekijk het originele document (PDF)
+            </a>
           </div>
         )}
         {messages.map((msg, i) => (

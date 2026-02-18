@@ -78,17 +78,8 @@
   letter-spacing: -0.3px;
 }
 
-.welcomeText {
-  font-size: 14px;
-  color: var(--pvda-text-secondary);
-  margin-bottom: 28px;
-  max-width: 280px;
-  line-height: 1.5;
-}
-
 .pdfLink {
-  display: inline-block;
-  margin-top: 4px;
+  margin-top: 16px;
   font-size: 13px;
   color: var(--pvda-red);
   text-decoration: none;
@@ -99,6 +90,33 @@
     color: var(--pvda-red-dark);
     border-bottom-style: solid;
   }
+}
+
+.howItWorks {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+  max-width: 300px;
+  text-align: left;
+}
+
+.howItWorksStep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--pvda-text-secondary);
+  line-height: 1.4;
+}
+
+.howItWorksIcon {
+  font-size: 15px;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .starters {
