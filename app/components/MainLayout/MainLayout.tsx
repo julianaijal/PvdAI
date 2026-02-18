@@ -20,6 +20,7 @@ interface MainLayoutProps {
 export default function MainLayout({ toc }: MainLayoutProps) {
   const [activePanel, setActivePanel] = useState<"browser" | "chat">("chat");
   const [highlightId, setHighlightId] = useState<string | null>(null);
+  const [isBrowserPulsing, setIsBrowserPulsing] = useState(false);
   const isMobile = useSyncExternalStore(
     (callback) => {
       const mql = window.matchMedia("(max-width: 768px)");
@@ -65,13 +66,17 @@ export default function MainLayout({ toc }: MainLayoutProps) {
   const handleArticleClick = useCallback((articleId: string) => {
     setHighlightId(articleId);
     setActivePanel("browser");
+    if (!isMobile) {
+      setIsBrowserPulsing(true);
+      setTimeout(() => setIsBrowserPulsing(false), 400);
+    }
     setTimeout(() => {
       const el = document.getElementById(articleId);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 100);
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className={styles.layout}>
@@ -126,7 +131,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
       <main id="main-content" className={styles.main}>
         <section
           ref={browserPanelRef}
-          className={`${styles.browserPanel} ${activePanel === "browser" ? styles.panelActive : ""}`}
+          className={`${styles.browserPanel} ${activePanel === "browser" ? styles.panelActive : ""} ${isBrowserPulsing ? styles.browserPanelPulse : ""}`}
           aria-label="Documentbrowser"
           {...(isMobile && activePanel !== "browser" ? { inert: true } : {})}
         >

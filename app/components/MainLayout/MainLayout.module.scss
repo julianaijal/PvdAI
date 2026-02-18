@@ -208,6 +208,22 @@
   }
 }
 
+@keyframes panelPulse {
+  0%, 100% {
+    border-color: color-mix(in srgb, var(--pvda-border) 60%, transparent);
+  }
+  35% {
+    border-color: var(--pvda-red);
+    box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--pvda-border) 20%, transparent), 0 0 12px var(--pvda-red-subtle);
+  }
+}
+
+.browserPanelPulse {
+  @media (min-width: 769px) {
+    animation: panelPulse 400ms ease-out;
+  }
+}
+
 .backToChat {
   display: none;
 
