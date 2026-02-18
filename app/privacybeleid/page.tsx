@@ -67,17 +67,23 @@ export default function PrivacybeleidPage() {
           <h2>Geen account nodig</h2>
           <p>
             PvdAI vereist geen registratie of account. Je kunt de tool
-            anoniem gebruiken zonder persoonlijke gegevens achter te laten.
+            gebruiken zonder je te identificeren.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>Welke gegevens worden verwerkt?</h2>
+          <h2>Verwerking door OpenAI</h2>
           <p>
-            Wanneer je een vraag stelt via de AI-chat, wordt die vraag
-            doorgestuurd naar de API van OpenAI voor verwerking. OpenAI
-            verwerkt de tekst van je vraag om een antwoord te genereren.
-            Raadpleeg het{" "}
+            Wanneer je een vraag stelt, wordt de tekst van je vraag
+            doorgestuurd naar de API van OpenAI. Bij een gesprek met meerdere
+            berichten wordt ook de gespreksgeschiedenis meegestuurd. OpenAI
+            verwerkt deze gegevens om een antwoord te genereren.
+          </p>
+          <p>
+            PvdAI stuurt uitdrukkelijk de instructie mee dat OpenAI de
+            gegevens niet mag opslaan voor trainingsdoeleinden (
+            <code>store: false</code>). PvdAI zelf slaat de inhoud van
+            vragen of antwoorden niet op. Raadpleeg het{" "}
             <a
               href="https://openai.com/policies/privacy-policy"
               target="_blank"
@@ -85,49 +91,77 @@ export default function PrivacybeleidPage() {
             >
               privacybeleid van OpenAI
             </a>{" "}
-            voor meer informatie over hoe zij met gegevens omgaan.
+            voor de volledige verwerkingsvoorwaarden van OpenAI.
           </p>
           <p>
-            PvdAI slaat de inhoud van vragen of antwoorden niet op in een
-            eigen database. Er worden geen gespreksgeschiedenissen bewaard.
+            Om dubbele verwerkingen te voorkomen kunnen vragen tijdelijk in
+            het geheugen van de server worden gecacht. Dit cache verdwijnt bij
+            een herstart van de server en wordt niet gedeeld.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>Gebruik van IP-adressen</h2>
+          <h2>IP-adressen en gebruikslimiet</h2>
           <p>
-            Om misbruik te voorkomen geldt een limiet van 20 vragen per dag
-            per IP-adres. Daarvoor wordt je IP-adres tijdelijk in het
-            geheugen van de server bewaard. Dit wordt niet opgeslagen in een
-            database en wordt niet gedeeld met derden.
+            Om overmatig gebruik te beperken geldt een maximum van 20 vragen
+            per dag per IP-adres. Daarvoor wordt je IP-adres opgeslagen in
+            een Redis-database met een vervaltijd van 24 uur. Na 24 uur wordt
+            de teller automatisch verwijderd. De IP-adressen worden niet
+            gedeeld met derden en niet voor andere doeleinden gebruikt.
           </p>
         </section>
 
         <section className={styles.section}>
           <h2>Analytische gegevens</h2>
           <p>
-            PvdAI maakt gebruik van Vercel Analytics en Google Analytics
-            (geanonimiseerd) voor inzicht in het bezoekersaantal en de
-            gebruikte apparaten. Er worden geen individuele gebruikers
-            gevolgd. Er worden geen advertentietrackers gebruikt.
+            PvdAI maakt gebruik van{" "}
+            <a
+              href="https://vercel.com/docs/analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vercel Analytics
+            </a>{" "}
+            en{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Analytics 4
+            </a>
+            . Deze diensten verzamelen gegevens over paginabezoeken,
+            browsertype, apparaattype en globale locatie (land/stad). Google
+            Analytics plaatst daarvoor cookies in je browser (zie hieronder).
+            Er worden geen advertentieprofielen opgebouwd.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>Cookies</h2>
+          <h2>Cookies en lokale opslag</h2>
           <p>
-            PvdAI gebruikt alleen functionele opslag via{" "}
-            <code>localStorage</code> in je browser, voor voorkeuren zoals
-            het kleurthema (donker/licht). Er worden geen tracking-cookies
-            geplaatst.
+            Google Analytics 4 plaatst analytische cookies in je browser,
+            waaronder <code>_ga</code> en <code>_ga_*</code>. Deze cookies
+            worden gebruikt om bezoeken te onderscheiden en gebruiksstatistieken
+            bij te houden.
+          </p>
+          <p>
+            PvdAI slaat je themakeuze (donker/licht) op via{" "}
+            <code>localStorage</code> in je browser. Dit blijft lokaal op je
+            apparaat en wordt niet naar servers verstuurd.
+          </p>
+          <p>
+            Er worden geen advertentiecookies of third-party tracking-cookies
+            geplaatst anders dan die van Google Analytics.
           </p>
         </section>
 
         <section className={styles.section}>
           <h2>Beveiliging</h2>
           <p>
-            De verbinding met PvdAI is beveiligd via HTTPS. API-sleutels zijn
-            nooit zichtbaar voor bezoekers.
+            De verbinding met PvdAI verloopt via HTTPS. API-sleutels zijn
+            uitsluitend beschikbaar op de server en nooit zichtbaar voor
+            bezoekers.
           </p>
         </section>
 
