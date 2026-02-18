@@ -30,9 +30,15 @@
   h1 {
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     color: var(--pvda-fg);
   }
+}
+
+.meta {
+  color: var(--pvda-text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
 }
 
 .section {
@@ -48,31 +54,10 @@
   p {
     color: var(--pvda-text);
     line-height: 1.7;
-  }
+    margin-bottom: 0.75rem;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  li {
-    color: var(--pvda-text);
-    line-height: 1.7;
-    padding-left: 1.25rem;
-    position: relative;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.65em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--pvda-red);
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
@@ -84,6 +69,14 @@
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background: var(--pvda-surface);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
   }
 }
 
@@ -113,9 +106,6 @@
   text-align: center;
   color: var(--pvda-text-secondary);
   font-size: 0.875rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 
   nav {
     display: flex;

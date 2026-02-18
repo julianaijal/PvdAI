@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://pvdai.tech",
-    languages: { nl: "https://pvdai.tech" },
+    languages: { nl: "https://pvdai.tech", "x-default": "https://pvdai.tech" },
   },
   robots: {
     index: true,

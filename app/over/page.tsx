@@ -165,6 +165,13 @@ export default function OverPage() {
       </main>
 
       <footer className={styles.footer}>
+        <nav>
+          <Link href="/">Home</Link>
+          {" · "}
+          <Link href="/veelgestelde-vragen">Veelgestelde vragen</Link>
+          {" · "}
+          <Link href="/privacybeleid">Privacybeleid</Link>
+        </nav>
         <p>
           Gemaakt door{" "}
           <a
