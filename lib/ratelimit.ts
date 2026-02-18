@@ -1,13 +1,24 @@
 import { createClient } from "redis";
-import { createHash } from "crypto";
+import { createHmac } from "crypto";
 
 const LIMIT = 20;
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 const WINDOW_S = 24 * 60 * 60; // 24 hours in seconds
 
-// Hash IP addresses before storage so raw IPs are never persisted
+const HASH_SECRET = process.env.IP_HASH_SECRET;
+
+if (!HASH_SECRET && process.env.NODE_ENV === "production") {
+  console.warn("[ratelimit] IP_HASH_SECRET not set — IP hashing is insecure");
+}
+
+// Hash IP with HMAC-SHA256 keyed on the secret + today's date.
+// - Without the secret, stored hashes are computationally irreversible.
+// - The daily component means hashes from different days cannot be linked,
+//   and they expire from Redis (24h TTL) at roughly the same time as they rotate.
 function hashIp(ip: string): string {
-  return createHash("sha256").update(ip).digest("hex");
+  const date = new Date().toISOString().split("T")[0];
+  const key = HASH_SECRET ? `${HASH_SECRET}:${date}` : date;
+  return createHmac("sha256", key).update(ip).digest("hex");
 }
 
 // In-memory fallback for local dev (no Redis configured)

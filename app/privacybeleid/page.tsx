@@ -104,11 +104,13 @@ export default function PrivacybeleidPage() {
           <h2>IP-adressen en gebruikslimiet</h2>
           <p>
             Om overmatig gebruik te beperken geldt een maximum van 20 vragen
-            per dag per IP-adres. Daarvoor wordt een SHA-256-hash van je
-            IP-adres opgeslagen in een Redis-database met een vervaltijd van
-            24 uur. Na 24 uur wordt de hash automatisch verwijderd. Je
-            werkelijke IP-adres wordt nooit opgeslagen. De hashes worden niet
-            gedeeld met derden en niet voor andere doeleinden gebruikt.
+            per dag per IP-adres. Daarvoor wordt een HMAC-SHA256-hash van je
+            IP-adres opgeslagen in een Redis-database. De hash wordt berekend
+            met een geheim serversleutel én de datum van de dag, zodat de hash
+            elke dag automatisch verandert. Zonder het serversleutel is de
+            hash wiskundig niet terug te herleiden naar een IP-adres. Na 24
+            uur vervalt de hash automatisch uit Redis. Je werkelijke IP-adres
+            wordt nooit opgeslagen. De hashes worden niet gedeeld met derden.
           </p>
         </section>
 
