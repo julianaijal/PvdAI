@@ -1,8 +1,14 @@
 import { createClient } from "redis";
+import { createHash } from "crypto";
 
 const LIMIT = 20;
 const WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 const WINDOW_S = 24 * 60 * 60; // 24 hours in seconds
+
+// Hash IP addresses before storage so raw IPs are never persisted
+function hashIp(ip: string): string {
+  return createHash("sha256").update(ip).digest("hex");
+}
 
 // In-memory fallback for local dev (no Redis configured)
 const store = new Map<string, { count: number; resetAt: number }>();
@@ -21,10 +27,11 @@ if (typeof setInterval !== "undefined") {
 
 function checkRateLimitMemory(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now();
-  const entry = store.get(ip);
+  const entry = store.get(hashIp(ip));
 
+  const key = hashIp(ip);
   if (!entry || now > entry.resetAt) {
-    store.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+    store.set(key, { count: 1, resetAt: now + WINDOW_MS });
     return { allowed: true, remaining: LIMIT - 1 };
   }
 
@@ -48,7 +55,7 @@ async function getRedis() {
 
 async function checkRateLimitRedis(ip: string): Promise<{ allowed: boolean; remaining: number }> {
   const client = await getRedis();
-  const key = `ratelimit:${ip}`;
+  const key = `ratelimit:${hashIp(ip)}`;
   const count = await client.incr(key);
 
   // Set TTL on first request (when count is 1)

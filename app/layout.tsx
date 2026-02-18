@@ -288,7 +288,7 @@ export default async function RootLayout({
           nonce={nonce}
         />
         <Script id="gtag-init" strategy="lazyOnload" nonce={nonce}>
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-H4VK7HXVHV');`}
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-H4VK7HXVHV',{'allow_google_signals':false,'allow_ad_personalization_signals':false});`}
         </Script>
       </body>
     </html>

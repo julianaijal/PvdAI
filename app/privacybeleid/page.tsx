@@ -104,9 +104,10 @@ export default function PrivacybeleidPage() {
           <h2>IP-adressen en gebruikslimiet</h2>
           <p>
             Om overmatig gebruik te beperken geldt een maximum van 20 vragen
-            per dag per IP-adres. Daarvoor wordt je IP-adres opgeslagen in
-            een Redis-database met een vervaltijd van 24 uur. Na 24 uur wordt
-            de teller automatisch verwijderd. De IP-adressen worden niet
+            per dag per IP-adres. Daarvoor wordt een SHA-256-hash van je
+            IP-adres opgeslagen in een Redis-database met een vervaltijd van
+            24 uur. Na 24 uur wordt de hash automatisch verwijderd. Je
+            werkelijke IP-adres wordt nooit opgeslagen. De hashes worden niet
             gedeeld met derden en niet voor andere doeleinden gebruikt.
           </p>
         </section>
@@ -133,7 +134,9 @@ export default function PrivacybeleidPage() {
             . Deze diensten verzamelen gegevens over paginabezoeken,
             browsertype, apparaattype en globale locatie (land/stad). Google
             Analytics plaatst daarvoor cookies in je browser (zie hieronder).
-            Er worden geen advertentieprofielen opgebouwd.
+            PvdAI heeft Google Signals en advertentiepersonalisatie
+            uitgeschakeld, zodat je gegevens niet worden gebruikt voor
+            advertentiedoeleinden.
           </p>
         </section>
 
