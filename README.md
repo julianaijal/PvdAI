@@ -41,9 +41,9 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 - **Dark/light mode** — system-aware with manual toggle
 - **Mobile-first** — responsive panel switching with accessible touch targets
 - **Accessible** — WCAG AA contrast compliance, 44px touch targets, `prefers-reduced-motion` support, `aria-live` announcements, focus-visible styles, and `inert` attribute on hidden panels
-- **SEO-friendly** — server-rendered summary and TOC, sitemap, robots.txt, IndexNow, FAQPage schema, SearchAction, canonical URL
-- **Privacy-first** — questions are not stored or used for training (`store: false`)
-- **Rate limiting** — 20 questions/day per IP via Redis (Vercel/Upstash), with remaining count shown to users
+- **SEO-friendly** — server-rendered summary and TOC, sitemap, robots.txt, IndexNow, FAQPage schema, SearchAction, canonical URL; dedicated `/veelgestelde-vragen` and `/privacybeleid` pages
+- **Privacy-first** — questions not stored or used for training (`store: false`); IP addresses HMAC-SHA256 hashed with daily rotation before storage; GA4 advertising features disabled
+- **Rate limiting** — 20 questions/day per IP via Redis (Vercel/Upstash), with remaining count shown to users; IPs stored only as HMAC hashes
 - **Error handling** — custom 404 page, error boundaries, incomplete stream detection
 
 ## Tech Stack
@@ -78,6 +78,7 @@ Open [http://localhost:3000](http://localhost:3000).
 |----------|----------|-------------|
 | `OPENAI_API_KEY` | Yes | [OpenAI API key](https://platform.openai.com/api-keys) |
 | `REDIS_URL` | No | Upstash Redis URL. Falls back to in-memory rate limiting |
+| `IP_HASH_SECRET` | Yes (prod) | Secret key for HMAC-SHA256 IP hashing. Generate with `openssl rand -hex 32` |
 
 ### Data Pipeline
 
@@ -268,10 +269,10 @@ Returns the full document structure for client-side search.
 
 ## Privacy
 
-- Questions are **not stored** and **not used for AI training**
-- OpenAI API called with `store: false` — data is not retained beyond the request
-- No personal data is collected or stored
-- Anonymous usage analytics via [Google Analytics](https://marketingplatform.google.com/about/analytics/) (page views, session data)
+- Questions are **not stored** and **not used for AI training** — OpenAI API called with `store: false`
+- IP addresses are **never stored in plaintext** — hashed with HMAC-SHA256 (server secret + daily date) before Redis storage; hashes expire after 24h and rotate daily
+- GA4 advertising features disabled (`allow_google_signals: false`, `allow_ad_personalization_signals: false`)
+- Full details at [pvdai.tech/privacybeleid](https://pvdai.tech/privacybeleid)
 
 ## Contributing
 
