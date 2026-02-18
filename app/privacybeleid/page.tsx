@@ -82,8 +82,15 @@ export default function PrivacybeleidPage() {
           <p>
             PvdAI stuurt uitdrukkelijk de instructie mee dat OpenAI de
             gegevens niet mag opslaan voor trainingsdoeleinden (
-            <code>store: false</code>). PvdAI zelf slaat de inhoud van
-            vragen of antwoorden niet op. Raadpleeg het{" "}
+            <a
+              href="https://github.com/julianaijal/PvdAI/blob/main/app/api/ask/route.ts#L88"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <code>store: false</code>
+            </a>
+            ). PvdAI zelf slaat de inhoud van vragen of antwoorden niet op.
+            Raadpleeg het{" "}
             <a
               href="https://openai.com/policies/privacy-policy"
               target="_blank"
@@ -104,13 +111,21 @@ export default function PrivacybeleidPage() {
           <h2>IP-adressen en gebruikslimiet</h2>
           <p>
             Om overmatig gebruik te beperken geldt een maximum van 20 vragen
-            per dag per IP-adres. Daarvoor wordt een HMAC-SHA256-hash van je
-            IP-adres opgeslagen in een Redis-database. De hash wordt berekend
-            met een geheim serversleutel én de datum van de dag, zodat de hash
-            elke dag automatisch verandert. Zonder het serversleutel is de
-            hash wiskundig niet terug te herleiden naar een IP-adres. Na 24
-            uur vervalt de hash automatisch uit Redis. Je werkelijke IP-adres
-            wordt nooit opgeslagen. De hashes worden niet gedeeld met derden.
+            per dag per IP-adres. Daarvoor wordt een{" "}
+            <a
+              href="https://github.com/julianaijal/PvdAI/blob/main/lib/ratelimit.ts#L18-L22"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              HMAC-SHA256-hash
+            </a>{" "}
+            van je IP-adres opgeslagen in een Redis-database. De hash wordt
+            berekend met een geheim serversleutel én de datum van de dag,
+            zodat de hash elke dag automatisch verandert. Zonder het
+            serversleutel is de hash wiskundig niet terug te herleiden naar
+            een IP-adres. Na 24 uur vervalt de hash automatisch uit Redis. Je
+            werkelijke IP-adres wordt nooit opgeslagen. De hashes worden niet
+            gedeeld met derden.
           </p>
         </section>
 
@@ -136,8 +151,15 @@ export default function PrivacybeleidPage() {
             . Deze diensten verzamelen gegevens over paginabezoeken,
             browsertype, apparaattype en globale locatie (land/stad). Google
             Analytics plaatst daarvoor cookies in je browser (zie hieronder).
-            PvdAI heeft Google Signals en advertentiepersonalisatie
-            uitgeschakeld, zodat je gegevens niet worden gebruikt voor
+            PvdAI heeft{" "}
+            <a
+              href="https://github.com/julianaijal/PvdAI/blob/main/app/layout.tsx#L291"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google Signals en advertentiepersonalisatie uitgeschakeld
+            </a>
+            , zodat je gegevens niet worden gebruikt voor
             advertentiedoeleinden.
           </p>
         </section>

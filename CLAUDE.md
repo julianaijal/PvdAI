@@ -60,6 +60,17 @@ No database. All data is static JSON:
 
 SCSS Modules with CSS variables defined in `app/globals.scss`. PvdA brand colors (`--pvda-red`), dark/light themes via `[data-theme]` attribute on `<html>`.
 
+## Privacy Policy Consistency
+
+`app/privacybeleid/page.tsx` must always reflect the actual code behavior. Whenever any of the following files change, check whether the privacy policy needs updating **before** committing:
+
+- `app/api/ask/route.ts` — OpenAI calls, `store: false`, what data is sent
+- `lib/ratelimit.ts` — IP hashing method, storage backend, TTL, rate limit
+- `app/layout.tsx` — analytics scripts, GA4 config, cookies, localStorage
+- `app/components/**` — any new localStorage usage
+
+The privacy policy also links directly to specific lines in these files on GitHub. If line numbers shift due to edits, update the anchor links in `privacybeleid/page.tsx` accordingly.
+
 ## Git Workflow
 
 - Always make small, focused commits — one logical change per commit.
