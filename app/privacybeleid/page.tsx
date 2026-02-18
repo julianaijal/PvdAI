@@ -146,9 +146,10 @@ export default function PrivacybeleidPage() {
             bij te houden.
           </p>
           <p>
-            PvdAI slaat je themakeuze (donker/licht) op via{" "}
-            <code>localStorage</code> in je browser. Dit blijft lokaal op je
-            apparaat en wordt niet naar servers verstuurd.
+            PvdAI slaat twee voorkeuren op via <code>localStorage</code> in
+            je browser: je themakeuze (donker/licht) en of je de
+            welkomstmelding hebt weggeklikt. Dit blijft lokaal op je apparaat
+            en wordt niet naar servers verstuurd.
           </p>
           <p>
             Er worden geen advertentiecookies of third-party tracking-cookies
