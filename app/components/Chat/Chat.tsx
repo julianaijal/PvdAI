@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 import styles from "./Chat.module.scss";
 import type { TocItem } from "@/lib/types";
+import { hasArticleRefs } from "@/lib/chat-utils";
 
 interface Message {
   role: "user" | "assistant";
@@ -117,7 +118,8 @@ function makeArticleButton(
   key: string,
   index: number | string,
   onClick?: (id: string) => void,
-  articleLookup?: Map<string, string>
+  articleLookup?: Map<string, string>,
+  onDismissHint?: () => void
 ): React.ReactElement {
   const tocId = articleLookup?.get(key);
   if (tocId && onClick) {
@@ -125,7 +127,10 @@ function makeArticleButton(
       <button
         key={index}
         className={styles.articleRef}
-        onClick={() => onClick(tocId)}
+        onClick={() => {
+          onClick(tocId);
+          onDismissHint?.();
+        }}
         aria-label={`Ga naar Artikel ${key} in documentbrowser`}
       >
         {text}
@@ -138,7 +143,8 @@ function makeArticleButton(
 function parseArticleRefs(
   text: string,
   onClick?: (id: string) => void,
-  articleLookup?: Map<string, string>
+  articleLookup?: Map<string, string>,
+  onDismissHint?: () => void
 ) {
   // Match both singular "Artikel X" and plural "Artikelen X, Y, Z"
   const parts = text.split(/(Artikelen\s+\d+(?:\.\d+)?(?:(?:,\s*(?:en\s+)?|\s+en\s+)\d+(?:\.\d+)?)*|Artikel\s+\d+(?:\.\d+)?(?:,?\s*lid\s+\d+)?)/gi);
@@ -155,14 +161,14 @@ function parseArticleRefs(
           const isLast = j === numbers.length - 1;
           result.push(<span key={`${i}-sep-${j}`}>{isLast ? " en " : ", "}</span>);
         }
-        result.push(makeArticleButton(trimmed, trimmed, `${i}-${j}`, onClick, articleLookup));
+        result.push(makeArticleButton(trimmed, trimmed, `${i}-${j}`, onClick, articleLookup, onDismissHint));
       });
       return result;
     }
     // Handle singular "Artikel X"
     const numMatch = part.match(/^Artikel\s+(\d+(?:\.\d+)?)/i);
     if (numMatch) {
-      return [makeArticleButton(part, numMatch[1], i, onClick, articleLookup)];
+      return [makeArticleButton(part, numMatch[1], i, onClick, articleLookup, onDismissHint)];
     }
     return [<span key={i}>{part}</span>];
   });
@@ -171,11 +177,12 @@ function parseArticleRefs(
 function processChildren(
   children: React.ReactNode,
   onClick?: (id: string) => void,
-  articleLookup?: Map<string, string>
+  articleLookup?: Map<string, string>,
+  onDismissHint?: () => void
 ): React.ReactNode {
   return Children.map(children, (child) => {
     if (typeof child === "string") {
-      return parseArticleRefs(child, onClick, articleLookup);
+      return parseArticleRefs(child, onClick, articleLookup, onDismissHint);
     }
     return child;
   });
@@ -183,7 +190,8 @@ function processChildren(
 
 function useMarkdownComponents(
   onClick?: (id: string) => void,
-  articleLookup?: Map<string, string>
+  articleLookup?: Map<string, string>,
+  onDismissHint?: () => void
 ): Components {
   return useMemo(() => ({
     p: ({ children }) => {
@@ -192,20 +200,20 @@ function useMarkdownComponents(
       if (/^Bron(?:nen)?:/i.test(text.trim())) {
         return (
           <div className={styles.sourceChips}>
-            {processChildren(children, onClick, articleLookup)}
+            {processChildren(children, onClick, articleLookup, onDismissHint)}
           </div>
         );
       }
-      return <p>{processChildren(children, onClick, articleLookup)}</p>;
+      return <p>{processChildren(children, onClick, articleLookup, onDismissHint)}</p>;
     },
     li: ({ children }) => (
-      <li>{processChildren(children, onClick, articleLookup)}</li>
+      <li>{processChildren(children, onClick, articleLookup, onDismissHint)}</li>
     ),
     strong: ({ children }) => (
-      <strong>{processChildren(children, onClick, articleLookup)}</strong>
+      <strong>{processChildren(children, onClick, articleLookup, onDismissHint)}</strong>
     ),
     em: ({ children }) => (
-      <em>{processChildren(children, onClick, articleLookup)}</em>
+      <em>{processChildren(children, onClick, articleLookup, onDismissHint)}</em>
     ),
     a: ({ href, children }) => (
       <a href={href} className={styles.markdownLink} target="_blank" rel="noopener noreferrer">
@@ -215,7 +223,7 @@ function useMarkdownComponents(
     ul: ({ children }) => <ul className={styles.markdownList}>{children}</ul>,
     ol: ({ children }) => <ol className={styles.markdownList}>{children}</ol>,
     code: ({ children }) => <code className={styles.markdownCode}>{children}</code>,
-  }), [onClick, articleLookup]);
+  }), [onClick, articleLookup, onDismissHint]);
 }
 
 function CopyButton({ text }: { text: string }) {
@@ -354,11 +362,24 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
   const abortControllerRef = useRef<AbortController | null>(null);
   const [starterQuestions, setStarterQuestions] = useState<string[]>([]);
   const [remainingQuestions, setRemainingQuestions] = useState<number | null>(null);
+  const [showArticleHint, setShowArticleHint] = useState(false);
+  const [articleHintDismissed, setArticleHintDismissed] = useState(() =>
+    typeof window !== "undefined"
+      ? localStorage.getItem("pvdai_article_hint_dismissed") === "1"
+      : false
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const isNearBottomRef = useRef(true);
   const articleLookup = useMemo<Map<string, string>>(() => buildArticleLookup(toc || []), [toc]);
-  const markdownComponents = useMarkdownComponents(onArticleClick, articleLookup);
+
+  const handleDismissArticleHint = useCallback(() => {
+    setShowArticleHint(false);
+    setArticleHintDismissed(true);
+    localStorage.setItem("pvdai_article_hint_dismissed", "1");
+  }, []);
+
+  const markdownComponents = useMarkdownComponents(onArticleClick, articleLookup, handleDismissArticleHint);
 
   const handleRetry = useCallback((index: number) => {
     const question = messages[index - 1].content;
@@ -376,6 +397,14 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (articleHintDismissed) return;
+    const hasAny = messages.some(
+      (m) => m.role === "assistant" && !m.isError && hasArticleRefs(m.content)
+    );
+    if (hasAny) setShowArticleHint(true);
+  }, [messages, articleHintDismissed]);
 
   // Pre-fill question from URL query parameter
   useEffect(() => {
@@ -640,6 +669,18 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
                 <span /><span /><span />
               </div>
             </div>
+          </div>
+        )}
+        {showArticleHint && (
+          <div className={styles.articleHint} role="note" aria-live="polite">
+            <span>💡 Klik op een artikel om het te lezen in de documentbrowser</span>
+            <button
+              className={styles.articleHintDismiss}
+              onClick={handleDismissArticleHint}
+              aria-label="Sluit tip"
+            >
+              ×
+            </button>
           </div>
         )}
         <div ref={messagesEndRef} />
