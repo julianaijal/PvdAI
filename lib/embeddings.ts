@@ -92,7 +92,8 @@ export function getChunks(): Chunk[] {
  */
 export function findRelevantChunks(
   queryEmbedding: number[],
-  topK: number = 5
+  topK: number = 5,
+  minScore: number = 0
 ): Chunk[] {
   ensureLoaded();
   const n = meta!.length;
@@ -160,12 +161,14 @@ export function findRelevantChunks(
     }
   }
 
-  // Sort the small heap (size ≤ k) by descending score
+  // Sort the small heap (size ≤ k) by descending score, then apply threshold
   const indices = heapIdx.map((idx, i) => ({ idx, score: heapScore[i] }));
   indices.sort((a, b) => b.score - a.score);
 
-  return indices.map((entry) => ({
-    ...meta![entry.idx],
-    embedding: mat.subarray(entry.idx * d, (entry.idx + 1) * d),
-  }));
+  return indices
+    .filter((entry) => entry.score >= minScore)
+    .map((entry) => ({
+      ...meta![entry.idx],
+      embedding: mat.subarray(entry.idx * d, (entry.idx + 1) * d),
+    }));
 }

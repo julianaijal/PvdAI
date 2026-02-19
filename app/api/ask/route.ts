@@ -129,8 +129,18 @@ export async function POST(req: Request) {
 
     const queryEmbedding = await getQueryEmbedding(searchQuery);
 
-    // Find relevant chunks
-    const relevantChunks = findRelevantChunks(queryEmbedding, 5);
+    // Find relevant chunks — only include those with cosine similarity ≥ 0.35.
+    // Below that threshold the match is too weak to be useful and risks
+    // introducing misleading context that the LLM may hallucinate from.
+    const relevantChunks = findRelevantChunks(queryEmbedding, 5, 0.35);
+
+    if (relevantChunks.length === 0) {
+      return Response.json(
+        { error: "Ik kan geen relevante informatie over dit onderwerp vinden in de statuten en reglementen." },
+        { status: 200 }
+      );
+    }
+
     const context = relevantChunks
       .map((c) => `[${c.sectionTitle}]\n${c.text}`)
       .join("\n\n---\n\n");
