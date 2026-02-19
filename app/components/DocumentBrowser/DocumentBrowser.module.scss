@@ -56,6 +56,7 @@
 .toc {
   max-height: 300px;
   overflow-y: auto;
+  scrollbar-gutter: stable;
   border-bottom: 1px solid var(--pvda-border-light);
   padding: 6px 8px;
 }
@@ -140,6 +141,7 @@
 .content {
   flex: 1;
   overflow-y: auto;
+  scrollbar-gutter: stable;
   padding: 40px 48px;
   position: relative;
 
