@@ -315,15 +315,17 @@ export default function DocumentBrowser({
           PDF
         </a>
       </div>
-      <div className={styles.searchBar}>
+      <search className={styles.searchBar} aria-label="Zoek in het document">
         <input
           className={styles.searchInput}
-          type="text"
+          type="search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={loadStructure}
           placeholder="Zoek in het document..."
           aria-label="Zoek in het document"
+          autoComplete="off"
+          spellCheck={false}
         />
         {searchQuery && (
           <button
@@ -334,7 +336,7 @@ export default function DocumentBrowser({
             &times;
           </button>
         )}
-      </div>
+      </search>
       {debouncedQuery && searchResults.length > 0 && (
         <div className={styles.searchResults} role="list" aria-label="Zoekresultaten" aria-live="polite">
           {searchResults.map((result, i) => (
