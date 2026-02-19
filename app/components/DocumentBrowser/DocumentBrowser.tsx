@@ -82,6 +82,7 @@ function tocMatchesQuery(item: TocItem, matchingIds: Set<string>): boolean {
 interface DocumentBrowserProps {
   toc: TocItem[];
   highlightId?: string | null;
+  scrollRequest?: number;
 }
 
 const TOCItem = memo(function TOCItem({
@@ -177,6 +178,7 @@ const SectionContent = memo(function SectionContent({ section }: { section: Sect
 export default function DocumentBrowser({
   toc,
   highlightId,
+  scrollRequest,
 }: DocumentBrowserProps) {
   const [tocOpen, setTocOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -237,9 +239,6 @@ export default function DocumentBrowser({
   const loadSection = useCallback(async (id: string) => {
     if (loadedSections[id]) {
       setActiveSectionId(id);
-      setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 50);
       return;
     }
 
@@ -251,9 +250,6 @@ export default function DocumentBrowser({
         const section: Section = await res.json();
         setLoadedSections((prev) => ({ ...prev, [id]: section }));
         setActiveSectionId(id);
-        setTimeout(() => {
-          document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 50);
       } else {
         setErrorId(id);
       }
@@ -282,17 +278,18 @@ export default function DocumentBrowser({
     loadSection(topId).then(() => {
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+      }, 300);
     });
   }, [findTopLevelId, loadSection]);
 
-  // Auto-load section when highlightId changes (e.g. from chat article links)
+  // Auto-load section when highlightId changes (e.g. from chat article links).
+  // scrollRequest ensures re-navigation even when highlightId hasn't changed.
   useEffect(() => {
     if (highlightId) {
       setTocOpen(false);
       handleSelect(highlightId);
     }
-  }, [highlightId, handleSelect]);
+  }, [highlightId, scrollRequest, handleSelect]);
 
   return (
     <div className={styles.browser} role="region" aria-label="Documentbrowser">

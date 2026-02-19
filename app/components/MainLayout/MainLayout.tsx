@@ -20,6 +20,7 @@ interface MainLayoutProps {
 export default function MainLayout({ toc }: MainLayoutProps) {
   const [activePanel, setActivePanel] = useState<"browser" | "chat">("chat");
   const [highlightId, setHighlightId] = useState<string | null>(null);
+  const [scrollRequest, setScrollRequest] = useState(0);
   const [isBrowserPulsing, setIsBrowserPulsing] = useState(false);
   const isMobile = useSyncExternalStore(
     (callback) => {
@@ -65,17 +66,12 @@ export default function MainLayout({ toc }: MainLayoutProps) {
 
   const handleArticleClick = useCallback((articleId: string) => {
     setHighlightId(articleId);
+    setScrollRequest((r) => r + 1);
     setActivePanel("browser");
     if (!isMobile) {
       setIsBrowserPulsing(true);
       setTimeout(() => setIsBrowserPulsing(false), 400);
     }
-    setTimeout(() => {
-      const el = document.getElementById(articleId);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 100);
   }, [isMobile]);
 
   return (
@@ -138,6 +134,7 @@ export default function MainLayout({ toc }: MainLayoutProps) {
           <DocumentBrowser
             toc={toc}
             highlightId={highlightId}
+            scrollRequest={scrollRequest}
           />
           {isMobile && activePanel === "browser" && (
             <button
