@@ -104,10 +104,10 @@ export async function POST(req: Request) {
   const question = parsed.data.question;
 
   const headersList = await headers();
-  const ip =
-    headersList.get("x-real-ip") ||
-    headersList.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    "unknown";
+  // x-real-ip is set by Vercel's edge proxy and cannot be spoofed by the client.
+  // Do NOT use x-forwarded-for[0]: the client controls that value and can set it
+  // to any IP to bypass rate limiting.
+  const ip = headersList.get("x-real-ip") ?? "unknown";
 
   const { allowed, remaining } = await checkRateLimit(ip);
   if (!allowed) {
