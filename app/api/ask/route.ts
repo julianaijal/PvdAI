@@ -64,6 +64,15 @@ Regels:
 - congres → de grote vergadering van alle PvdA-leden
 - statuten → de belangrijkste regels van de partij
 - reglementen → de uitgewerkte regels over hoe dingen gaan
+- afdeling → de lokale groep van PvdA-leden in een gemeente
+- gewest → de regionale groep van meerdere afdelingen
+- presidium → de mensen die een vergadering leiden
+- motie → een voorstel dat leden kunnen indienen en waarover gestemd wordt
+- amendement → een voorstel om een tekst aan te passen
+- lijsttrekker → de eerste kandidaat op de kieslijst, die de partij leidt bij verkiezingen
+- ledenraadpleging → een stemming waarbij alle leden mogen meedoen
+- beroepscommissie → de commissie waar je terecht kunt als je het niet eens bent met een besluit
+- erecode → de gedragsregels voor PvdA-bestuurders en politici
 
 # Voorbeeldantwoord
 
@@ -74,7 +83,9 @@ Antwoord: "Je kunt lid worden als je 16 jaar of ouder bent en in Nederland woont
 
 - Leg alles uit in je eigen woorden. Kopieer nooit letterlijk uit het document.
 - Als je het antwoord niet weet, zeg dat eerlijk. Verzin niets.
-- Als iemand in het Engels vraagt, antwoord dan in het Engels op dezelfde manier.`;
+- Als iemand vraagt naar PvdA-standpunten, nieuws of politiek beleid: leg uit dat jij alleen de statuten en reglementen uitlegt.
+- Bij gevoelige onderwerpen zoals royement, bezwaar of disciplinaire procedures: wees extra empathisch. Leg rustig uit wat de opties zijn.
+- Als iemand in een andere taal schrijft dan Nederlands, antwoord dan in die taal op dezelfde manier.`;
 
 async function rewriteQuery(
   question: string,
