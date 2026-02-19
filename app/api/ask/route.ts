@@ -87,7 +87,7 @@ async function rewriteQuery(
   const response = await openai.responses.create({
     model: "gpt-4.1-mini",
     instructions:
-      "Herschrijf de laatste vraag of opmerking van de gebruiker als een volledige, zelfstandige zoekzin in het Nederlands. Los alle verwijzingen op (zoals 'dat', 'dit', 'je', 'hem', 'iemand anders') met behulp van de gespreksgeschiedenis. De zin moet begrijpelijk zijn zonder de gespreksgeschiedenis. Geef alleen de herschreven zin terug, zonder uitleg. Maximaal 25 woorden.",
+      "Herschrijf de laatste vraag of opmerking van de gebruiker als een volledige, zelfstandige zoekzin in het Nederlands. Los alle verwijzingen op (zoals 'dat', 'dit', 'je', 'hem', 'iemand anders') met behulp van de gespreksgeschiedenis. De zin moet begrijpelijk zijn zonder de gespreksgeschiedenis. Geef alleen de herschreven zin terug, zonder uitleg.",
     input: `<conversation>\n${historyText}\n</conversation>\n\n<question>${question}</question>`,
     max_output_tokens: 100,
     temperature: 0,
