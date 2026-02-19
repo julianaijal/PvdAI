@@ -2,6 +2,7 @@ import { openai } from "@/lib/openai";
 import { findRelevantChunks } from "@/lib/embeddings";
 import { checkRateLimit } from "@/lib/ratelimit";
 import { AskRequestSchema } from "@/lib/schemas";
+import { logger } from "@/lib/logger";
 import { headers } from "next/headers";
 
 // LRU cache for query embeddings — avoids redundant OpenAI calls for repeated questions
@@ -182,7 +183,7 @@ export async function POST(req: Request) {
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
         } catch (error) {
-          console.error("Stream error:", error);
+          logger.error("/api/ask", "stream error", { error: String(error) });
           controller.enqueue(
             encoder.encode(
               `data: ${JSON.stringify({ error: "Er is een fout opgetreden." })}\n\n`
@@ -202,7 +203,7 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.error("Error in /api/ask:", error);
+    logger.error("/api/ask", "unhandled error", { error: String(error) });
     return Response.json(
       { error: "Er is een fout opgetreden bij het verwerken van je vraag." },
       { status: 500 }
