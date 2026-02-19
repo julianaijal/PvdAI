@@ -176,6 +176,8 @@
   margin-bottom: 32px;
   scroll-margin-top: 20px;
   animation: contentFade 300ms ease;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
 }
 
 .sectionTitle {
