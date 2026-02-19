@@ -155,7 +155,7 @@ export async function POST(req: Request) {
     const stream = openai.responses.stream({
       model: "gpt-4.1-mini",
       instructions: SYSTEM_PROMPT,
-      input: `<context>\n${context}\n</context>${historyPrompt}\n\n<question>${question}</question>`,
+      input: `<context>\n${context}\n</context>${historyPrompt}\n\n<question>${searchQuery}</question>`,
       max_output_tokens: 512,
       store: false,
     }, { signal: AbortSignal.timeout(30_000) });
