@@ -57,7 +57,7 @@ PvdAI makes the 188-page [Statuten en reglementen PvdA 2023](https://www.pvda.nl
 | Hosting | [Vercel](https://vercel.com) |
 | Rate Limiting | [Redis](https://redis.io) via Upstash (in-memory fallback for local dev) |
 | Testing | [Vitest](https://vitest.dev) |
-| CI | [GitHub Actions](.github/workflows/ci.yml) — lint + test on push/PR |
+| CI | [GitHub Actions](.github/workflows/ci.yml) — lint, test, and `npm audit` (CVE check) on push/PR; [Dependabot](.github/dependabot.yml) weekly dependency updates |
 | Database | None — static JSON files |
 
 ## Quick Start
@@ -209,6 +209,7 @@ lib/
 ├── openai.ts                    OpenAI client singleton
 ├── embeddings.ts                Dot-product search over L2-normalized vectors
 ├── ratelimit.ts                 Redis rate limiter with in-memory fallback (20/day)
+├── logger.ts                    Structured JSON logger (Vercel-friendly)
 └── schemas.ts                   Zod schemas for API request validation
 scripts/
 ├── parse.ts                     PDF → structured JSON (pure JS, no system deps)
@@ -223,7 +224,7 @@ data/                            Generated data files (embeddings gitignored)
 
 1. User question is embedded with `text-embedding-3-small`
 2. For follow-up questions, the query is automatically rewritten using conversation history for better context
-3. Top 5 chunks found via dot-product search against L2-normalized embeddings
+3. Top 5 chunks found via dot-product search against L2-normalized embeddings; chunks below cosine similarity 0.35 are discarded
 4. Chunks + question sent to OpenAI Responses API with a Dutch B1-level system prompt
 5. Response streamed back as SSE; article references become clickable links in the UI
 
