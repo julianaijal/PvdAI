@@ -434,9 +434,6 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
     if (!text || loading) return;
 
     setInput("");
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-    }
     const userMessage: Message = { role: "user", content: text };
     setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
@@ -705,9 +702,6 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
               value={input}
               onChange={(e) => {
                 setInput(e.target.value);
-                const el = e.target;
-                el.style.height = "auto";
-                el.style.height = Math.min(el.scrollHeight, 120) + "px";
               }}
               onFocus={() => setInputFocused(true)}
               onBlur={() => setInputFocused(false)}
