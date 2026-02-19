@@ -10,8 +10,13 @@ const EMBEDDING_CACHE_SIZE = 100;
 const embeddingCache = new Map<string, number[]>();
 
 async function getQueryEmbedding(query: string): Promise<number[]> {
-  const cached = embeddingCache.get(query);
-  if (cached) return cached;
+  if (embeddingCache.has(query)) {
+    const cached = embeddingCache.get(query)!;
+    // Move to end so Map insertion order = recency order (true LRU)
+    embeddingCache.delete(query);
+    embeddingCache.set(query, cached);
+    return cached;
+  }
 
   const response = await openai.embeddings.create({
     model: "text-embedding-3-small",
@@ -19,10 +24,9 @@ async function getQueryEmbedding(query: string): Promise<number[]> {
   });
   const embedding = response.data[0].embedding;
 
-  // LRU eviction: delete oldest entry if at capacity
+  // Evict the least-recently-used entry (first key in insertion-order Map)
   if (embeddingCache.size >= EMBEDDING_CACHE_SIZE) {
-    const oldest = embeddingCache.keys().next().value!;
-    embeddingCache.delete(oldest);
+    embeddingCache.delete(embeddingCache.keys().next().value!);
   }
   embeddingCache.set(query, embedding);
   return embedding;
