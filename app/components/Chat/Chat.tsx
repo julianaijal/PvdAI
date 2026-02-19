@@ -640,7 +640,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
               Bekijk het originele document (PDF)
             </a>
             <p className={styles.disclaimer}>
-              AI-uitleg op basis van de statuten 2023 · Geen officieel partijstandpunt of juridisch advies
+              Onafhankelijke AI-tool · Niet gemaakt door of namens de PvdA · Geen juridisch advies
             </p>
           </div>
         )}
