@@ -306,9 +306,8 @@ const ChatMessage = memo(function ChatMessage({
   onRetry: (index: number) => void;
 }) {
   return (
-    <div
+    <article
       className={`${styles.message} ${msg.role === "user" ? styles.userMessage : styles.assistantMessage} ${msg.isError ? styles.errorMessage : ""}`}
-      role={msg.role === "user" ? "log" : "status"}
       aria-label={msg.role === "user" ? "Jouw vraag" : "Antwoord"}
     >
       {msg.role === "assistant" && (
@@ -349,7 +348,7 @@ const ChatMessage = memo(function ChatMessage({
           msg.content
         )}
       </div>
-    </div>
+    </article>
   );
 });
 
