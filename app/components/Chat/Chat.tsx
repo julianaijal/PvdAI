@@ -713,6 +713,7 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
               placeholder="Stel een vraag over de statuten..."
               disabled={loading}
               autoComplete="off"
+              enterKeyHint="send"
               rows={1}
             />
             <span className={styles.inputHint} aria-hidden="true">
