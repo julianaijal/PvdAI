@@ -222,7 +222,7 @@ export async function POST(req: Request) {
     if (relevantChunks.length === 0) {
       return Response.json(
         { error: "Ik kan geen relevante informatie over dit onderwerp vinden in de statuten en reglementen." },
-        { status: 200 }
+        { status: 422 }
       );
     }
 
