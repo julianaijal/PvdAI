@@ -456,14 +456,16 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
       }
 
       if (!res.ok) {
-        const data = await res.json();
+        let errorMsg = "Er is iets misgegaan. Probeer het opnieuw.";
+        try {
+          const data = await res.json();
+          if (data.error) errorMsg = data.error;
+        } catch {
+          // Server returned non-JSON (e.g. HTML error page)
+        }
         setMessages((prev) => [
           ...prev,
-          {
-            role: "assistant",
-            content: data.error || "Er is iets misgegaan. Probeer het opnieuw.",
-            isError: true,
-          },
+          { role: "assistant", content: errorMsg, isError: true },
         ]);
         return;
       }

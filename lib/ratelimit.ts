@@ -58,27 +58,35 @@ let redis: ReturnType<typeof createClient> | null = null;
 
 async function getRedis() {
   if (!redis) {
-    redis = createClient({ url: process.env.REDIS_URL });
-    await redis.connect();
+    const client = createClient({ url: process.env.REDIS_URL });
+    await client.connect();
+    redis = client;
   }
   return redis;
 }
 
 async function checkRateLimitRedis(ip: string): Promise<{ allowed: boolean; remaining: number }> {
-  const client = await getRedis();
-  const key = `ratelimit:${hashIp(ip)}`;
-  const count = await client.incr(key);
+  try {
+    const client = await getRedis();
+    const key = `ratelimit:${hashIp(ip)}`;
+    const count = await client.incr(key);
 
-  // Set TTL on first request (when count is 1)
-  if (count === 1) {
-    await client.expire(key, WINDOW_S);
+    // Set TTL on first request (when count is 1)
+    if (count === 1) {
+      await client.expire(key, WINDOW_S);
+    }
+
+    if (count > LIMIT) {
+      return { allowed: false, remaining: 0 };
+    }
+
+    return { allowed: true, remaining: LIMIT - count };
+  } catch (err) {
+    // Redis unavailable — reset so the next request retries, fall back to in-memory
+    redis = null;
+    console.warn("[ratelimit] Redis error, falling back to in-memory:", String(err));
+    return checkRateLimitMemory(ip);
   }
-
-  if (count > LIMIT) {
-    return { allowed: false, remaining: 0 };
-  }
-
-  return { allowed: true, remaining: LIMIT - count };
 }
 
 const useRedis = !!process.env.REDIS_URL;
