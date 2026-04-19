@@ -116,4 +116,7 @@ function writeBinaryFormat(chunks: ChunkWithEmbedding[]) {
   console.log(`   Meta: ${metaSize}KB, Vectors: ${binSize}MB (was ~24MB JSON)`);
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

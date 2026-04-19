@@ -541,6 +541,21 @@ export default function Chat({ onArticleClick, toc }: ChatProps) {
           return prev;
         });
       }
+
+      // If stream completed but no content was ever produced, show an error
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.role === "assistant" && !last.content) {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            ...last,
+            content: "Er is een fout opgetreden. Probeer het opnieuw.",
+            isError: true,
+          };
+          return updated;
+        }
+        return prev;
+      });
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
         // Remove empty assistant message if no content was streamed yet
