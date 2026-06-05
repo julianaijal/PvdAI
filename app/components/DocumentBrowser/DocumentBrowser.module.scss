@@ -179,19 +179,19 @@
 }
 
 .sectionTitle {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--pvda-fg);
   margin-bottom: 24px;
   padding-bottom: 14px;
   border-bottom: 2px solid var(--pvda-red);
-  letter-spacing: -0.4px;
+  letter-spacing: -0.5px;
   line-height: 1.3;
   text-wrap: balance;
 }
 
 .chapterTitle {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--pvda-fg);
   margin-top: 36px;
@@ -203,7 +203,7 @@
 }
 
 .articleTitle {
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--pvda-red);
   margin-top: 24px;
@@ -215,8 +215,8 @@
 }
 
 .paragraph {
-  font-size: 14.5px;
-  line-height: 1.8;
+  font-size: 15.5px;
+  line-height: 1.85;
   margin-bottom: 8px;
   color: var(--pvda-text);
 
